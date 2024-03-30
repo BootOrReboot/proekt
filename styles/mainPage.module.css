@@ -114,7 +114,7 @@
     height: inherit;
   }
 
-  .vestiNovosti div .vest-novost {
+  .vestiNovosti div .vestNovost {
     display: flex;
     flex-direction: column;
     width: 99%;
@@ -122,14 +122,14 @@
     border: 1px solid black;
     margin: 2% 0;
   }
-  .vestiNovosti div .vest-novost .slika {
+  .vestiNovosti div .vestNovost .slika {
     align-items: start;
     width: 100%;
   }
-  .vestiNovosti div .vest-novost .slika img {
+  .vestiNovosti div .vestNovost .slika img {
     width: 100%;
   }
-  .vestiNovosti div .vest-novost .naslov {
+  .vestiNovosti div .vestNovost .naslov {
     justify-content: left;
     font-weight: bold;
     font-size: 6vw;
@@ -137,20 +137,21 @@
     padding: 3%;
     cursor: pointer;
   }
-  .vestiNovosti div .vest-novost .naslov:hover {
+  .vestiNovosti div .vestNovost .naslov:hover {
     text-decoration: underline;
   }
-  .vestiNovosti div .vest-novost .objaveno {
+  .vestiNovosti div .vestNovost .objaveno {
     flex-direction: row;
     justify-content: left;
     font-size: 2.5vw;
     width: 100%;
     color: rgb(102, 102, 102);
     margin-bottom: 2%;
+    align-items: center;
   }
-  .vestiNovosti div .vest-novost .objaveno i {
-    width: auto;
-    height: auto;
+  .vestiNovosti div .vestNovost .objaveno svg {
+    width: 30px;
+    height: 30px;
     margin: 0 2%;
   }
   .vestiNovosti .povekje {
@@ -255,11 +256,58 @@
     font-weight: bold;
   }
   .header nav ul {
-    display: none;
+    position: absolute;
+    z-index: 10;
+    right: 0;
+    top: 0;
+    width: 0%;
+    padding: 10% 0% 0px 0px;
+    font-size: 26px;
+    background-color: rgb(0, 195, 255);
+
+    animation-name: menu;
+    animation-duration: 2s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+  }
+  .closeMenu {
+    position: absolute;
+    z-index: 11;
+    right: 17%;
+    top: 5%;
+    width: 5%;
+    visibility: hidden;
+    animation-name: close;
+    animation-delay: 2s;
+    animation-timing-function: ease-in;
+    animation-fill-mode: forwards;
+    animation-play-state: paused;
+  }
+  @keyframes menu {
+    0% {
+      width: 0%;
+    }
+    100% {
+      width: 40%;
+    }
+  }
+  @keyframes close {
+    100% {
+      visibility: visible;
+    }
+  }
+  .header nav ul li {
+    height: 40px;
+    border: 1px solid;
+    width: 100%;
   }
   .header nav {
     display: flex;
     align-items: center;
+    justify-content: flex-end;
+
+    width: 100%;
   }
   .header nav .menu {
     border: 0;
@@ -343,7 +391,7 @@
     height: inherit;
   }
 
-  .vestiNovosti div .vest-novost {
+  .vestiNovosti div .vestNovost {
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -352,17 +400,17 @@
     margin: 2% 0;
     flex: 0 0 46%;
   }
-  .vestiNovosti div .vest-novost .slika {
+  .vestiNovosti div .vestNovost .slika {
     align-items: start;
     width: 100%;
   }
-  .vestiNovosti div .vest-novost .slika img {
+  .vestiNovosti div .vestNovost .slika img {
     width: 100%;
   }
-  .vestiNovosti div .vest-novost .naslov {
+  .vestiNovosti div .vestNovost .naslov {
     width: 100%;
   }
-  .vestiNovosti div .vest-novost .naslov p {
+  .vestiNovosti div .vestNovost .naslov p {
     font-weight: bold;
     font-size: 3.5vw;
     width: 100%;
@@ -372,20 +420,21 @@
     cursor: pointer;
   }
 
-  .vestiNovosti div .vest-novost .naslov:hover {
+  .vestiNovosti div .vestNovost .naslov:hover {
     text-decoration: underline;
   }
-  .vestiNovosti div .vest-novost .objaveno {
+  .vestiNovosti div .vestNovost .objaveno {
     flex-direction: row;
     justify-content: left;
     font-size: 1.8vw;
     width: 100%;
     color: rgb(102, 102, 102);
     margin-bottom: 2%;
+    align-items: center;
   }
-  .vestiNovosti div .vest-novost .objaveno i {
-    width: auto;
-    height: auto;
+  .vestiNovosti div .vestNovost .objaveno svg {
+    width: 30px;
+    height: 30px;
     margin: 0 2%;
   }
   .vestiNovosti .povekje {
@@ -629,7 +678,7 @@
     height: fit-content;
   }
 
-  .vestiNovosti div .vest-novost {
+  .vestiNovosti div .vestNovost {
     display: flex;
     flex-direction: column;
     width: 30vw;
@@ -638,14 +687,14 @@
     margin: 1% 0;
     flex: 0 0 30%;
   }
-  .vestiNovosti div .vest-novost .slika {
+  .vestiNovosti div .vestNovost .slika {
     align-items: start;
     width: 100%;
   }
-  .vestiNovosti div .vest-novost .slika img {
+  .vestiNovosti div .vestNovost .slika img {
     width: 100%;
   }
-  .vestiNovosti div .vest-novost .naslov {
+  .vestiNovosti div .vestNovost .naslov {
     justify-content: left;
     font-weight: bold;
     font-size: 2vw;
@@ -653,19 +702,20 @@
     padding: 3%;
     cursor: pointer;
   }
-  .vestiNovosti div .vest-novost .naslov:hover {
+  .vestiNovosti div .vestNovost .naslov:hover {
     text-decoration: underline;
   }
-  .vestiNovosti div .vest-novost .objaveno {
+  .vestiNovosti div .vestNovost .objaveno {
     justify-content: left;
     font-size: 1.2vw;
     width: 100%;
     color: rgb(102, 102, 102);
     margin-bottom: 2%;
+    align-items: center;
   }
-  .vestiNovosti div .vest-novost .objaveno i {
-    width: auto;
-    height: auto;
+  .vestiNovosti div .vestNovost .objaveno svg {
+    width: 30px;
+    height: 30px;
     margin: 0 2%;
   }
   .vestiNovosti .povekje {
@@ -920,7 +970,7 @@
     margin: auto;
   }
 
-  .vestiNovosti div .vest-novost {
+  .vestiNovosti div .vestNovost {
     display: flex;
     flex-direction: column;
     width: 30vw;
@@ -929,14 +979,14 @@
     flex: 0 0 30%;
     margin: 1% 0;
   }
-  .vestiNovosti div .vest-novost .slika {
+  .vestiNovosti div .vestNovost .slika {
     align-items: start;
     width: 100%;
   }
-  .vestiNovosti div .vest-novost .slika img {
+  .vestiNovosti div .vestNovost .slika img {
     width: 100%;
   }
-  .vestiNovosti div .vest-novost .naslov {
+  .vestiNovosti div .vestNovost .naslov {
     justify-content: left;
     font-weight: bold;
     font-size: 2vw;
@@ -944,20 +994,21 @@
     padding: 3%;
     cursor: pointer;
   }
-  .vestiNovosti div .vest-novost .naslov:hover {
+  .vestiNovosti div .vestNovost .naslov:hover {
     text-decoration: underline;
   }
-  .vestiNovosti div .vest-novost .objaveno {
+  .vestiNovosti div .vestNovost .objaveno {
     flex-direction: row;
     justify-content: left;
     font-size: 1vw;
     width: 100%;
     color: rgb(102, 102, 102);
     margin-bottom: 2%;
+    align-items: center;
   }
-  .vestiNovosti div .vest-novost .objaveno i {
-    width: auto;
-    height: auto;
+  .vestiNovosti div .vestNovost .objaveno svg {
+    width: 30px;
+    height: 30px;
     margin: 0 2%;
   }
   .vestiNovosti .povekje {

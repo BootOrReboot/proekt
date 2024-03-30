@@ -14,8 +14,48 @@ import bezbednost from "../images/bezbednost.png";
 import test from "../images/test-slika.png";
 import mladite from "../images/mladite.png";
 import hemija from "../images/hemija.jpg";
+import Xicon from "../images/x-symbol.png";
+import { useEffect } from "react";
 
 export default function Home() {
+  useEffect(() => {
+    const openNav = () => {
+      const nav = document.getElementById("navigation");
+      const socials = document.getElementById("socials");
+
+      nav.style.display = "flex";
+      socials.style.display = "flex";
+      document.documentElement.style.overflowY = "hidden";
+    };
+    const closeNav = () => {
+      const nav = document.getElementById("navigation");
+      const socials = document.getElementById("socials");
+
+      nav.style.display = "none";
+      socials.style.display = "none";
+      document.documentElement.style.overflowY = "auto";
+    };
+  }, []);
+
+  const menu = () => {
+    const links = document.getElementById("options");
+    links.style.animationPlayState = "running";
+    const close = document.getElementById("Xmenu");
+    close.style.animationPlayState = "running";
+  };
+  const closing = () => {
+    const links = document.getElementById("options");
+    links.style.animation = "none";
+
+    const close = document.getElementById("Xmenu");
+    close.style.animation = "none";
+    setTimeout(() => {
+      links.style.animation = "";
+      close.style.animation = "";
+    }, 1000);
+    console.log("works");
+  };
+
   return (
     <div>
       <section className={style.section}>
@@ -36,10 +76,16 @@ export default function Home() {
           <p>Ѓорче Петров</p>
         </div>
         <nav>
-          <button type="button" className={style.menu}>
+          <button type="button" className={style.menu} onClick={menu}>
             <FontAwesomeIcon icon={faBars} />
           </button>
-          <ul>
+          <Image
+            src={Xicon}
+            className={style.closeMenu}
+            id="Xmenu"
+            onClick={closing}
+          />
+          <ul id="options">
             <li>
               <a href="">За Гимназијата</a>
             </li>
@@ -109,7 +155,7 @@ export default function Home() {
       <div className={style.vestiNovosti}>
         <h1>Вести и Настани</h1>
         <div>
-          <div className={style.vestiNovosti}>
+          <div className={style.vestNovost}>
             <div className={style.slika}>
               <Image src={test} alt="test slika" />
             </div>
@@ -121,7 +167,7 @@ export default function Home() {
               14 Март 2024 by Елена Ѓорѓиевска
             </div>
           </div>
-          <div className={style.vestiNovosti}>
+          <div className={style.vestNovost}>
             <div className={style.slika}>
               <Image src={mladite} alt="test slika" />
             </div>
@@ -133,7 +179,7 @@ export default function Home() {
               08 Март 2024 by Елена Ѓорѓиевска
             </div>
           </div>
-          <div className={style.vestiNovosti}>
+          <div className={style.vestNovost}>
             <div className={style.slika}>
               <Image src={hemija} alt="test slika" />
             </div>
