@@ -6,6 +6,7 @@ import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
+import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import profile from "../images/icons/profile.svg";
 import notif from "../images/icons/notification.svg";
 import logo from "../images/logo-gjorce-petrov.svg";
@@ -18,24 +19,22 @@ import Xicon from "../images/x-symbol.png";
 import { useEffect } from "react";
 
 export default function Home() {
-  useEffect(() => {
-    const openNav = () => {
-      const nav = document.getElementById("navigation");
-      const socials = document.getElementById("socials");
+  function openNav() {
+    const nav = document.getElementById("navigation");
+    const socials = document.getElementById("socials");
 
-      nav.style.display = "flex";
-      socials.style.display = "flex";
-      document.documentElement.style.overflowY = "hidden";
-    };
-    const closeNav = () => {
-      const nav = document.getElementById("navigation");
-      const socials = document.getElementById("socials");
+    nav.style.display = "flex";
+    socials.style.display = "flex";
+    document.documentElement.style.overflowY = "hidden";
+  }
+  function closeNav() {
+    const nav = document.getElementById("navigation");
+    const socials = document.getElementById("socials");
 
-      nav.style.display = "none";
-      socials.style.display = "none";
-      document.documentElement.style.overflowY = "auto";
-    };
-  }, []);
+    nav.style.display = "none";
+    socials.style.display = "none";
+    document.documentElement.style.overflowY = "auto";
+  }
 
   const menu = () => {
     const links = document.getElementById("options");
@@ -58,55 +57,6 @@ export default function Home() {
 
   return (
     <div>
-      <section className={style.section}>
-        <div className={style.account}>
-          <button className={style.notifications} type="button">
-            <Image src={notif} alt="Notifications" />
-          </button>
-          <button type="button" className={style.profile}>
-            <Image src={profile} alt="Profile" />
-          </button>
-        </div>
-      </section>
-      <header className={style.header}>
-        <div>
-          <a href="index.html">
-            <Image src={logo} />
-          </a>
-          <p>Ѓорче Петров</p>
-        </div>
-        <nav>
-          <button type="button" className={style.menu} onClick={menu}>
-            <FontAwesomeIcon icon={faBars} />
-          </button>
-          <Image
-            src={Xicon}
-            className={style.closeMenu}
-            id="Xmenu"
-            onClick={closing}
-          />
-          <ul id="options">
-            <li>
-              <a href="">За Гимназијата</a>
-            </li>
-            <li>
-              <a href="">Струки</a>
-            </li>
-            <li>
-              <a href="">Уписи</a>
-            </li>
-            <li>
-              <a href="vesti-nastani.html">Вести и Настани</a>
-            </li>
-            <li>
-              <a href="">Проекти</a>
-            </li>
-            <li>
-              <a href="">Часови</a>
-            </li>
-          </ul>
-        </nav>
-      </header>
       <div className={style.content}>
         <div className={style.text}>
           <div className={`${style.center} ${style.split}`}>
