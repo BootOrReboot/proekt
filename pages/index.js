@@ -16,43 +16,37 @@ import test from "../images/test-slika.png";
 import mladite from "../images/mladite.png";
 import hemija from "../images/hemija.jpg";
 import Xicon from "../images/x-symbol.png";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 
 export default function Home() {
-  function openNav() {
-    const nav = document.getElementById("navigation");
-    const socials = document.getElementById("socials");
-
-    nav.style.display = "flex";
-    socials.style.display = "flex";
-    document.documentElement.style.overflowY = "hidden";
-  }
-  function closeNav() {
-    const nav = document.getElementById("navigation");
-    const socials = document.getElementById("socials");
-
-    nav.style.display = "none";
-    socials.style.display = "none";
-    document.documentElement.style.overflowY = "auto";
-  }
-
-  const menu = () => {
-    const links = document.getElementById("options");
-    links.style.animationPlayState = "running";
-    const close = document.getElementById("Xmenu");
-    close.style.animationPlayState = "running";
+  const [email, setEmail] = useState({
+    original: "",
+    subject: "",
+    info: "",
+  });
+  const addInfo = (e) => {
+    const { name, value } = e.target;
+    setEmail({
+      ...email,
+      [name]: value,
+    });
   };
-  const closing = () => {
-    const links = document.getElementById("options");
-    links.style.animation = "none";
-
-    const close = document.getElementById("Xmenu");
-    close.style.animation = "none";
-    setTimeout(() => {
-      links.style.animation = "";
-      close.style.animation = "";
-    }, 1000);
-    console.log("works");
+  const sendMail = (e) => {
+    e.preventDefault();
+    fetch("http://localhost:3000/api/mailSending", {
+      method: "POST",
+      body: JSON.stringify({
+        transportEmail: email.original,
+        title: email.subject,
+        text: email.info,
+      }),
+    })
+      .then((res1) => {
+        return res1.json();
+      })
+      .then((res2) => {
+        console.log(res2.message);
+      });
   };
 
   return (
@@ -148,46 +142,6 @@ export default function Home() {
           </button>
         </div>
       </div>
-
-      <footer className={style.footer}>
-        <div className={style.adresa}>
-          <p>
-            ул.8-ми Октомври бр. 91
-            <br />
-            1330 Крива Паланка
-            <br />
-            Република Северна Македонија
-            <br />
-            031/375-025
-            <br />
-            <a href="mailto:sougorcepetrov@yahoo.com">
-              sougorcepetrov@yahoo.com
-            </a>
-          </p>
-        </div>
-        <div className={style.contact}>
-          <form action="">
-            <div className={style.info}>
-              <p>Ime</p>
-              <input type="text" />
-              <p>Prezime</p>
-              <input type="text" />
-            </div>
-            <div className={style.email}>
-              <p>Email *</p>
-              <input type="email" />
-              <p>Naslov</p>
-              <input type="text" />
-
-              <p>Napisete poraka...</p>
-              <textarea name="poraka" id="poraka" cols="23" rows="5"></textarea>
-              <br />
-              <button type="submit">Испрати</button>
-            </div>
-          </form>
-        </div>
-      </footer>
-      <p className={style.copyright}>© 2019. Сите права се задржани</p>
     </div>
   );
 }

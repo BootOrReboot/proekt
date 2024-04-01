@@ -11,6 +11,24 @@ export default function Home() {
       .then((rez) => {
         console.log(rez.message);
       });
+    const menu = () => {
+      const links = document.getElementById("options");
+      links.style.animationPlayState = "running";
+      const close = document.getElementById("Xmenu");
+      close.style.animationPlayState = "running";
+    };
+    const closing = () => {
+      const links = document.getElementById("options");
+      links.style.animation = "none";
+
+      const close = document.getElementById("Xmenu");
+      close.style.animation = "none";
+      setTimeout(() => {
+        links.style.animation = "";
+        close.style.animation = "";
+      }, 1000);
+      console.log("works");
+    };
   }
   const click = () => {
     const image = document.getElementById("icon");
