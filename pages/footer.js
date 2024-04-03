@@ -1,14 +1,18 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import style from "../styles/mainPage.module.css";
 import styleMax from "../styles/screenSizes/max.module.css";
 import styleLap from "../styles/screenSizes/laptop.module.css";
 import styleMob from "../styles/screenSizes/mobile.module.css";
 
 export default function Footer() {
+  const [screenWidth, setScreenWidth] = useState(0);
+  const [styles, setStyles] = useState(style);
   const [email, setEmail] = useState({
     original: "",
     subject: "",
     info: "",
+    fullName: "",
+    surname: "",
   });
   const addInfo = (e) => {
     const { name, value } = e.target;
@@ -25,6 +29,7 @@ export default function Footer() {
         transportEmail: email.original,
         title: email.subject,
         text: email.info,
+        fullName: email.fullName + " " + email.surname,
       }),
     })
       .then((res1) => {
@@ -34,14 +39,30 @@ export default function Footer() {
         console.log(res2.message);
       });
   };
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+  }, []);
+  if (screenWidth >= 1366 && styles != styleMax) {
+    setStyles(() => {
+      return styleMax;
+    });
+  } else if (screenWidth >= 1024 && screenWidth <= 1365 && styles != styleLap) {
+    setStyles(() => {
+      return styleLap;
+    });
+  } else if (screenWidth >= 700 && screenWidth <= 1023 && styles != style) {
+    setStyles(() => {
+      return style;
+    });
+  } else if (screenWidth <= 699 && screenWidth > 0 && styles != styleMob) {
+    setStyles(() => {
+      return styleMob;
+    });
+  }
   return (
     <>
-      <footer
-        className={`${style.footer} ${styleMob.footer} ${styleMax.footer} ${styleLap.footer}`}
-      >
-        <div
-          className={`${style.adresa} ${styleMob.adresa} ${styleMax.adresa} ${styleLap.adresa}`}
-        >
+      <footer className={styles.footer}>
+        <div className={styles.adresa}>
           <p>
             ул.8-ми Октомври бр. 91
             <br />
@@ -56,21 +77,15 @@ export default function Footer() {
             </a>
           </p>
         </div>
-        <div
-          className={`${style.contact} ${styleMob.contact} ${styleMax.contact} ${styleLap.contact}`}
-        >
+        <div className={styles.contact}>
           <form>
-            <div
-              className={`${style.info} ${styleMob.info} ${styleMax.info} ${styleLap.info}`}
-            >
+            <div className={styles.info}>
               <p>Ime</p>
-              <input type="text" />
+              <input type="text" onChange={addInfo} name="fullName" />
               <p>Prezime</p>
-              <input type="text" />
+              <input type="text" onChange={addInfo} name="surname" />
             </div>
-            <div
-              className={`${style.email} ${styleMob.email} ${styleMax.email} ${styleLap.email}`}
-            >
+            <div className={styles.email}>
               <p>Email *</p>
               <input type="email" onChange={addInfo} name="original" />
               <p>Naslov</p>
@@ -91,11 +106,7 @@ export default function Footer() {
           </form>
         </div>
       </footer>
-      <p
-        className={`${style.copyright} ${styleMob.copyright} ${styleMax.copyright} ${styleLap.copyright}`}
-      >
-        © 2019. Сите права се задржани
-      </p>
+      <p className={styles.copyright}>© 2019. Сите права се задржани</p>
     </>
   );
 }

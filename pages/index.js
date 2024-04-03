@@ -32,9 +32,9 @@ export default function Home() {
       date: "18 Фебруари 2024",
     },
   ]);
-  setTimeout(() => {
+  useEffect(() => {
     setScreenWidth(window.innerWidth);
-  }, 1);
+  }, []);
   if (screenWidth >= 1366 && styles != styleMax) {
     setStyles(() => {
       return styleMax;
@@ -59,16 +59,12 @@ export default function Home() {
     <div>
       <div className={styles.content}>
         <div className={styles.text}>
-          <div
-            className={`${style.center} ${style.split} ${styleMax.center} ${styleMax.split} ${styleLap.center} ${styleLap.split} ${styleMob.center} ${styleMob.split}`}
-          >
+          <div className={`${styles.center} ${styles.split}`}>
             <span>Ѓорче Петров</span>
             <span>Крива Паланка</span>
           </div>
         </div>
-        <div
-          className={`${style.img} ${styleLap.img} ${styleMax.img} ${styleMob.img}`}
-        >
+        <div className={styles.img}>
           <Image
             src={vraboteni}
             alt="Gjorce Petrov Vraboteni"
@@ -76,20 +72,12 @@ export default function Home() {
           />
         </div>
       </div>
-      <div
-        className={`${style.content} ${style.reverse} ${styleMax.content} ${styleMax.reverse} ${styleMob.content} ${styleMob.reverse} ${styleLap.content} ${styleLap.reverse}`}
-      >
-        <div
-          className={`${style.img} ${styleMob.img} ${styleMax.img} ${styleLap.img}`}
-        >
+      <div className={`${styles.content} ${styles.reverse} `}>
+        <div className={styles.img}>
           <Image src={bezbednost} alt="Bezbednost" />
         </div>
-        <div
-          className={`${style.text} ${styleLap.text} ${styleMax.text} ${styleMob.text}`}
-        >
-          <div
-            className={`${style.split} ${styleLap.split} ${styleMax.split} ${styleMob.split}`}
-          >
+        <div className={styles.text}>
+          <div className={styles.split}>
             <h1>Безбедност</h1>
             <p>
               Во Гимназија „Ѓорче Петров“, веруваме дека нашите ученици имаат
@@ -103,9 +91,7 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div
-        className={`${style.socialLinks} ${styleLap.socialLinks} ${styleMax.socialLinks} ${styleMob.socialLinks}`}
-      >
+      <div className={styles.socialLinks}>
         <a
           href="https://www.youtube.com/@sougorcepetrovkrivapalanka4547"
           target="_blank"
@@ -120,9 +106,7 @@ export default function Home() {
         </a>
       </div>
 
-      <div
-        className={`${style.vestiNovosti} ${styleLap.vestiNovosti} ${styleMax.vestiNovosti} ${styleMob.vestiNovosti}`}
-      >
+      <div className={styles.vestiNovosti}>
         <h1>Вести и Настани</h1>
         <div>
           {news.map((el, index) => (
@@ -140,9 +124,7 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <div
-          className={`${style.povekje} ${styleLap.povekje} ${styleMax.povekje} ${styleMob.povekje}`}
-        >
+        <div className={styles.povekje}>
           <button
             type="button"
             onClick={() => (window.location.href = "vesti-nastani.html")}

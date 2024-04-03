@@ -17,9 +17,9 @@ import { useState, useEffect } from "react";
 export default function Nav() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
-  setTimeout(() => {
+  useEffect(() => {
     setScreenWidth(window.innerWidth);
-  }, 1);
+  }, []);
   if (screenWidth >= 1366 && styles != styleMax) {
     setStyles(() => {
       return styleMax;
@@ -55,29 +55,17 @@ export default function Nav() {
   }
   return (
     <>
-      <section
-        className={`${style.section} ${styleMax.section} ${styleMob.section} ${styleLap.section}`}
-      >
-        <div
-          className={`${style.account} ${styleMax.account} ${styleMob.account} ${styleLap.account}`}
-        >
-          <button
-            className={`${style.notification} ${styleMax.notification} ${styleMob.notification} ${styleLap.notification}`}
-            type="button"
-          >
+      <section className={styles.section}>
+        <div className={styles.account}>
+          <button className={styles.notification} type="button">
             <Image src={notif} alt="Notifications" />
           </button>
-          <button
-            type="button"
-            className={`${style.profile} ${styleMax.profile} ${styleMob.profile} ${styleLap.profile}`}
-          >
+          <button type="button" className={styles.profile}>
             <Image src={profile} alt="Profile" />
           </button>
         </div>
       </section>
-      <header
-        className={`${style.header} ${styleMax.header} ${styleMob.header} ${styleLap.header}`}
-      >
+      <header className={styles.header}>
         <div>
           <a href="/">
             <Image src={logo} alt="logo" />
@@ -87,43 +75,37 @@ export default function Nav() {
         <nav>
           <button
             type="button"
-            className={`${style.menu} ${styleMax.menu} ${styleMob.menu} ${styleLap.menu}`}
+            className={styles.menu}
             id="menu-button"
             onClick={openNav}
           >
             <FontAwesomeIcon icon={faBars} />
           </button>
 
-          <div id={`${styles.navigation}`}>
+          <div id={styles.navigation}>
             <a
               onClick={closeNav}
-              className={`${styleMax.mobile} ${styleMob.close} ${styleLap.mobile}`}
+              className={`${styles.mobile} ${styles.close} `}
             >
               <FontAwesomeIcon icon={faWindowClose} />
             </a>
-            <div className={`${styleMax.center}`}>
+            <div className={styles.center}>
               <a href="">За Гимназијата</a>
               <a href="">Струки</a>
               <a href="">Уписи</a>
               <a href="links/news">Вести и Настани</a>
               <a href="">Проекти</a>
               <a href="">Часови</a>
-              <a
-                href=""
-                className={`${style.mobile} ${styleMax.mobile} ${styleMob.mobile} ${styleLap.mobile}`}
-              >
+              <a href="" className={styles.mobile}>
                 Логин
               </a>
-              <a
-                href=""
-                className={`${style.mobile} ${styleMax.mobile} ${styleMob.mobile} ${styleLap.mobile}`}
-              >
+              <a href="" className={styles.mobile}>
                 Регистрација
               </a>
             </div>
 
             <div
-              className={`${style.socialLinks} ${styleMax.socialLinks} ${styleMax.mobile} ${styleMob.socialLinks} ${styleLap.socialLinks} ${styleLap.mobile}`}
+              className={`${styles.socialLinks} ${styles.mobile} `}
               id="socials"
               style={{ display: "none" }}
             >
