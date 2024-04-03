@@ -1,169 +1,166 @@
-@media only screen and (min-width: 700px) and (max-width: 1023px) {
+@media only screen and (min-width: 1366px) {
   .section {
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 0.5vw 2vw;
+    padding-bottom: 0;
+  }
+  .section .account {
+    display: flex;
+    justify-content: right;
+    width: 8%;
+    height: fit-content;
+    padding: 0 2vw;
+  }
+  .header nav #navigation {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0;
+    width: 70%;
+  }
+  .header nav #navigation .mobile {
     display: none;
+  }
+  .header nav #navigation a:hover {
+    color: rgb(24, 75, 184);
+  }
+  .header nav #navigation a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.3vw;
+  }
+
+  .section button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    width: 40%;
+    height: 50%;
+  }
+  .section button img {
+    width: 100%;
+  }
+
+  .section button:hover img {
+    filter: contrast(20%);
   }
 
   .header {
     display: flex;
-    width: 100%;
-    padding: 3%;
+    padding: 0 2% 2%;
+  }
+  .header div img {
+    width: 5vw;
   }
   .header div {
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: space-evenly;
-    width: 80%;
-  }
-  .header div img {
-    width: 100px;
   }
   .header div p {
     margin: 0;
-    width: 50%;
-    font-size: calc(100% + 3vw);
+    width: 60%;
+    font-size: 2vw;
     font-weight: bold;
-  }
-  .header nav ul {
-    position: absolute;
-    z-index: 10;
-    right: 0;
-    top: 0;
-    width: 0%;
-    padding: 10% 0% 0px 0px;
-    font-size: 26px;
-    background-color: rgb(0, 195, 255);
-
-    animation-name: menu;
-    animation-duration: 2s;
-    animation-timing-function: ease-in;
-    animation-fill-mode: forwards;
-    animation-play-state: paused;
-  }
-  .closeMenu {
-    position: absolute;
-    z-index: 11;
-    right: 17%;
-    top: 5%;
-    width: 5%;
-    visibility: hidden;
-    animation-name: close;
-    animation-delay: 2s;
-    animation-timing-function: ease-in;
-    animation-fill-mode: forwards;
-    animation-play-state: paused;
-  }
-  @keyframes menu {
-    0% {
-      width: 0%;
-    }
-    100% {
-      width: 40%;
-    }
-  }
-  @keyframes close {
-    100% {
-      visibility: visible;
-    }
-  }
-  .header nav ul li {
-    height: 40px;
-    border: 1px solid;
-    width: 100%;
   }
   .header nav {
     display: flex;
     align-items: center;
+    justify-content: right;
+    width: 100%;
   }
   .header nav .menu {
-    border: 0;
-    background: white;
-    font-size: 30px;
-    cursor: pointer;
+    display: none;
   }
-
   .content {
     display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    width: 90%;
-    height: 50vw;
-    margin: auto;
+    width: 80%;
+    height: 30vw;
     overflow: hidden;
+    margin: auto;
   }
-  .content .img {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    width: 95%;
-  }
-  .content .img img {
-    width: 100%;
-    padding: 5% 0;
-  }
+
   .content .text {
-    display: flex;
     text-align: center;
-    width: 100%;
-    height: 100%;
+    width: 50%;
     color: white;
     background-color: rgb(8, 80, 109);
+    height: auto;
     font-weight: bold;
     padding: 0 2%;
-    align-items: center;
-    justify-content: center;
   }
-  .content .text .split {
+  .split {
     display: flex;
     flex-direction: column;
   }
   .content .text span {
-    line-height: 200%;
-    font-size: calc(100% + 3.5vw);
+    font-size: 4.5vw;
   }
   .content .text h1 {
-    font-size: calc(100% + 20px);
+    text-align: left;
+    font-size: 3vw;
   }
   .content .text p {
     text-align: justify;
     font-weight: 100;
-    font-size: 16px;
-    padding: 0 4%;
+    font-size: 1.2vw;
+  }
+  .center {
+    margin: 8vw 0;
+  }
+  .content .text span {
+    width: 100%;
+    margin: 0;
+  }
+
+  .content .img {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgb(50, 132, 165);
+    width: 50%;
+  }
+
+  .content .img img {
+    width: 98%;
+    height: 98%;
   }
 
   .vestiNovosti {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    justify-content: center;
+    width: 90%;
     height: fit-content;
-    align-items: center;
-    padding: 2% 0;
+    margin: auto;
   }
   .vestiNovosti h1 {
-    color: black;
+    font-size: 5vw;
     width: 100%;
-    height: 9vw;
+    height: 10vw;
     text-align: center;
-    font-size: 7vw;
-    margin: 0;
+    margin: 1% 0;
   }
   .vestiNovosti div {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     width: inherit;
     height: inherit;
+    margin: auto;
   }
 
   .vestiNovosti div .vestNovost {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 30vw;
     height: fit-content;
     border: 1px solid black;
-    margin: 2% 0;
-    flex: 0 0 46%;
+    flex: 0 0 30%;
+    margin: 1% 0;
   }
   .vestiNovosti div .vestNovost .slika {
     align-items: flex-start;
@@ -173,33 +170,28 @@
     width: 100%;
   }
   .vestiNovosti div .vestNovost .naslov {
-    width: 100%;
-  }
-  .vestiNovosti div .vestNovost .naslov p {
+    justify-content: left;
     font-weight: bold;
-    font-size: 3.5vw;
+    font-size: 2vw;
     width: 100%;
-    margin: 5% 0;
-    padding-left: 5%;
-    text-align: left;
+    padding: 3%;
     cursor: pointer;
   }
-
   .vestiNovosti div .vestNovost .naslov:hover {
     text-decoration: underline;
   }
   .vestiNovosti div .vestNovost .objaveno {
     flex-direction: row;
     justify-content: left;
-    font-size: 1.8vw;
+    font-size: 1vw;
     width: 100%;
     color: rgb(102, 102, 102);
     margin-bottom: 2%;
     align-items: center;
   }
   .vestiNovosti div .vestNovost .objaveno svg {
-    width: 30px;
-    height: 30px;
+    width: 1.4vw;
+    height: 1.4vw;
     margin: 0 2%;
   }
   .vestiNovosti .povekje {
@@ -209,11 +201,14 @@
     border: 0;
     background-color: rgb(8, 80, 109);
     color: white;
-    font-size: 4.5vw;
-    padding: 2vw 0;
-    width: 80%;
+    font-size: 1.6vw;
+    padding: 1vw 4vw;
+    margin: 2vw 0;
     border-radius: 2vw;
     cursor: pointer;
+  }
+  .vestiNovosti .povekje button:hover {
+    background-color: rgb(0, 70, 95);
   }
 
   .socialLinks {
@@ -221,25 +216,33 @@
     flex-direction: column;
     position: fixed;
     bottom: 0;
-    left: 0.5%;
+    left: 0.6vw;
     justify-content: space-evenly;
     align-items: center;
+    height: 14vw;
   }
 
   .socialLinks a {
-    font-size: calc(100% + 10px);
+    font-size: 2vw;
+    width: 4vw;
     color: black;
+    text-align: center;
+    overflow: hidden;
+  }
+
+  .socialLinks a:hover {
+    color: darkslategray;
     overflow: hidden;
   }
 
   .footer {
     display: flex;
-    flex-direction: column;
     justify-content: space-between;
     padding: 2% 5%;
   }
   .footer .adresa p {
     line-height: 250%;
+    font-size: 1vw;
     color: rgb(73, 73, 73);
   }
   .footer .adresa a {
@@ -248,15 +251,16 @@
     cursor: pointer;
   }
   .copyright {
-    text-align: center;
+    font-size: 1vw;
+    margin-left: 5%;
     font-weight: bold;
   }
   .footer .contact {
-    width: 100%;
+    width: 50vw;
   }
   .footer .contact form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
     width: 100%;
   }
@@ -264,8 +268,8 @@
   .footer .contact textarea {
     border: 0;
     border-bottom: 2px solid gray;
-    font-size: 18px;
-    width: 100%;
+    font-size: 1.5vw;
+    width: 20vw;
     outline: 0;
   }
 
@@ -276,15 +280,17 @@
 
   .footer .contact p {
     color: gray;
-    font-size: 18px;
+    font-size: 1.3vw;
   }
-
+  .footer .contact .email {
+    display: flex;
+    flex-direction: column;
+  }
   .footer .contact .email button {
     border: 0;
     background-color: white;
-    font-size: 20px;
-    margin: 5% 50%;
-    transform: translateX(-50%);
+    font-size: 2vw;
+    margin: 0;
     color: maroon;
     font-weight: bold;
     cursor: pointer;

@@ -1,4 +1,7 @@
 import style from "../styles/mainPage.module.css";
+import styleMax from "../styles/screenSizes/max.module.css";
+import styleLap from "../styles/screenSizes/laptop.module.css";
+import styleMob from "../styles/screenSizes/mobile.module.css";
 import Image from "next/image";
 import profile from "../images/icons/profile.svg";
 import notif from "../images/icons/notification.svg";
@@ -9,8 +12,31 @@ import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
+import { useState, useEffect } from "react";
 
 export default function Nav() {
+  const [screenWidth, setScreenWidth] = useState(0);
+  const [styles, setStyles] = useState(style);
+  setTimeout(() => {
+    setScreenWidth(window.innerWidth);
+  }, 1);
+  if (screenWidth >= 1366 && styles != styleMax) {
+    setStyles(() => {
+      return styleMax;
+    });
+  } else if (screenWidth >= 1024 && screenWidth <= 1365 && styles != styleLap) {
+    setStyles(() => {
+      return styleLap;
+    });
+  } else if (screenWidth >= 700 && screenWidth <= 1023 && styles != style) {
+    setStyles(() => {
+      return style;
+    });
+  } else if (screenWidth <= 699 && screenWidth > 0 && styles != styleMob) {
+    setStyles(() => {
+      return styleMob;
+    });
+  }
   function openNav() {
     const nav = document.getElementById("navigation");
     const socials = document.getElementById("socials");
@@ -29,63 +55,75 @@ export default function Nav() {
   }
   return (
     <>
-      <section className={style.section}>
-        <div className={style.account}>
-          <button className={style.notifications} type="button">
+      <section
+        className={`${style.section} ${styleMax.section} ${styleMob.section} ${styleLap.section}`}
+      >
+        <div
+          className={`${style.account} ${styleMax.account} ${styleMob.account} ${styleLap.account}`}
+        >
+          <button
+            className={`${style.notification} ${styleMax.notification} ${styleMob.notification} ${styleLap.notification}`}
+            type="button"
+          >
             <Image src={notif} alt="Notifications" />
           </button>
-          <button type="button" className={style.profile}>
+          <button
+            type="button"
+            className={`${style.profile} ${styleMax.profile} ${styleMob.profile} ${styleLap.profile}`}
+          >
             <Image src={profile} alt="Profile" />
           </button>
         </div>
       </section>
-      <header className={style.header}>
+      <header
+        className={`${style.header} ${styleMax.header} ${styleMob.header} ${styleLap.header}`}
+      >
         <div>
           <a href="/">
-            <Image src={logo} />
+            <Image src={logo} alt="logo" />
           </a>
           <p>Ѓорче Петров</p>
         </div>
         <nav>
           <button
             type="button"
-            className={style.menu}
+            className={`${style.menu} ${styleMax.menu} ${styleMob.menu} ${styleLap.menu}`}
             id="menu-button"
             onClick={openNav}
           >
             <FontAwesomeIcon icon={faBars} />
           </button>
 
-          <ul id="navigation">
-            <a onClick={closeNav} className={`${style.close} ${style.mobile}`}>
+          <div id={`${styles.navigation}`}>
+            <a
+              onClick={closeNav}
+              className={`${styleMax.mobile} ${styleMob.close} ${styleLap.mobile}`}
+            >
               <FontAwesomeIcon icon={faWindowClose} />
             </a>
-            <li>
+            <div className={`${styleMax.center}`}>
               <a href="">За Гимназијата</a>
-            </li>
-            <li>
               <a href="">Струки</a>
-            </li>
-            <li>
               <a href="">Уписи</a>
-            </li>
-            <li>
               <a href="links/news">Вести и Настани</a>
-            </li>
-            <li>
               <a href="">Проекти</a>
-            </li>
-            <li>
               <a href="">Часови</a>
-            </li>
-            <li className={style.mobile}>
-              <a href="">Логин</a>
-            </li>
-            <li className={style.mobile}>
-              <a href="">Регистрација</a>
-            </li>
+              <a
+                href=""
+                className={`${style.mobile} ${styleMax.mobile} ${styleMob.mobile} ${styleLap.mobile}`}
+              >
+                Логин
+              </a>
+              <a
+                href=""
+                className={`${style.mobile} ${styleMax.mobile} ${styleMob.mobile} ${styleLap.mobile}`}
+              >
+                Регистрација
+              </a>
+            </div>
+
             <div
-              className={`${style.socialLinks}${style.mobile}`}
+              className={`${style.socialLinks} ${styleMax.socialLinks} ${styleMax.mobile} ${styleMob.socialLinks} ${styleLap.socialLinks} ${styleLap.mobile}`}
               id="socials"
               style={{ display: "none" }}
             >
@@ -105,7 +143,7 @@ export default function Nav() {
                 <FontAwesomeIcon icon={faInstagram} />
               </a>
             </div>
-          </ul>
+          </div>
         </nav>
       </header>
     </>

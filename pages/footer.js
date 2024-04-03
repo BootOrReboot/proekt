@@ -1,5 +1,8 @@
 import { useState } from "react";
 import style from "../styles/mainPage.module.css";
+import styleMax from "../styles/screenSizes/max.module.css";
+import styleLap from "../styles/screenSizes/laptop.module.css";
+import styleMob from "../styles/screenSizes/mobile.module.css";
 
 export default function Footer() {
   const [email, setEmail] = useState({
@@ -33,8 +36,12 @@ export default function Footer() {
   };
   return (
     <>
-      <footer className={style.footer}>
-        <div className={style.adresa}>
+      <footer
+        className={`${style.footer} ${styleMob.footer} ${styleMax.footer} ${styleLap.footer}`}
+      >
+        <div
+          className={`${style.adresa} ${styleMob.adresa} ${styleMax.adresa} ${styleLap.adresa}`}
+        >
           <p>
             ул.8-ми Октомври бр. 91
             <br />
@@ -49,15 +56,21 @@ export default function Footer() {
             </a>
           </p>
         </div>
-        <div className={style.contact}>
+        <div
+          className={`${style.contact} ${styleMob.contact} ${styleMax.contact} ${styleLap.contact}`}
+        >
           <form>
-            <div className={style.info}>
+            <div
+              className={`${style.info} ${styleMob.info} ${styleMax.info} ${styleLap.info}`}
+            >
               <p>Ime</p>
               <input type="text" />
               <p>Prezime</p>
               <input type="text" />
             </div>
-            <div className={style.email}>
+            <div
+              className={`${style.email} ${styleMob.email} ${styleMax.email} ${styleLap.email}`}
+            >
               <p>Email *</p>
               <input type="email" onChange={addInfo} name="original" />
               <p>Naslov</p>
@@ -69,6 +82,7 @@ export default function Footer() {
                 id="poraka"
                 cols="23"
                 rows="5"
+                style={{ resize: "none" }}
                 onChange={addInfo}
               ></textarea>
               <br />
@@ -77,7 +91,11 @@ export default function Footer() {
           </form>
         </div>
       </footer>
-      <p className={style.copyright}>© 2019. Сите права се задржани</p>
+      <p
+        className={`${style.copyright} ${styleMob.copyright} ${styleMax.copyright} ${styleLap.copyright}`}
+      >
+        © 2019. Сите права се задржани
+      </p>
     </>
   );
 }

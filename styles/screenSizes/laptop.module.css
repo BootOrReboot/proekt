@@ -1,84 +1,63 @@
-@media only screen and (min-width: 700px) and (max-width: 1023px) {
+@media only screen and (min-width: 1024px) and (max-width: 1365px) {
   .section {
-    display: none;
+    display: flex;
+    justify-content: right;
+    align-items: center;
+    padding: 0.5vw 2vw;
+    padding-bottom: 0;
+  }
+  .section .account {
+    display: flex;
+    justify-content: right;
+    width: 8vw;
+    height: fit-content;
+    padding: 0 2vw;
+  }
+
+  .section button {
+    background: none;
+    border: 0;
+    cursor: pointer;
+    width: 40%;
+    height: 50%;
+  }
+  .section button img {
+    width: 100%;
+  }
+
+  .section button:hover img {
+    filter: contrast(20%);
   }
 
   .header {
     display: flex;
     width: 100%;
-    padding: 3%;
+    padding-bottom: 2vw;
   }
   .header div {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 80%;
+    width: 40%;
   }
+
   .header div img {
-    width: 100px;
+    width: 8vw;
   }
   .header div p {
     margin: 0;
     width: 50%;
-    font-size: calc(100% + 3vw);
+    font-size: 3vw;
     font-weight: bold;
-  }
-  .header nav ul {
-    position: absolute;
-    z-index: 10;
-    right: 0;
-    top: 0;
-    width: 0%;
-    padding: 10% 0% 0px 0px;
-    font-size: 26px;
-    background-color: rgb(0, 195, 255);
-
-    animation-name: menu;
-    animation-duration: 2s;
-    animation-timing-function: ease-in;
-    animation-fill-mode: forwards;
-    animation-play-state: paused;
-  }
-  .closeMenu {
-    position: absolute;
-    z-index: 11;
-    right: 17%;
-    top: 5%;
-    width: 5%;
-    visibility: hidden;
-    animation-name: close;
-    animation-delay: 2s;
-    animation-timing-function: ease-in;
-    animation-fill-mode: forwards;
-    animation-play-state: paused;
-  }
-  @keyframes menu {
-    0% {
-      width: 0%;
-    }
-    100% {
-      width: 40%;
-    }
-  }
-  @keyframes close {
-    100% {
-      visibility: visible;
-    }
-  }
-  .header nav ul li {
-    height: 40px;
-    border: 1px solid;
-    width: 100%;
   }
   .header nav {
     display: flex;
     align-items: center;
+    justify-content: right;
+    width: 100%;
   }
   .header nav .menu {
-    border: 0;
-    background: white;
-    font-size: 30px;
-    cursor: pointer;
+    display: none;
   }
 
   .content {
@@ -87,15 +66,15 @@
     justify-content: center;
     align-items: center;
     width: 90%;
-    height: 50vw;
     margin: auto;
+    height: 50vw;
     overflow: hidden;
   }
   .content .img {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 95%;
+    width: 100%;
   }
   .content .img img {
     width: 100%;
@@ -119,51 +98,49 @@
   }
   .content .text span {
     line-height: 200%;
-    font-size: calc(100% + 3.5vw);
+    font-size: 5vw;
   }
   .content .text h1 {
-    font-size: calc(100% + 20px);
+    font-size: 5vw;
   }
   .content .text p {
     text-align: justify;
     font-weight: 100;
-    font-size: 16px;
+    font-size: 1.8vw;
     padding: 0 4%;
   }
 
   .vestiNovosti {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    width: 90vw;
     height: fit-content;
+    justify-content: space-evenly;
     align-items: center;
     padding: 2% 0;
+    margin: auto;
   }
   .vestiNovosti h1 {
-    color: black;
-    width: 100%;
-    height: 9vw;
-    text-align: center;
-    font-size: 7vw;
-    margin: 0;
+    font-size: 4vw;
   }
   .vestiNovosti div {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
+    align-items: flex-start;
     width: inherit;
-    height: inherit;
+    height: fit-content;
   }
 
   .vestiNovosti div .vestNovost {
     display: flex;
     flex-direction: column;
-    width: 70%;
+    width: 30vw;
     height: fit-content;
     border: 1px solid black;
-    margin: 2% 0;
-    flex: 0 0 46%;
+    margin: 1% 0;
+    flex: 0 0 30%;
   }
   .vestiNovosti div .vestNovost .slika {
     align-items: flex-start;
@@ -173,25 +150,19 @@
     width: 100%;
   }
   .vestiNovosti div .vestNovost .naslov {
-    width: 100%;
-  }
-  .vestiNovosti div .vestNovost .naslov p {
+    justify-content: left;
     font-weight: bold;
-    font-size: 3.5vw;
+    font-size: 2vw;
     width: 100%;
-    margin: 5% 0;
-    padding-left: 5%;
-    text-align: left;
+    padding: 3%;
     cursor: pointer;
   }
-
   .vestiNovosti div .vestNovost .naslov:hover {
     text-decoration: underline;
   }
   .vestiNovosti div .vestNovost .objaveno {
-    flex-direction: row;
     justify-content: left;
-    font-size: 1.8vw;
+    font-size: 1.2vw;
     width: 100%;
     color: rgb(102, 102, 102);
     margin-bottom: 2%;
@@ -209,34 +180,40 @@
     border: 0;
     background-color: rgb(8, 80, 109);
     color: white;
-    font-size: 4.5vw;
-    padding: 2vw 0;
-    width: 80%;
+    font-size: 2vw;
+    padding: 1vw 3vw;
     border-radius: 2vw;
     cursor: pointer;
   }
-
+  .vestiNovosti .povekje button:hover {
+    background-color: rgb(0, 70, 95);
+  }
   .socialLinks {
     display: flex;
     flex-direction: column;
     position: fixed;
     bottom: 0;
-    left: 0.5%;
+    left: 1%;
     justify-content: space-evenly;
     align-items: center;
+    height: 14vw;
   }
 
   .socialLinks a {
-    font-size: calc(100% + 10px);
+    width: 2.5vw;
     color: black;
     overflow: hidden;
   }
 
   .footer {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-between;
+    width: 100%;
     padding: 2% 5%;
+  }
+  .footer .adresa {
+    width: 50%;
   }
   .footer .adresa p {
     line-height: 250%;
@@ -248,17 +225,20 @@
     cursor: pointer;
   }
   .copyright {
-    text-align: center;
+    font-size: 1.3vw;
+    text-align: left;
     font-weight: bold;
+    margin-left: 5%;
   }
   .footer .contact {
-    width: 100%;
+    margin: auto;
+    width: 50%;
   }
   .footer .contact form {
     display: flex;
-    flex-direction: column;
+    flex-direction: row;
     justify-content: space-around;
-    width: 100%;
+    width: 90%;
   }
   .footer .contact input,
   .footer .contact textarea {
@@ -288,5 +268,23 @@
     color: maroon;
     font-weight: bold;
     cursor: pointer;
+  }
+  .header nav #navigation {
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    padding: 0;
+    width: 70%;
+  }
+  .header nav #navigation .mobile {
+    display: none;
+  }
+  .header nav #navigation a:hover {
+    color: rgb(24, 75, 184);
+  }
+  .header nav #navigation a {
+    color: black;
+    text-decoration: none;
+    font-size: 1.3vw;
   }
 }

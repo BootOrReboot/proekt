@@ -1,73 +1,95 @@
 import style from "../styles/mainPage.module.css";
+import styleMax from "../styles/screenSizes/max.module.css";
+import styleLap from "../styles/screenSizes/laptop.module.css";
+import styleMob from "../styles/screenSizes/mobile.module.css";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faBars } from "@fortawesome/free-solid-svg-icons";
 import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faCalendar } from "@fortawesome/free-solid-svg-icons";
-import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import profile from "../images/icons/profile.svg";
-import notif from "../images/icons/notification.svg";
-import logo from "../images/logo-gjorce-petrov.svg";
 import vraboteni from "../images/vraboteni.png";
 import bezbednost from "../images/bezbednost.png";
 import test from "../images/test-slika.png";
 import mladite from "../images/mladite.png";
 import hemija from "../images/hemija.jpg";
-import Xicon from "../images/x-symbol.png";
 import { useEffect, useState } from "react";
+import { useWindowSize } from "@uidotdev/usehooks";
 
 export default function Home() {
-  const [email, setEmail] = useState({
-    original: "",
-    subject: "",
-    info: "",
-  });
-  const addInfo = (e) => {
-    const { name, value } = e.target;
-    setEmail({
-      ...email,
-      [name]: value,
+  const [screenWidth, setScreenWidth] = useState(0);
+  const [styles, setStyles] = useState(style);
+  const [news, setNews] = useState([
+    { name: "Светски ден на бубрегот", image: test, date: "14 Март 2024" },
+    {
+      name: "Новинарски спринт во СОУ „Ѓорче Петров“",
+      image: mladite,
+      date: "08 Март 2024",
+    },
+    {
+      name: "Општински натпревар по хемија",
+      image: hemija,
+      date: "18 Фебруари 2024",
+    },
+  ]);
+  setTimeout(() => {
+    setScreenWidth(window.innerWidth);
+  }, 1);
+  if (screenWidth >= 1366 && styles != styleMax) {
+    setStyles(() => {
+      return styleMax;
     });
-  };
-  const sendMail = (e) => {
-    e.preventDefault();
-    fetch("http://localhost:3000/api/mailSending", {
-      method: "POST",
-      body: JSON.stringify({
-        transportEmail: email.original,
-        title: email.subject,
-        text: email.info,
-      }),
-    })
-      .then((res1) => {
-        return res1.json();
-      })
-      .then((res2) => {
-        console.log(res2.message);
-      });
-  };
+  } else if (screenWidth >= 1024 && screenWidth <= 1365 && styles != styleLap) {
+    setStyles(() => {
+      return styleLap;
+    });
+  } else if (screenWidth >= 700 && screenWidth <= 1023 && styles != style) {
+    setStyles(() => {
+      return style;
+    });
+  } else if (screenWidth <= 699 && screenWidth > 0 && styles != styleMob) {
+    setStyles(() => {
+      return styleMob;
+    });
+  }
 
+  console.log(screenWidth);
+  console.log(styles);
   return (
     <div>
-      <div className={style.content}>
-        <div className={style.text}>
-          <div className={`${style.center} ${style.split}`}>
+      <div className={styles.content}>
+        <div className={styles.text}>
+          <div
+            className={`${style.center} ${style.split} ${styleMax.center} ${styleMax.split} ${styleLap.center} ${styleLap.split} ${styleMob.center} ${styleMob.split}`}
+          >
             <span>Ѓорче Петров</span>
             <span>Крива Паланка</span>
           </div>
         </div>
-        <div className={style.img}>
-          <Image src={vraboteni} alt="Gjorce Petrov Vraboteni" />
+        <div
+          className={`${style.img} ${styleLap.img} ${styleMax.img} ${styleMob.img}`}
+        >
+          <Image
+            src={vraboteni}
+            alt="Gjorce Petrov Vraboteni"
+            priority={true}
+          />
         </div>
       </div>
-      <div className={`${style.content} ${style.reverse}`}>
-        <div className={style.img}>
+      <div
+        className={`${style.content} ${style.reverse} ${styleMax.content} ${styleMax.reverse} ${styleMob.content} ${styleMob.reverse} ${styleLap.content} ${styleLap.reverse}`}
+      >
+        <div
+          className={`${style.img} ${styleMob.img} ${styleMax.img} ${styleLap.img}`}
+        >
           <Image src={bezbednost} alt="Bezbednost" />
         </div>
-        <div className={style.text}>
-          <div className={style.split}>
+        <div
+          className={`${style.text} ${styleLap.text} ${styleMax.text} ${styleMob.text}`}
+        >
+          <div
+            className={`${style.split} ${styleLap.split} ${styleMax.split} ${styleMob.split}`}
+          >
             <h1>Безбедност</h1>
             <p>
               Во Гимназија „Ѓорче Петров“, веруваме дека нашите ученици имаат
@@ -81,7 +103,9 @@ export default function Home() {
           </div>
         </div>
       </div>
-      <div className={style.socialLinks}>
+      <div
+        className={`${style.socialLinks} ${styleLap.socialLinks} ${styleMax.socialLinks} ${styleMob.socialLinks}`}
+      >
         <a
           href="https://www.youtube.com/@sougorcepetrovkrivapalanka4547"
           target="_blank"
@@ -96,48 +120,33 @@ export default function Home() {
         </a>
       </div>
 
-      <div className={style.vestiNovosti}>
+      <div
+        className={`${style.vestiNovosti} ${styleLap.vestiNovosti} ${styleMax.vestiNovosti} ${styleMob.vestiNovosti}`}
+      >
         <h1>Вести и Настани</h1>
         <div>
-          <div className={style.vestNovost}>
-            <div className={style.slika}>
-              <Image src={test} alt="test slika" />
+          {news.map((el, index) => (
+            <div className={styles.vestNovost} key={index}>
+              <div className={styles.slika}>
+                <Image src={el.image} alt="test slika" />
+              </div>
+              <div className={styles.naslov}>
+                <p>{el.name}</p>
+              </div>
+              <div className={styles.objaveno}>
+                <FontAwesomeIcon icon={faCalendar} />
+                {el.date} by Елена Ѓорѓиевска
+              </div>
             </div>
-            <div className={style.naslov}>
-              <p>Светски ден на бубрегот</p>
-            </div>
-            <div className={style.objaveno}>
-              <FontAwesomeIcon icon={faCalendar} />
-              14 Март 2024 by Елена Ѓорѓиевска
-            </div>
-          </div>
-          <div className={style.vestNovost}>
-            <div className={style.slika}>
-              <Image src={mladite} alt="test slika" />
-            </div>
-            <div className={style.naslov}>
-              <p>Новинарски спринт во СОУ „Ѓорче Петров“</p>
-            </div>
-            <div className={style.objaveno}>
-              <FontAwesomeIcon icon={faCalendar} />
-              08 Март 2024 by Елена Ѓорѓиевска
-            </div>
-          </div>
-          <div className={style.vestNovost}>
-            <div className={style.slika}>
-              <Image src={hemija} alt="test slika" />
-            </div>
-            <div className={style.naslov}>
-              <p>Општински натпревар по хемија</p>
-            </div>
-            <div className={style.objaveno}>
-              <FontAwesomeIcon icon={faCalendar} />
-              18 Фебруари 2024 by Елена Ѓорѓиевска
-            </div>
-          </div>
+          ))}
         </div>
-        <div className={style.povekje}>
-          <button type="button" onclick="location.href='vesti-nastani.html'">
+        <div
+          className={`${style.povekje} ${styleLap.povekje} ${styleMax.povekje} ${styleMob.povekje}`}
+        >
+          <button
+            type="button"
+            onClick={() => (window.location.href = "vesti-nastani.html")}
+          >
             Повеќе &#8594;
           </button>
         </div>
