@@ -31,14 +31,14 @@
 
   .header {
     display: flex;
-    width: 100%;
+    width: 90%;
+    margin: auto;
     padding-bottom: 2vw;
   }
   .header div {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    width: 40%;
   }
 
   .header div img {
@@ -88,7 +88,6 @@
     color: white;
     background-color: rgb(8, 80, 109);
     font-weight: bold;
-    padding: 0 2%;
     align-items: center;
     justify-content: center;
   }
@@ -274,10 +273,13 @@
     justify-content: space-evenly;
     align-items: center;
     padding: 0;
-    width: 70%;
+    width: 90%;
   }
   .header nav #navigation .mobile {
     display: none;
+  }
+  .header nav #navigation .center {
+    width: inherit;
   }
   .header nav #navigation a:hover {
     color: rgb(24, 75, 184);
@@ -286,5 +288,6 @@
     color: black;
     text-decoration: none;
     font-size: 1.3vw;
+    padding: 0px 5px;
   }
 }

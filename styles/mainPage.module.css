@@ -75,12 +75,65 @@
     align-items: center;
   }
   .header nav .menu {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     border: 0;
     background: white;
-    font-size: 30px;
+    font-size: 7vw;
     cursor: pointer;
+    width: 8vw;
+    height: 8vw;
+    padding: 0;
   }
-
+  .header nav #navigation .socialLinks {
+    display: none;
+  }
+  .header nav #navigation .close {
+    position: fixed;
+    top: 3vw;
+    right: 3vw;
+    width: 4vw;
+    color: white;
+    z-index: inherit;
+  }
+  .header nav #navigation {
+    display: none;
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: rgba(0, 70, 95, 0.95);
+    margin: 0;
+    width: 0;
+    height: 100vh;
+    flex-direction: column;
+    z-index: 1;
+  }
+  .header nav #navigation .center {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: start;
+    width: 70%;
+    height: 80vh;
+  }
+  .header nav #navigation .center a {
+    color: white;
+    text-decoration: none;
+    text-align: left;
+    font-size: 3vw;
+    width: max-content;
+  }
+  .header nav #navigation a:active {
+    text-decoration: underline;
+  }
+  #navigation {
+    animation-duration: 1s;
+    animation-name: fadeIn;
+    animation-direction: normal;
+    animation-play-state: paused;
+    animation-fill-mode: forwards;
+  }
   .content {
     display: flex;
     flex-direction: row;
@@ -151,7 +204,7 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: flex-start;
     width: inherit;
     height: inherit;
   }
@@ -162,7 +215,7 @@
     width: 70%;
     height: fit-content;
     border: 1px solid black;
-    margin: 2% 0;
+    margin: 1%;
     flex: 0 0 46%;
   }
   .vestiNovosti div .vestNovost .slika {
@@ -209,9 +262,10 @@
     border: 0;
     background-color: rgb(8, 80, 109);
     color: white;
-    font-size: 4.5vw;
-    padding: 2vw 0;
-    width: 80%;
+    font-size: 4vw;
+    padding: 1.5vw 0;
+    width: 60%;
+    margin: auto;
     border-radius: 2vw;
     cursor: pointer;
   }
@@ -288,5 +342,21 @@
     color: maroon;
     font-weight: bold;
     cursor: pointer;
+  }
+  @keyframes fadeIn {
+    0% {
+      width: 0;
+    }
+    100% {
+      width: 40vw;
+    }
+  }
+  @keyframes fadeOut {
+    0% {
+      width: 40vw;
+    }
+    100% {
+      width: 0;
+    }
   }
 }

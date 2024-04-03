@@ -34,6 +34,17 @@ export default function Home() {
   ]);
   useEffect(() => {
     setScreenWidth(window.innerWidth);
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setScreenWidth(width);
+    };
+
+    handleResize(); // Call once to set initial state
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
   }, []);
   if (screenWidth >= 1366 && styles != styleMax) {
     setStyles(() => {

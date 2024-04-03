@@ -52,9 +52,9 @@
   .header nav #navigation a:active {
     text-decoration: underline;
   }
-  .header nav #navigation .social-links a {
+  .socialTags {
     color: white;
-    font-size: 10vw;
+    width: 10vw;
     height: fit-content;
     margin: 0;
     overflow: hidden;
@@ -63,7 +63,7 @@
     position: fixed;
     top: 5vw;
     right: 5vw;
-    font-size: 10vw;
+    width: 10vw;
     color: white;
     z-index: inherit;
   }
