@@ -112,7 +112,7 @@
     padding: 0 4%;
   }
 
-  .vestiNovosti {
+  .vestiNastani {
     display: flex;
     flex-direction: column;
     width: 100%;
@@ -120,7 +120,7 @@
     align-items: center;
     padding: 2% 0;
   }
-  .vestiNovosti h1 {
+  .vestiNastani h1 {
     color: black;
     width: 100%;
     height: 9vw;
@@ -128,7 +128,7 @@
     font-size: 7vw;
     margin: 0;
   }
-  .vestiNovosti div {
+  .vestiNastani div {
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
@@ -137,7 +137,7 @@
     height: inherit;
   }
 
-  .vestiNovosti div .vestNovost {
+  .vestiNastani div .vestNastan {
     display: flex;
     flex-direction: column;
     width: 70%;
@@ -146,17 +146,17 @@
     margin: 2% 0;
     flex: 0 0 46%;
   }
-  .vestiNovosti div .vestNovost .slika {
+  .vestiNastani div .vestNastan .slika {
     align-items: flex-start;
     width: 100%;
   }
-  .vestiNovosti div .vestNovost .slika img {
+  .vestiNastani div .vestNastan .slika img {
     width: 100%;
   }
-  .vestiNovosti div .vestNovost .naslov {
+  .vestiNastani div .vestNastan .naslov {
     width: 100%;
   }
-  .vestiNovosti div .vestNovost .naslov p {
+  .vestiNastani div .vestNastan .naslov p {
     font-weight: bold;
     font-size: 3.5vw;
     width: 100%;
@@ -166,10 +166,10 @@
     cursor: pointer;
   }
 
-  .vestiNovosti div .vestNovost .naslov:hover {
+  .vestiNastani div .vestNastan .naslov:hover {
     text-decoration: underline;
   }
-  .vestiNovosti div .vestNovost .objaveno {
+  .vestiNastani div .vestNastan .objaveno {
     flex-direction: row;
     justify-content: left;
     font-size: 1.8vw;
@@ -178,15 +178,15 @@
     margin-bottom: 2%;
     align-items: center;
   }
-  .vestiNovosti div .vestNovost .objaveno svg {
+  .vestiNastani div .vestNastan .objaveno svg {
     width: 30px;
     height: 30px;
     margin: 0 2%;
   }
-  .vestiNovosti .povekje {
+  .vestiNastani .povekje {
     height: fit-content;
   }
-  .vestiNovosti .povekje button {
+  .vestiNastani .povekje button {
     border: 0;
     background-color: rgb(8, 80, 109);
     color: white;

@@ -7,30 +7,79 @@ import styleMob from "../styles/screenSizes/mobile.module.css";
 export default function Footer() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
-  const [email, setEmail] = useState({
-    original: "",
-    subject: "",
-    info: "",
+  const [form, setForm] = useState({
+    email: "",
+    title: "",
+    letter: "",
     fullName: "",
     surname: "",
+  });
+  const [mistakes, setMistakes] = useState({
+    email: false,
+    title: false,
+    letter: false,
+    fullName: false,
+    surname: false,
   });
 
   const addInfo = (e) => {
     const { name, value } = e.target;
-    setEmail({
-      ...email,
+    setForm({
+      ...form,
       [name]: value,
     });
+  };
+  const validateFields = (e) => {
+    e.preventDefault();
+
+    const newMistakes = {};
+
+    if (form.fullName === "") {
+      newMistakes.fullName = true;
+    } else {
+      newMistakes.fullName = false;
+    }
+
+    if (form.surname === "") {
+      newMistakes.surname = true;
+    } else {
+      newMistakes.surname = false;
+    }
+
+    if (
+      form.email === "" ||
+      !/^[\w-\.]+@[\w-]+\.[\w-]{2,4}$/.test(form.email)
+    ) {
+      newMistakes.email = true;
+    } else {
+      newMistakes.email = false;
+    }
+
+    if (form.title === "") {
+      newMistakes.title = true;
+    } else {
+      newMistakes.title = false;
+    }
+
+    if (form.letter === "") {
+      newMistakes.letter = true;
+    } else {
+      newMistakes.letter = false;
+    }
+
+    setMistakes(newMistakes);
+
+    console.log(newMistakes);
   };
   const sendMail = (e) => {
     e.preventDefault();
     fetch("http://localhost:3000/api/mailSending", {
       method: "POST",
       body: JSON.stringify({
-        transportEmail: email.original,
-        title: email.subject,
-        text: email.info,
-        fullName: email.fullName + " " + email.surname,
+        transportEmail: form.email,
+        title: form.title,
+        text: form.letter,
+        fullName: form.fullName + " " + form.surname,
       }),
     })
       .then((res1) => {
@@ -92,28 +141,114 @@ export default function Footer() {
         <div className={styles.contact}>
           <form>
             <div className={styles.info}>
-              <p>Ime</p>
-              <input type="text" onChange={addInfo} name="fullName" />
-              <p>Prezime</p>
-              <input type="text" onChange={addInfo} name="surname" />
+              {mistakes.fullName ? (
+                <>
+                  <p style={{ color: "red" }}>Име *Field is empty*</p>
+                  <input
+                    type="text"
+                    onChange={addInfo}
+                    name="fullName"
+                    style={{ borderColor: "red" }}
+                  />
+                </>
+              ) : (
+                <>
+                  <p>Име</p>
+                  <input type="text" onChange={addInfo} name="fullName" />
+                </>
+              )}
+              {mistakes.surname ? (
+                <>
+                  <p style={{ color: "red" }}>Презиме *Field is empty*</p>
+                  <input
+                    type="text"
+                    onChange={addInfo}
+                    name="surname"
+                    style={{ borderColor: "red" }}
+                  />
+                </>
+              ) : (
+                <>
+                  <p>Презиме</p>
+                  <input type="text" onChange={addInfo} name="surname" />
+                </>
+              )}
             </div>
             <div className={styles.email}>
-              <p>Email *</p>
-              <input type="email" onChange={addInfo} name="original" />
-              <p>Naslov</p>
-              <input type="text" onChange={addInfo} name="subject" />
+              {mistakes.email ? (
+                form.email === "" ? (
+                  <>
+                    <p style={{ color: "red" }}>Email *Field is empty*</p>
+                    <input
+                      type="email"
+                      onChange={addInfo}
+                      name="email"
+                      style={{ borderColor: "red" }}
+                    />
+                  </>
+                ) : (
+                  <>
+                    <p style={{ color: "red" }}>Email *Incorrect email*</p>
+                    <input
+                      type="email"
+                      onChange={addInfo}
+                      name="email"
+                      style={{ borderColor: "red" }}
+                    />
+                  </>
+                )
+              ) : (
+                <>
+                  <p>Email *</p>
+                  <input type="email" onChange={addInfo} name="email" />
+                </>
+              )}
+              {mistakes.title ? (
+                <>
+                  <p style={{ color: "red" }}>Наслов *Field is empty</p>
+                  <input
+                    type="text"
+                    onChange={addInfo}
+                    name="title"
+                    style={{ borderColor: "red" }}
+                  />
+                </>
+              ) : (
+                <>
+                  <p>Наслов</p>
+                  <input type="text" onChange={addInfo} name="title" />
+                </>
+              )}
+              {mistakes.letter ? (
+                <>
+                  <p style={{ color: "red" }}>
+                    Напишете порака... *Field is empty*
+                  </p>
+                  <textarea
+                    name="letter"
+                    id="poraka"
+                    cols="23"
+                    rows="5"
+                    style={{ resize: "none", borderColor: "red" }}
+                    onChange={addInfo}
+                  ></textarea>
+                </>
+              ) : (
+                <>
+                  <p>Напишете порака... </p>
+                  <textarea
+                    name="letter"
+                    id="poraka"
+                    cols="23"
+                    rows="5"
+                    style={{ resize: "none" }}
+                    onChange={addInfo}
+                  ></textarea>
+                </>
+              )}
 
-              <p>Napisete poraka...</p>
-              <textarea
-                name="info"
-                id="poraka"
-                cols="23"
-                rows="5"
-                style={{ resize: "none" }}
-                onChange={addInfo}
-              ></textarea>
               <br />
-              <button onClick={sendMail}>Испрати</button>
+              <button onClick={validateFields}>Испрати</button>
             </div>
           </form>
         </div>

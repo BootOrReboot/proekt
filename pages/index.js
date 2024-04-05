@@ -64,8 +64,6 @@ export default function Home() {
     });
   }
 
-  console.log(screenWidth);
-  console.log(styles);
   return (
     <div>
       <div className={styles.content}>
@@ -117,11 +115,11 @@ export default function Home() {
         </a>
       </div>
 
-      <div className={styles.vestiNovosti}>
+      <div className={styles.vestiNastani}>
         <h1>Вести и Настани</h1>
         <div>
           {news.map((el, index) => (
-            <div className={styles.vestNovost} key={index}>
+            <div className={styles.vestNastan} key={index}>
               <div className={styles.slika}>
                 <Image src={el.image} alt="test slika" />
               </div>
@@ -138,7 +136,9 @@ export default function Home() {
         <div className={styles.povekje}>
           <button
             type="button"
-            onClick={() => (window.location.href = "vesti-nastani.html")}
+            onClick={() =>
+              (window.location.href = "http://localhost:3000/links/news")
+            }
           >
             Повеќе &#8594;
           </button>

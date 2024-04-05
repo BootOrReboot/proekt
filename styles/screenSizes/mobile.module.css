@@ -130,7 +130,7 @@
     font-size: 16px;
     padding: 0 4%;
   }
-  .vestiNovosti {
+  .vestiNastani {
     display: flex;
     flex-direction: column;
     width: 90%;
@@ -140,14 +140,14 @@
     align-items: center;
     padding: 2% 0;
   }
-  .vestiNovosti h1 {
+  .vestiNastani h1 {
     color: black;
     width: 100%;
     height: 15vw;
     text-align: center;
     font-size: 10vw;
   }
-  .vestiNovosti div {
+  .vestiNastani div {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
@@ -156,7 +156,7 @@
     height: inherit;
   }
 
-  .vestiNovosti div .vestNovost {
+  .vestiNastani div .vestNastan {
     display: flex;
     flex-direction: column;
     width: 99%;
@@ -164,14 +164,14 @@
     border: 1px solid black;
     margin: 2% 0;
   }
-  .vestiNovosti div .vestNovost .slika {
+  .vestiNastani div .vestNastan .slika {
     align-items: flex-start;
     width: 100%;
   }
-  .vestiNovosti div .vestNovost .slika img {
+  .vestiNastani div .vestNastan .slika img {
     width: 100%;
   }
-  .vestiNovosti div .vestNovost .naslov {
+  .vestiNastani div .vestNastani .naslov {
     justify-content: left;
     font-weight: bold;
     font-size: 6vw;
@@ -180,10 +180,10 @@
     text-align: center;
     cursor: pointer;
   }
-  .vestiNovosti div .vestNovost .naslov:hover {
+  .vestiNastani div .vestNastan .naslov:hover {
     text-decoration: underline;
   }
-  .vestiNovosti div .vestNovost .objaveno {
+  .vestiNastani div .vestNastan .objaveno {
     flex-direction: row;
     justify-content: left;
     font-size: 3.5vw;
@@ -192,15 +192,15 @@
     margin-bottom: 2%;
     align-items: center;
   }
-  .vestiNovosti div .vestNovost .objaveno svg {
+  .vestiNastani div .vestNastan .objaveno svg {
     width: 30px;
     height: 30px;
     margin: 0 2%;
   }
-  .vestiNovosti .povekje {
+  .vestiNastani .povekje {
     height: fit-content;
   }
-  .vestiNovosti .povekje button {
+  .vestiNastani .povekje button {
     border: 0;
     background-color: rgb(8, 80, 109);
     color: white;
@@ -271,5 +271,56 @@
     color: maroon;
     font-weight: bold;
     cursor: pointer;
+  }
+  .gimnazijaInfo {
+    width: 100%;
+    margin: auto;
+  }
+  .gimnazijaInfo img {
+    width: 100%;
+    height: 40vw;
+    object-fit: cover;
+  }
+
+  .gimnazijaInfo p {
+    text-align: justify;
+    font-size: 4vw;
+    padding: 5%;
+  }
+  .gimnazijaInfo p i {
+    font-size: 4.4vw;
+  }
+  .gimnazijaInfo p b {
+    font-size: 4.8vw;
+  }
+
+  .vraboteni {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .vraboten {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: auto;
+    background-color: rgb(238, 234, 234);
+    padding: 2% 2%;
+    margin: 1% 0;
+  }
+  .vraboteni .vraboten p {
+    font-size: 5vw;
+    margin: 3% 0;
+  }
+  .vraboteni .vraboten :nth-child(1 of p) {
+    font-weight: bold;
+  }
+  .vraboteni .vraboten :nth-child(2 of p) {
+    font-style: italic;
+  }
+  .vraboteni .vraboten img {
+    margin-bottom: 3%;
+    width: 50vw;
   }
 }

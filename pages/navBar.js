@@ -13,6 +13,7 @@ import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
+import { Button } from "@nextui-org/button";
 
 export default function Nav() {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -32,20 +33,7 @@ export default function Nav() {
       window.removeEventListener("resize", handleResize);
     };
   }, []);
-  const addStyles = () => {
-    if (screenWidth >= 1024) {
-      const nav = document.getElementById("navigation");
-      const socials = document.getElementById("socials");
-      nav.style.display = "flex";
-      socials.style.display = "none";
-    } else {
-      const nav = document.getElementById("navigation");
-      const socials = document.getElementById("socials");
-      nav.style.display = "none";
-      socials.style.display = "none";
-    }
-    console.log("testing");
-  };
+
   if (screenWidth >= 1366 && styles != styleMax) {
     setStyles(() => {
       return styleMax;
@@ -86,23 +74,44 @@ export default function Nav() {
       }, 1000);
     }
   }
+  function toggleProfileDropdown() {
+    const accDropdown = document.getElementById(`${styles.accountDropdown}`);
+    if (accDropdown.style.display == "none") {
+      accDropdown.style.display = "flex";
+    } else {
+      accDropdown.style.display = "none";
+    }
+  }
 
   return (
     <>
       <section className={styles.section}>
         <div className={styles.account}>
-          <button className={styles.notification} type="button">
+          <Button
+            className={styles.notification}
+            onClick={() => {
+              location.href = "http://localhost:3000/account/notification";
+            }}
+          >
             <Image src={notif} alt="Notifications" />
-          </button>
-          <button type="button" className={styles.profile}>
+          </Button>
+          <Button className={styles.profile} onClick={toggleProfileDropdown}>
             <Image src={profile} alt="Profile" />
-          </button>
+          </Button>
         </div>
       </section>
+      <div id={styles.accountDropdown} style={{ display: "none" }}>
+        <div className={styles.options}>
+          <a href="">Регистрација</a>
+          <a href="">Логин</a>
+          <a href="">Поставувања</a>
+          <a href="">Одјави се</a>
+        </div>
+      </div>
       <header className={styles.header}>
         <div>
           <a href="/">
-            <Image src={logo} alt="logo" />
+            <Image src={logo} alt="logo" priority={true} />
           </a>
           <p>Ѓорче Петров</p>
         </div>
@@ -125,10 +134,12 @@ export default function Nav() {
                 <FontAwesomeIcon icon={faWindowClose} />
               </a>
               <div className={styles.center}>
-                <a href="">За Гимназијата</a>
+                <a href="http://localhost:3000/links/schoolInfo">
+                  За Гимназијата
+                </a>
                 <a href="">Струки</a>
                 <a href="">Уписи</a>
-                <a href="links/news">Вести и Настани</a>
+                <a href="http://localhost:3000/links/news">Вести и Настани</a>
                 <a href="">Проекти</a>
                 <a href="">Часови</a>
                 <a href="" className={styles.mobile}>
@@ -176,7 +187,7 @@ export default function Nav() {
                 <FontAwesomeIcon icon={faWindowClose} />
               </a>
               <div className={styles.center}>
-                <a href="">За Гимназијата</a>
+                <a href="links/schoolInfo">За Гимназијата</a>
                 <a href="">Струки</a>
                 <a href="">Уписи</a>
                 <a href="links/news">Вести и Настани</a>

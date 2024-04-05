@@ -1,117 +1,86 @@
 import style from "../../styles/mainPage.module.css";
-
+import styleMax from "../../styles/screenSizes/max.module.css";
+import styleLap from "../../styles/screenSizes/laptop.module.css";
+import styleMob from "../../styles/screenSizes/mobile.module.css";
 import Image from "next/image";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faBars,
-  faYoutube,
-  faFacebook,
-  faInstagram,
-  faCalendar,
-  faWindowClose,
-} from "@fortawesome/free-solid-svg-icons";
-import profile from "../../images/icons/profile.svg";
-import notif from "../../images/icons/notification.svg";
-import logo from "../../images/logo-gjorce-petrov.svg";
+import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import test from "../../images/test-slika.png";
 import mladite from "../../images/mladite.png";
 import hemija from "../../images/hemija.jpg";
+import { useState, useEffect } from "react";
 
 export default function vesti() {
+  const [screenWidth, setScreenWidth] = useState(0);
+  const [styles, setStyles] = useState(style);
+  const [news, setNews] = useState([
+    { name: "Светски ден на бубрегот", image: test, date: "14 Март 2024" },
+    { name: "Светски ден на бубрегот", image: test, date: "14 Март 2024" },
+    {
+      name: "Новинарски спринт во СОУ „Ѓорче Петров“",
+      image: mladite,
+      date: "08 Март 2024",
+    },
+    {
+      name: "Општински натпревар по хемија",
+      image: hemija,
+      date: "18 Фебруари 2024",
+    },
+  ]);
+  useEffect(() => {
+    setScreenWidth(window.innerWidth);
+    const handleResize = () => {
+      const width = window.innerWidth;
+      setScreenWidth(width);
+    };
+
+    handleResize(); // Call once to set initial state
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+  if (screenWidth >= 1366 && styles != styleMax) {
+    setStyles(() => {
+      return styleMax;
+    });
+  } else if (screenWidth >= 1024 && screenWidth <= 1365 && styles != styleLap) {
+    setStyles(() => {
+      return styleLap;
+    });
+  } else if (screenWidth >= 700 && screenWidth <= 1023 && styles != style) {
+    setStyles(() => {
+      return style;
+    });
+  } else if (screenWidth <= 699 && screenWidth > 0 && styles != styleMob) {
+    setStyles(() => {
+      return styleMob;
+    });
+  }
   return (
-    <div>
-      <div className={style.vestiNovosti}>
-        <h1>Вести и Настани</h1>
-        <div>
-          <div className={style.vestNovost}>
-            <div className={style.slika}>
-              <Image src={test} alt="test slika" />
-            </div>
-            <div className={style.naslov}>
-              <p>Светски ден на бубрегот</p>
-            </div>
-            <div className={style.objaveno}>
-              <FontAwesomeIcon icon={faCalendar} />
-              14 Март 2024 by Елена Ѓорѓиевска
-            </div>
-          </div>
-          <div className={style.vestNovost}>
-            <div className={style.slika}>
-              <Image src={test} alt="test slika" />
-            </div>
-            <div className={style.naslov}>
-              <p>Светски ден на бубрегот</p>
-            </div>
-            <div className={style.objaveno}>
-              <FontAwesomeIcon icon={faCalendar} />
-              14 Март 2024 by Елена Ѓорѓиевска
-            </div>
-          </div>
-          <div className={style.vestNovost}>
-            <div className={style.slika}>
-              <Image src={mladite} alt="test slika" />
-            </div>
-            <div className={style.naslov}>
-              <p>Новинарски спринт во СОУ „Ѓорче Петров“</p>
-            </div>
-            <div className={style.objaveno}>
-              <FontAwesomeIcon icon={faCalendar} />
-              08 Март 2024 by Елена Ѓорѓиевска
-            </div>
-          </div>
-          <div className={style.vestNovost}>
-            <div className={style.slika}>
-              <Image src={hemija} alt="test slika" />
-            </div>
-            <div className={style.naslov}>
-              <p>Општински натпревар по хемија</p>
-            </div>
-            <div className={style.objaveno}>
-              <FontAwesomeIcon icon={faCalendar} />
-              18 Фебруари 2024 by Елена Ѓорѓиевска
-            </div>
+    <>
+      <div>
+        <div className={styles.vestiNastani}>
+          <h1>Вести и Настани</h1>
+          <div>
+            {news.map((el, index) => (
+              <div className={styles.vestNastan} key={index}>
+                <div className={styles.slika}>
+                  <Image src={el.image} alt="test slika" />
+                </div>
+                <div className={styles.naslov}>
+                  <p>{el.name}</p>
+                </div>
+                <div className={styles.objaveno}>
+                  <FontAwesomeIcon icon={faCalendar} />
+                  {el.date} by Елена Ѓорѓиевска
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
-      <footer className={style.footer}>
-        <div className={style.adresa}>
-          <p>
-            ул.8-ми Октомври бр. 91
-            <br />
-            1330 Крива Паланка
-            <br />
-            Република Северна Македонија
-            <br />
-            031/375-025
-            <br />
-            <a href="mailto:sougorcepetrov@yahoo.com">
-              sougorcepetrov@yahoo.com
-            </a>
-          </p>
-        </div>
-        <div className={style.contact}>
-          <form action="">
-            <div className={style.info}>
-              <p>Ime</p>
-              <input type="text" />
-              <p>Prezime</p>
-              <input type="text" />
-            </div>
-            <div className={style.email}>
-              <p>Email *</p>
-              <input type="email" />
-              <p>Naslov</p>
-              <input type="text" />
-
-              <p>Napisete poraka...</p>
-              <textarea name="poraka" id="poraka" cols="23" rows="5"></textarea>
-              <br />
-              <button type="submit">Испрати</button>
-            </div>
-          </form>
-        </div>
-      </footer>
-      <p className={style.copyright}>© 2019. Сите права се задржани</p>
-    </div>
+    </>
   );
 }
