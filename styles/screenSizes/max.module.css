@@ -302,6 +302,15 @@
     font-weight: bold;
     cursor: pointer;
   }
+  .footer .contact .email button:hover {
+    border: 0;
+    background-color: maroon;
+    font-size: 2vw;
+    margin: 0;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+  }
   .gimnazijaInfo {
     width: 90%;
     margin: auto;

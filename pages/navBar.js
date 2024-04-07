@@ -13,8 +13,7 @@ import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect } from "react";
-import { Button } from "@nextui-org/button";
-
+import Button from "@mui/material/Button";
 export default function Nav() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);

@@ -3,6 +3,7 @@ import style from "../styles/mainPage.module.css";
 import styleMax from "../styles/screenSizes/max.module.css";
 import styleLap from "../styles/screenSizes/laptop.module.css";
 import styleMob from "../styles/screenSizes/mobile.module.css";
+import { Button } from "@mui/material";
 
 export default function Footer() {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -248,7 +249,7 @@ export default function Footer() {
               )}
 
               <br />
-              <button onClick={validateFields}>Испрати</button>
+              <Button onClick={validateFields}>Испрати</Button>
             </div>
           </form>
         </div>
