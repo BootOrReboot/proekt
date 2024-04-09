@@ -19,6 +19,7 @@ export default function Nav() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const [error, setError] = useState("");
+  const [errorM, setErrorM] = useState("");
   const [haveNotification, setHaveNotification] = useState(false);
   const search = useSearchParams();
 
@@ -31,7 +32,7 @@ export default function Nav() {
 
     const search = new URLSearchParams(window.location.search);
 
-    const user = search.get("username");
+    const user = search.get("id");
     if (user !== null) {
       fetch("http://localhost:3000/api/notificationAPI/checkSeenNotif", {
         method: "POST",
@@ -105,7 +106,7 @@ export default function Nav() {
     }
   }
   const notify = () => {
-    const username = search.get("username");
+    const username = search.get("id");
     if (username !== null) {
       fetch("http://localhost:3000/api/notificationAPI/changeSeen", {
         method: "POST",
@@ -116,10 +117,28 @@ export default function Nav() {
         })
         .then((res) => {
           console.log(res);
-          location.href = `http://localhost:3000/account/notification?username=${username}`;
+          location.href = `http://localhost:3000/account/notification?id=${id}`;
         });
     } else {
       setError("Register or Login First");
+    }
+  };
+  const notifyM = () => {
+    const username = search.get("id");
+    if (username !== null) {
+      fetch("http://localhost:3000/api/notificationAPI/changeSeen", {
+        method: "POST",
+        body: username,
+      })
+        .then((r) => {
+          return r.json();
+        })
+        .then((res) => {
+          console.log(res);
+          location.href = `http://localhost:3000/account/notification?id=${id}`;
+        });
+    } else {
+      setErrorM("Register or Login First");
     }
   };
   return (
@@ -195,7 +214,7 @@ export default function Nav() {
       </section>
       <div id={styles.accountDropdown} style={{ display: "none" }}>
         <div className={styles.options}>
-          <a href="loginregister.html">Профил</a>
+          <a href="/loginAndRegister">Профил</a>
           <a href="">Поставувања</a>
           <a href="">Одјави се</a>
         </div>
@@ -226,18 +245,23 @@ export default function Nav() {
                 <FontAwesomeIcon icon={faWindowClose} />
               </a>
               <div className={styles.center}>
-                <a href="http://localhost:3000/links/schoolInfo">
-                  За Гимназијата
-                </a>
-                <a href="">Струки</a>
+                <a href="/links/schoolInfo">За Гимназијата</a>
+                <a href="/branches">Струки</a>
 
-                <a href="http://localhost:3000/links/news">Вести и Настани</a>
+                <a href="/links/news">Вести и Настани</a>
 
-                <a className={styles.mobile} href="loginregister.html">
+                <a className={styles.mobile} href="/loginAndRegister">
                   Профил
                 </a>
-                <a className={styles.mobile} href="notifikacii.html">
-                  Нотификации
+                <a className={styles.mobile} onClick={notifyM}>
+                  {errorM === "" ? (
+                    "Нотификации"
+                  ) : (
+                    <div>
+                      Нотификации
+                      <div style={{ position: "absolute" }}>{errorM}</div>
+                    </div>
+                  )}
                 </a>
                 <a className={styles.mobile} href="">
                   Поставувања
@@ -286,15 +310,30 @@ export default function Nav() {
               <div className={styles.center}>
                 <a href="links/schoolInfo">За Гимназијата</a>
                 <a href="">Струки</a>
-                <a href="">Уписи</a>
+
                 <a href="links/news">Вести и Настани</a>
-                <a href="">Проекти</a>
-                <a href="">Часови</a>
-                <a className={styles.mobile} href="loginregister.html">
+
+                <a className={styles.mobile} href="/loginAndRegister">
                   Профил
                 </a>
-                <a className={styles.mobile} href="notifikacii.html">
-                  Нотификации
+                <a className={styles.mobile} onClick={notifyM}>
+                  {errorM === "" ? (
+                    "Нотификации"
+                  ) : (
+                    <div style={{ width: "100%" }}>
+                      Нотификации
+                      <div
+                        style={{
+                          position: "absolute",
+                          left: "-11%",
+                          top: "63%",
+                          fontSize: "58%",
+                        }}
+                      >
+                        {errorM}
+                      </div>
+                    </div>
+                  )}
                 </a>
                 <a className={styles.mobile} href="">
                   Поставувања

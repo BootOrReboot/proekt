@@ -23,7 +23,7 @@ export default function notify() {
     window.addEventListener("resize", handleResize);
     const search = new URLSearchParams(window.location.search);
 
-    const user = search.get("username");
+    const user = search.get("id");
     fetch("http://localhost:3000/api/notificationAPI/getNotifications", {
       method: "POST",
       body: user,
@@ -62,7 +62,7 @@ export default function notify() {
 
     const search = new URLSearchParams(window.location.search);
 
-    const user = search.get("username");
+    const user = search.get("id");
     fetch("http://localhost:3000/api/notificationAPI/deleteNotification", {
       method: "POST",
       body: JSON.stringify({ name: user, id: id }),

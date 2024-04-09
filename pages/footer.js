@@ -69,8 +69,16 @@ export default function Footer() {
     }
 
     setMistakes(newMistakes);
-
-    console.log(newMistakes);
+    if (
+      newMistakes.fullName == false &&
+      newMistakes.surname == false &&
+      newMistakes.email == false &&
+      newMistakes.letter == false &&
+      newMistakes.title == false
+    ) {
+      sendMail();
+    }
+    console.log(mistakes);
   };
   const sendMail = (e) => {
     e.preventDefault();

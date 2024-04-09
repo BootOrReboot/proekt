@@ -578,4 +578,7 @@
   .delete svg {
     height: 40px;
   }
+  .socialLinks a svg {
+    height: 100%;
+  }
 }
