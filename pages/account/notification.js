@@ -7,7 +7,7 @@ import styleMob from "../../styles/screenSizes/mobile.module.css";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
 
-export default function notify() {
+export default function Notify() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const [info, setInfo] = useState({});

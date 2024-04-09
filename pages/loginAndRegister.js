@@ -4,10 +4,10 @@ import styleLap from "../styles/screenSizes/laptop.module.css";
 import styleMob from "../styles/screenSizes/mobile.module.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
-
+import Link from "next/link";
 import { useState, useEffect } from "react";
 
-export default function login() {
+export default function Login() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const [information, setInformation] = useState({
@@ -223,9 +223,9 @@ export default function login() {
             Register
           </button>
           <div className={styles.right}>
-            <a href="/" className={`${styles.close} ${styles.mobile}`}>
+            <Link href="/" className={`${styles.close} ${styles.mobile}`}>
               <FontAwesomeIcon icon={faWindowClose} />
-            </a>
+            </Link>
           </div>
         </div>
         <div className={styles.neznam}>

@@ -53,7 +53,7 @@ export default function Home() {
           <div className={style.toRight} id="toRight"></div>
           <div className={style.blinker} id="blinker"></div>
           <div className={style.searchIcon} onClick={click}>
-            <Image src={image} id="icon" />
+            <Image src={image} id="icon" alt="icon" />
           </div>
 
           <div className={style.searchText} onClick={click}>

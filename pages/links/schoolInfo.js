@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 import frontImageSchool from "../../images/gjorche-petrov-palanka.jpg";
 import Image from "next/image";
 
-export default function forCollage() {
+export default function ForCollage() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
 

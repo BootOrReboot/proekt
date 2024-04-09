@@ -10,7 +10,7 @@ import mladite from "../../images/mladite.png";
 import hemija from "../../images/hemija.jpg";
 import { useState, useEffect } from "react";
 
-export default function vesti() {
+export default function Vesti() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const [news, setNews] = useState([

@@ -14,7 +14,7 @@ import kuvar from "../images/icons/ugostitelska.png";
 import medicina from "../images/icons/zdravstvena.png";
 
 import { useState, useEffect } from "react";
-export default function schoolBranches() {
+export default function SchoolBranches() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
 

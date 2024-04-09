@@ -15,6 +15,7 @@ import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import { useState, useEffect, use } from "react";
 import Button from "@mui/material/Button";
 import { useSearchParams } from "next/navigation";
+import Link from "next/link";
 export default function Nav() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
@@ -214,16 +215,16 @@ export default function Nav() {
       </section>
       <div id={styles.accountDropdown} style={{ display: "none" }}>
         <div className={styles.options}>
-          <a href="/loginAndRegister">Профил</a>
+          <Link href="/loginAndRegister">Профил</Link>
           <a href="">Поставувања</a>
           <a href="">Одјави се</a>
         </div>
       </div>
       <header className={styles.header}>
         <div>
-          <a href="/">
+          <Link href="/">
             <Image src={logo} alt="logo" priority={true} />
-          </a>
+          </Link>
           <p>Ѓорче Петров</p>
         </div>
         <nav>
@@ -245,14 +246,14 @@ export default function Nav() {
                 <FontAwesomeIcon icon={faWindowClose} />
               </a>
               <div className={styles.center}>
-                <a href="/links/schoolInfo">За Гимназијата</a>
-                <a href="/branches">Струки</a>
+                <Link href="/links/schoolInfo">За Гимназијата</Link>
+                <Link href="/branches">Струки</Link>
 
-                <a href="/links/news">Вести и Настани</a>
+                <Link href="/links/news">Вести и Настани</Link>
 
-                <a className={styles.mobile} href="/loginAndRegister">
+                <Link className={styles.mobile} href="/loginAndRegister">
                   Профил
-                </a>
+                </Link>
                 <a className={styles.mobile} onClick={notifyM}>
                   {errorM === "" ? (
                     "Нотификации"
@@ -276,27 +277,27 @@ export default function Nav() {
                 id="socials"
                 style={{ display: "none" }}
               >
-                <a
+                <Link
                   className={styles.socialTags}
                   href="https://www.youtube.com/@sougorcepetrovkrivapalanka4547"
                   target="_blank"
                 >
                   <FontAwesomeIcon icon={faYoutube} />
-                </a>
-                <a
+                </Link>
+                <Link
                   href="https://www.facebook.com/gjorcepetrov"
                   target="_blank"
                   className={styles.socialTags}
                 >
                   <FontAwesomeIcon icon={faFacebook} />
-                </a>
-                <a
+                </Link>
+                <Link
                   className={styles.socialTags}
                   href="https://www.instagram.com/uz_gjorchepetrov/"
                   target="_blank"
                 >
                   <FontAwesomeIcon icon={faInstagram} />
-                </a>
+                </Link>
               </div>
             </div>
           ) : (
@@ -308,14 +309,14 @@ export default function Nav() {
                 <FontAwesomeIcon icon={faWindowClose} />
               </a>
               <div className={styles.center}>
-                <a href="links/schoolInfo">За Гимназијата</a>
-                <a href="">Струки</a>
+                <Link href="links/schoolInfo">За Гимназијата</Link>
+                <Link href="/links/branches">Струки</Link>
 
-                <a href="links/news">Вести и Настани</a>
+                <Link href="/links/news">Вести и Настани</Link>
 
-                <a className={styles.mobile} href="/loginAndRegister">
+                <Link className={styles.mobile} href="/loginAndRegister">
                   Профил
-                </a>
+                </Link>
                 <a className={styles.mobile} onClick={notifyM}>
                   {errorM === "" ? (
                     "Нотификации"
