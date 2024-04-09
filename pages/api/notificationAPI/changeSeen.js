@@ -7,7 +7,7 @@ export default async function insert(req, res) {
   const base = client.db("baza");
   const collections = base.collection("Professors");
   const updating = await collections.updateOne(
-    { username: user },
+    { id: user },
     { $set: { seen: true } }
   );
   res.status(200).json({ message: "works" });
