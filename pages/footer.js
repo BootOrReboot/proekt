@@ -137,6 +137,12 @@ export default function Footer() {
             <a href="mailto:sougorcepetrov@yahoo.com">
               sougorcepetrov@yahoo.com
             </a>
+            <br />
+            <b>Изработиле:</b>
+            <br />
+            Филип Стојановски
+            <br />
+            Сергеј Крстевски
           </p>
         </div>
         <div className={styles.contact}>

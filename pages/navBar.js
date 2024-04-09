@@ -12,11 +12,15 @@ import { faYoutube } from "@fortawesome/free-brands-svg-icons";
 import { faFacebook } from "@fortawesome/free-brands-svg-icons";
 import { faInstagram } from "@fortawesome/free-brands-svg-icons";
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
-import { useState, useEffect } from "react";
+import { useState, useEffect, use } from "react";
 import Button from "@mui/material/Button";
+import { useSearchParams } from "next/navigation";
 export default function Nav() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
+  const [error, setError] = useState("");
+  const [haveNotification, setHaveNotification] = useState(false);
+  const search = useSearchParams();
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -24,6 +28,25 @@ export default function Nav() {
       const width = window.innerWidth;
       setScreenWidth(width);
     };
+
+    const search = new URLSearchParams(window.location.search);
+
+    const user = search.get("username");
+    if (user !== null) {
+      fetch("http://localhost:3000/api/notificationAPI/checkSeenNotif", {
+        method: "POST",
+        body: user,
+      })
+        .then((r) => {
+          return r.json();
+        })
+        .then((res) => {
+          console.log(res.message);
+          setHaveNotification(res.message);
+        });
+    } else {
+      setHaveNotification(false);
+    }
 
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
@@ -81,19 +104,90 @@ export default function Nav() {
       accDropdown.style.display = "none";
     }
   }
-
+  const notify = () => {
+    const username = search.get("username");
+    if (username !== null) {
+      fetch("http://localhost:3000/api/notificationAPI/changeSeen", {
+        method: "POST",
+        body: username,
+      })
+        .then((r) => {
+          return r.json();
+        })
+        .then((res) => {
+          console.log(res);
+          location.href = `http://localhost:3000/account/notification?username=${username}`;
+        });
+    } else {
+      setError("Register or Login First");
+    }
+  };
   return (
     <>
       <section className={styles.section}>
         <div className={styles.account}>
-          <Button
-            className={styles.notification}
-            onClick={() => {
-              location.href = "http://localhost:3000/account/notification";
-            }}
-          >
-            <Image src={notif} alt="Notifications" />
-          </Button>
+          {error === "" ? (
+            haveNotification ? (
+              <Button className={styles.notification} onClick={notify}>
+                <Image src={notif} alt="Notifications" />
+              </Button>
+            ) : (
+              <Button
+                className={styles.notification}
+                onClick={notify}
+                style={{ position: "relative" }}
+              >
+                <Image src={notif} alt="Notifications" />
+                <div
+                  style={{
+                    width: "25%",
+                    height: "25%",
+                    backgroundColor: "white",
+                    border: "red solid 4px",
+                    borderRadius: "50%",
+                    position: "absolute",
+                    top: "0",
+                    right: "0",
+                  }}
+                ></div>
+              </Button>
+            )
+          ) : haveNotification ? (
+            <>
+              <Button
+                className={styles.notification}
+                onClick={notify}
+                style={{ display: "flex", flexDirection: "column" }}
+              >
+                <Image src={notif} alt="Notifications" />
+                <div id="error">{error}</div>
+              </Button>
+            </>
+          ) : (
+            <>
+              <Button
+                className={styles.notification}
+                onClick={notify}
+                style={{ display: "flex", flexDirection: "column" }}
+              >
+                <Image src={notif} alt="Notifications" />
+                <div
+                  style={{
+                    width: "25%",
+                    height: "15%",
+                    backgroundColor: "white",
+                    border: "red solid 4px",
+                    borderRadius: "50%",
+                    position: "absolute",
+                    top: "0",
+                    right: "0",
+                  }}
+                ></div>
+                <div id="error">{error}</div>
+              </Button>
+            </>
+          )}
+
           <Button className={styles.profile} onClick={toggleProfileDropdown}>
             <Image src={profile} alt="Profile" />
           </Button>
@@ -101,8 +195,7 @@ export default function Nav() {
       </section>
       <div id={styles.accountDropdown} style={{ display: "none" }}>
         <div className={styles.options}>
-          <a href="">Регистрација</a>
-          <a href="">Логин</a>
+          <a href="loginregister.html">Профил</a>
           <a href="">Поставувања</a>
           <a href="">Одјави се</a>
         </div>
@@ -137,15 +230,20 @@ export default function Nav() {
                   За Гимназијата
                 </a>
                 <a href="">Струки</a>
-                <a href="">Уписи</a>
+
                 <a href="http://localhost:3000/links/news">Вести и Настани</a>
-                <a href="">Проекти</a>
-                <a href="">Часови</a>
-                <a href="" className={styles.mobile}>
-                  Логин
+
+                <a className={styles.mobile} href="loginregister.html">
+                  Профил
                 </a>
-                <a href="" className={styles.mobile}>
-                  Регистрација
+                <a className={styles.mobile} href="notifikacii.html">
+                  Нотификации
+                </a>
+                <a className={styles.mobile} href="">
+                  Поставувања
+                </a>
+                <a className={styles.mobile} href="">
+                  Одјави се
                 </a>
               </div>
 
@@ -192,11 +290,17 @@ export default function Nav() {
                 <a href="links/news">Вести и Настани</a>
                 <a href="">Проекти</a>
                 <a href="">Часови</a>
-                <a href="" className={styles.mobile}>
-                  Логин
+                <a className={styles.mobile} href="loginregister.html">
+                  Профил
                 </a>
-                <a href="" className={styles.mobile}>
-                  Регистрација
+                <a className={styles.mobile} href="notifikacii.html">
+                  Нотификации
+                </a>
+                <a className={styles.mobile} href="">
+                  Поставувања
+                </a>
+                <a className={styles.mobile} href="">
+                  Одјави се
                 </a>
               </div>
 

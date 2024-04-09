@@ -5,10 +5,13 @@ import styleMax from "../../styles/screenSizes/max.module.css";
 import styleLap from "../../styles/screenSizes/laptop.module.css";
 import styleMob from "../../styles/screenSizes/mobile.module.css";
 import { useState, useEffect } from "react";
+import { useSearchParams } from "next/navigation";
 
 export default function notify() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
+  const [info, setInfo] = useState({});
+
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     const handleResize = () => {
@@ -18,7 +21,20 @@ export default function notify() {
 
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
+    const search = new URLSearchParams(window.location.search);
 
+    const user = search.get("username");
+    fetch("http://localhost:3000/api/notificationAPI/getNotifications", {
+      method: "POST",
+      body: user,
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((res) => {
+        setInfo(res.message);
+      });
+    console.log(user);
     return () => {
       window.removeEventListener("resize", handleResize);
     };
@@ -40,29 +56,48 @@ export default function notify() {
       return styleMob;
     });
   }
+
+  const deleteNotification = (event) => {
+    const id = event.currentTarget.id;
+
+    const search = new URLSearchParams(window.location.search);
+
+    const user = search.get("username");
+    fetch("http://localhost:3000/api/notificationAPI/deleteNotification", {
+      method: "POST",
+      body: JSON.stringify({ name: user, id: id }),
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((res) => {
+        console.log(res.message);
+        window.location.reload();
+      });
+  };
+
   return (
     <>
       <div className={styles.notifikacii}>
-        <div className={styles.notifikacija}>
-          <div className={styles.left}>
-            <div className={styles.tekst}>
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Dolores
-              quas sunt nostrum culpa labore cupiditate, eius, molestiae
-              architecto rem, omnis magnam facilis aut laborum deserunt ratione?
-              Iusto, eveniet. Doloremque, ex!
+        {Object.values(info).map((el, index) => {
+          return (
+            <div className={styles.notifikacija} key={index}>
+              <div className={styles.left}>
+                <div className={styles.tekst}>{el}</div>
+                <div className={styles.pratena}>
+                  <p>20 Maj 2024, 10:20</p>
+                </div>
+              </div>
+              <div className={styles.right}>
+                <div className={styles.delete}>
+                  <div onClick={deleteNotification} id={`N${index + 1}`}>
+                    <FontAwesomeIcon icon={faTrash} />
+                  </div>
+                </div>
+              </div>
             </div>
-            <div className={styles.pratena}>
-              <p>20 Maj 2024, 10:20</p>
-            </div>
-          </div>
-          <div className={styles.right}>
-            <div className={styles.delete}>
-              <a href="">
-                <FontAwesomeIcon icon={faTrash} />
-              </a>
-            </div>
-          </div>
-        </div>
+          );
+        })}
       </div>
     </>
   );

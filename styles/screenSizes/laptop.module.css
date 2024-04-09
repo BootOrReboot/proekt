@@ -10,9 +10,25 @@
     position: relative;
     display: flex;
     justify-content: right;
-    width: 9vw;
+    width: 14vw;
     height: fit-content;
     padding: 0 2vw;
+  }
+  .bgColor {
+    display: flex;
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0;
+    left: 0;
+    background: linear-gradient(
+      to bottom right,
+      rgb(13, 76, 192),
+      rgb(158, 180, 252)
+    );
+  }
+  .RegisterLogin {
+    backdrop-filter: blur(10px);
   }
 
   .section button {
@@ -35,6 +51,7 @@
     width: 90%;
     margin: auto;
     padding-bottom: 2vw;
+    justify-content: right;
   }
   .header div {
     display: flex;
@@ -87,7 +104,7 @@
     width: 100%;
     height: 100%;
     color: white;
-    background-color: rgb(8, 80, 109);
+    background-color: rgb(50, 78, 155);
     font-weight: bold;
     align-items: center;
     justify-content: center;
@@ -178,7 +195,7 @@
   }
   .vestiNastani .povekje button {
     border: 0;
-    background-color: rgb(8, 80, 109);
+    background-color: rgb(50, 78, 155);
     color: white;
     font-size: 2vw;
     padding: 1vw 3vw;
@@ -275,7 +292,7 @@
     justify-content: space-evenly;
     align-items: center;
     padding: 0;
-    width: 90%;
+    width: 80%;
   }
   .header nav #navigation .mobile {
     display: none;
@@ -314,40 +331,11 @@
     font-size: 1.8vw;
   }
 
-  .vraboteni {
-    display: flex;
-    flex-wrap: wrap;
-    width: 90%;
-    margin: auto;
-  }
-
-  .vraboten {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    background-color: rgb(238, 234, 234);
-    padding: 2% 1%;
-    flex: 0 0 18%;
-  }
-  .vraboteni .vraboten p {
-    font-size: 1.2vw;
-    margin: 3% 0;
-  }
-  .vraboteni .vraboten :nth-child(1 of p) {
-    font-weight: bold;
-  }
-  .vraboteni .vraboten :nth-child(2 of p) {
-    font-style: italic;
-  }
-  .vraboteni .vraboten img {
-    margin-bottom: 3%;
-    width: 15vw;
-  }
   #accountDropdown {
     position: absolute;
-    display: flex;
+    display: none;
     width: 15vw;
-    height: 30vw;
+    height: 20vw;
     background-color: rgba(0, 70, 95, 0.7);
     backdrop-filter: blur(10px);
     right: 1vw;
@@ -366,6 +354,7 @@
     text-decoration: none;
     cursor: pointer;
     width: 70%;
+    font-size: 1.2vw;
   }
   .notifikacii {
     width: 100vw;
@@ -388,6 +377,8 @@
   }
   .notifikacija .left .tekst {
     width: 95%;
+    font-size: 1.2vw;
+    text-align: justify;
   }
   .notifikacija .left .pratena {
     width: 100%;
@@ -396,7 +387,7 @@
   .notifikacija .left .pratena p {
     margin: 0;
     color: gray;
-    font-size: 1.4vw;
+    font-size: 1vw;
   }
 
   .notifikacija .right .delete {
@@ -417,5 +408,174 @@
     display: flex;
     align-items: center;
     width: 5%;
+  }
+  .RegisterLogin {
+    display: flex;
+    width: 80vw;
+    height: 85vh;
+    box-sizing: border-box;
+    background: rgba(223, 220, 220, 0.623);
+    margin: 4% auto;
+    flex-direction: column;
+    border-radius: 2vw;
+  }
+  .RegisterLogin .choice {
+    display: inherit;
+    width: 100%;
+    margin: 2%;
+    justify-content: start;
+    align-items: center;
+    box-sizing: border-box;
+  }
+  .RegisterLogin button {
+    padding: 1vw 3vw;
+    border-radius: 5vw;
+    cursor: pointer;
+    font-weight: bold;
+    font-size: 1vw;
+    margin: 0 2%;
+    background-color: rgb(191, 205, 207);
+    border: 0;
+  }
+  .RegisterLogin button:hover {
+    background-color: rgb(202, 218, 212);
+  }
+  .RegisterLogin .neznam .main form #register {
+    display: inherit;
+    flex-direction: column;
+  }
+  .RegisterLogin .neznam {
+    display: inherit;
+    flex-direction: row;
+    width: 100%;
+    height: 80%;
+    justify-content: space-around;
+  }
+  .RegisterLogin .choice .right {
+    display: inherit;
+    width: 50vw;
+    justify-content: right;
+  }
+  .RegisterLogin .choice .right a {
+    color: black;
+    font-size: 2vw;
+  }
+  .RegisterLogin .choice .right a:hover {
+    color: rgb(95, 95, 95);
+  }
+  .RegisterLogin .neznam .text {
+    width: 48%;
+    background-color: rgb(220, 220, 220);
+    padding: 0 2%;
+    box-sizing: border-box;
+    border-radius: 2vw 0 0 2vw;
+  }
+  .RegisterLogin .neznam .text h1 {
+    font-size: 3vw;
+  }
+  .RegisterLogin .neznam .text p {
+    font-size: 1.3vw;
+    text-align: justify;
+  }
+  .RegisterLogin .neznam .main {
+    width: 48%;
+    height: 100%;
+    background-color: rgb(220, 220, 220);
+    border-radius: 0 2vw 2vw 0;
+  }
+  .RegisterLogin .neznam .main form {
+    display: flex;
+    flex-direction: column;
+    padding: 5%;
+    box-sizing: border-box;
+  }
+  .RegisterLogin .neznam .main input {
+    margin: 2%;
+    margin-left: 0;
+    font-size: 1.3vw;
+    padding: 1%;
+    border: 0;
+    border-bottom: 1px solid black;
+    background-color: rgb(220, 220, 220);
+    color: black;
+    outline: 0;
+  }
+  .RegisterLogin .neznam .main input::placeholder {
+    color: black;
+  }
+  .RegisterLogin .neznam .main select {
+    background-color: rgb(220, 220, 220);
+    border: 0;
+    font-size: 1.2vw;
+    font-weight: bold;
+    margin: 1vw 0;
+    outline: 0;
+  }
+  .RegisterLogin .neznam .main .neznam2 {
+    margin-top: 2%;
+  }
+  .RegisterLogin .neznam .main .neznam2 button {
+    background-color: rgb(255, 255, 255);
+  }
+  .RegisterLogin .neznam .main .neznam2 button:hover {
+    background-color: rgb(241, 241, 241);
+  }
+  .RegisterLogin .neznam .main .neznam2 #resetPassword {
+    font-size: 1.2vw;
+    display: none;
+    margin-top: 2vw;
+  }
+  .struki {
+    display: flex;
+    width: 100%;
+    margin: auto;
+
+    flex-wrap: wrap;
+  }
+  .struki .struka {
+    display: flex;
+    background-color: whitesmoke;
+    flex-direction: row;
+    width: 48%;
+    padding: 1%;
+    box-sizing: border-box;
+    justify-content: space-evenly;
+    margin: 1%;
+  }
+  .struki .struka .ikona {
+    display: flex;
+    align-items: center;
+    width: 15%;
+  }
+  .struki .struka .ikona img {
+    width: 4vw;
+  }
+
+  .struki .struka .podatoci {
+    flex-direction: column;
+    width: 85%;
+  }
+  .struki .struka .podatoci .ime {
+    font-weight: bold;
+    font-size: 1.8vw;
+  }
+  .struki .struka .podatoci .deskripcija {
+    font-size: 1.2vw;
+    margin-top: 1vw;
+  }
+  .upisi {
+    box-sizing: border-box;
+    padding: 1%;
+    overflow: auto;
+  }
+  .upisi h1 {
+    font-size: 2.5vw;
+  }
+  .upisi ul li {
+    font-size: 1.3vw;
+    line-height: 4vw;
+  }
+  .delete svg {
+    height: 40px;
   }
 }

@@ -11,7 +11,7 @@ export default async function mail(req, res) {
 
   const mailOptions = {
     from: "example@yahoo.com",
-    to: "supermcp123@gmail.com",
+    to: "sougorcepetrov@yahoo.com",
     subject: `email sent by:${info.transportEmail}`,
     html: `<h2>${info.title}</h2><p>${info.text}</p>`,
   };

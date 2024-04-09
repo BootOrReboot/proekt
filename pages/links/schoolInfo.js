@@ -9,23 +9,6 @@ import Image from "next/image";
 export default function forCollage() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
-  const [proffessors, setProffessors] = useState([
-    {
-      name: "ime na vraboten",
-      profession: "pozicija",
-      image: "../images/vraboten.jpg",
-    },
-    {
-      name: "ime na vraboten",
-      profession: "pozicija",
-      image: "../images/vraboten.jpg",
-    },
-    {
-      name: "ime na vraboten",
-      profession: "pozicija",
-      image: "../images/vraboten.jpg",
-    },
-  ]);
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -124,17 +107,6 @@ export default function forCollage() {
           <br />
           <i>Да бидеме цртачи на денот за да бидеме дизајнери на животот.</i>
         </p>
-      </div>
-      <div className={styles.vraboteni}>
-        {proffessors.map((el, index) => {
-          return (
-            <div className={styles.vraboten} key={index}>
-              <img src={el.image} alt="Slika od Vraboten" />
-              <p>{el.name}</p>
-              <p>{el.profession}</p>
-            </div>
-          );
-        })}
       </div>
     </>
   );
