@@ -319,7 +319,7 @@ export default function Nav() {
               </a>
               <div className={styles.center}>
                 <Link href="links/schoolInfo">За Гимназијата</Link>
-                <Link href="/links/branches">Струки</Link>
+                <Link href="/branches">Струки</Link>
 
                 <Link href="/links/news">Вести и Настани</Link>
 
