@@ -6,6 +6,6 @@ export default async function insert(req, res) {
   const client = await connection();
   const base = client.db("baza");
   const collections = base.collection("Professors");
-  const finding = await collections.findOne({ username: user });
+  const finding = await collections.findOne({ email: user });
   res.status(200).json({ message: finding.notifications });
 }
