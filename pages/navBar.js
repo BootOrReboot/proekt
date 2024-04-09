@@ -35,10 +35,13 @@ export default function Nav() {
 
     const user = search.get("id");
     if (user !== null) {
-      fetch("http://localhost:3000/api/notificationAPI/checkSeenNotif", {
-        method: "POST",
-        body: user,
-      })
+      fetch(
+        "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/checkSeenNotif",
+        {
+          method: "POST",
+          body: user,
+        }
+      )
         .then((r) => {
           return r.json();
         })
@@ -109,10 +112,13 @@ export default function Nav() {
   const notify = () => {
     const username = search.get("id");
     if (username !== null) {
-      fetch("http://localhost:3000/api/notificationAPI/changeSeen", {
-        method: "POST",
-        body: username,
-      })
+      fetch(
+        "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/changeSeen",
+        {
+          method: "POST",
+          body: username,
+        }
+      )
         .then((r) => {
           return r.json();
         })
@@ -127,10 +133,13 @@ export default function Nav() {
   const notifyM = () => {
     const username = search.get("id");
     if (username !== null) {
-      fetch("http://localhost:3000/api/notificationAPI/changeSeen", {
-        method: "POST",
-        body: username,
-      })
+      fetch(
+        "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/changeSeen",
+        {
+          method: "POST",
+          body: username,
+        }
+      )
         .then((r) => {
           return r.json();
         })

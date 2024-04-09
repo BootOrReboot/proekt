@@ -24,10 +24,13 @@ export default function Notify() {
     const search = new URLSearchParams(window.location.search);
 
     const user = search.get("id");
-    fetch("http://localhost:3000/api/notificationAPI/getNotifications", {
-      method: "POST",
-      body: user,
-    })
+    fetch(
+      "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/getNotifications",
+      {
+        method: "POST",
+        body: user,
+      }
+    )
       .then((r) => {
         return r.json();
       })
@@ -63,10 +66,13 @@ export default function Notify() {
     const search = new URLSearchParams(window.location.search);
 
     const user = search.get("id");
-    fetch("http://localhost:3000/api/notificationAPI/deleteNotification", {
-      method: "POST",
-      body: JSON.stringify({ name: user, id: id }),
-    })
+    fetch(
+      "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/deleteNotification",
+      {
+        method: "POST",
+        body: JSON.stringify({ name: user, id: id }),
+      }
+    )
       .then((r) => {
         return r.json();
       })

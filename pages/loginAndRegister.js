@@ -102,7 +102,7 @@ export default function Login() {
     });
   };
   const signUp = () => {
-    fetch("http://localhost:3000/api/loginRegAPI/register", {
+    fetch("https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register", {
       method: "POST",
       body: JSON.stringify({
         name: information.name,
@@ -197,7 +197,7 @@ export default function Login() {
     }
   };
   const signIn = () => {
-    fetch("http://localhost:3000/api/loginRegAPI/register", {
+    fetch("https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register", {
       method: "POST",
       body: JSON.stringify({
         email: log.email,

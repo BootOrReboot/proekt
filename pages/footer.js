@@ -82,7 +82,7 @@ export default function Footer() {
   };
   const sendMail = (e) => {
     e.preventDefault();
-    fetch("http://localhost:3000/api/mailSending", {
+    fetch("https://master--sougjorchepetrov.netlify.app/api/mailSending", {
       method: "POST",
       body: JSON.stringify({
         transportEmail: form.email,
