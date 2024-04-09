@@ -145,7 +145,7 @@ export default function Nav() {
         })
         .then((res) => {
           console.log(res);
-          window.location.href = `http://localhost:3000/account/notification?id=${username}`;
+          window.location.href = `https://master--sougjorchepetrov.netlify.app/account/notification?id=${username}`;
         });
     } else {
       setErrorM("Register or Login First");
