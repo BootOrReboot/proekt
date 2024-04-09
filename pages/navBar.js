@@ -124,7 +124,7 @@ export default function Nav() {
         })
         .then((res) => {
           console.log(res);
-          location.href = `http://localhost:3000/account/notification?id=${id}`;
+          location.href = `http://localhost:3000/account/notification?id=${username}`;
         });
     } else {
       setError("Register or Login First");
