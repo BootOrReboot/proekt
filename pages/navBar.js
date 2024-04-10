@@ -37,10 +37,13 @@ export default function Nav() {
 
     const user = search.get("id");
     if (user !== null) {
-      fetch("http://localhost:3000/api/notificationAPI/checkSeenNotif", {
-        method: "POST",
-        body: user,
-      })
+      fetch(
+        "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/checkSeenNotif",
+        {
+          method: "POST",
+          body: user,
+        }
+      )
         .then((r) => {
           return r.json();
         })
@@ -153,16 +156,19 @@ export default function Nav() {
     }
   };
   const LogOut = () => {
-    fetch("http://localhost:3000/api/loginRegAPI/loggingOut", {
-      method: "POST",
-      body: account.email,
-    })
+    fetch(
+      "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/loggingOut",
+      {
+        method: "POST",
+        body: account.email,
+      }
+    )
       .then((r) => {
         return r.json();
       })
       .then((res) => {
         console.log(res.message);
-        window.location.href = "http://localhost:3000/";
+        window.location.href = "https://master--sougjorchepetrov.netlify.app";
       });
   };
   console.log(account);
