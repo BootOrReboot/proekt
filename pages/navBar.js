@@ -23,6 +23,7 @@ export default function Nav() {
   const [errorM, setErrorM] = useState("");
   const [haveNotification, setHaveNotification] = useState(false);
   const [account, setAccount] = useState({});
+  const [hasId, setHasId] = useState(false);
   const search = useSearchParams();
 
   useEffect(() => {
@@ -48,6 +49,7 @@ export default function Nav() {
           setHaveNotification(res.message.seen);
           setAccount(res.message);
         });
+      setHasId(true);
     } else {
       setHaveNotification(false);
     }
@@ -277,28 +279,65 @@ export default function Nav() {
                 <FontAwesomeIcon icon={faWindowClose} />
               </a>
               <div className={styles.center}>
-                <Link href="/links/schoolInfo">За Гимназијата</Link>
-                <Link href="/branches">Струки</Link>
+                {hasId ? (
+                  <>
+                    <Link href={`/links/schoolInfo?id=${account.email}`}>
+                      За Гимназијата
+                    </Link>
+                    <Link href={`/branches?id=${account.email}`}>Струки</Link>
 
-                <Link href="/links/news">Вести и Настани</Link>
+                    <Link href={`/links/news?id=${account.email}`}>
+                      Вести и Настани
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/links/schoolInfo">За Гимназијата</Link>
+                    <Link href="/branches">Струки</Link>
 
-                <Link className={styles.mobile} href="/loginAndRegister">
-                  Профил
-                </Link>
-                <a className={styles.mobile} onClick={notifyM}>
-                  {errorM === "" ? (
-                    "Нотификации"
-                  ) : (
-                    <div>
-                      Нотификации
-                      <div style={{ position: "absolute" }}>{errorM}</div>
-                    </div>
-                  )}
-                </a>
+                    <Link href="/links/news">Вести и Настани</Link>
+                  </>
+                )}
+                {account != {} ? (
+                  <>
+                    <Link
+                      className={styles.mobile}
+                      href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
+                    >
+                      Login Or Register
+                    </Link>
+                    <a className={styles.mobile} onClick={notifyM}>
+                      {errorM === "" ? (
+                        "Нотификации"
+                      ) : (
+                        <div>
+                          Нотификации
+                          <div style={{ position: "absolute" }}>{errorM}</div>
+                        </div>
+                      )}
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <Link className={styles.mobile} href=".">
+                      {account.firstName + " " + account.lastName}
+                    </Link>
+                    <a className={styles.mobile} onClick={notifyM}>
+                      {errorM === "" ? (
+                        "Нотификации"
+                      ) : (
+                        <div>
+                          Нотификации
+                          <div style={{ position: "absolute" }}>{errorM}</div>
+                        </div>
+                      )}
+                    </a>
 
-                <a className={styles.mobile} onClick={LogOut}>
-                  Одјави се
-                </a>
+                    <a className={styles.mobile} onClick={LogOut}>
+                      Одјави се
+                    </a>
+                  </>
+                )}
               </div>
 
               <div
@@ -338,37 +377,66 @@ export default function Nav() {
                 <FontAwesomeIcon icon={faWindowClose} />
               </a>
               <div className={styles.center}>
-                <Link href="links/schoolInfo">За Гимназијата</Link>
-                <Link href="/branches">Струки</Link>
+                {hasId ? (
+                  <>
+                    <Link href={`/links/schoolInfo?id=${account.email}`}>
+                      За Гимназијата
+                    </Link>
+                    <Link href={`/branches?id=${account.email}`}>Струки</Link>
 
-                <Link href="/links/news">Вести и Настани</Link>
+                    <Link href={`/links/news?id=${account.email}`}>
+                      Вести и Настани
+                    </Link>
+                  </>
+                ) : (
+                  <>
+                    <Link href="/links/schoolInfo">За Гимназијата</Link>
+                    <Link href="/branches">Струки</Link>
 
-                <Link className={styles.mobile} href="/loginAndRegister">
-                  Профил
-                </Link>
-                <a className={styles.mobile} onClick={notifyM}>
-                  {errorM === "" ? (
-                    "Нотификации"
-                  ) : (
-                    <div style={{ width: "100%" }}>
-                      Нотификации
-                      <div
-                        style={{
-                          position: "absolute",
-                          left: "-1%",
-                          top: "63%",
-                          fontSize: "58%",
-                        }}
-                      >
-                        {errorM}
-                      </div>
-                    </div>
-                  )}
-                </a>
+                    <Link href="/links/news">Вести и Настани</Link>
+                  </>
+                )}
 
-                <a className={styles.mobile} onClick={LogOut}>
-                  Одјави се
-                </a>
+                {account != {} ? (
+                  <>
+                    <Link
+                      className={styles.mobile}
+                      href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
+                    >
+                      Login Or Register
+                    </Link>
+                    <a className={styles.mobile} onClick={notifyM}>
+                      {errorM === "" ? (
+                        "Нотификации"
+                      ) : (
+                        <div>
+                          Нотификации
+                          <div style={{ position: "absolute" }}>{errorM}</div>
+                        </div>
+                      )}
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <Link className={styles.mobile} href=".">
+                      {account.firstName + " " + account.lastName}
+                    </Link>
+                    <a className={styles.mobile} onClick={notifyM}>
+                      {errorM === "" ? (
+                        "Нотификации"
+                      ) : (
+                        <div>
+                          Нотификации
+                          <div style={{ position: "absolute" }}>{errorM}</div>
+                        </div>
+                      )}
+                    </a>
+
+                    <a className={styles.mobile} onClick={LogOut}>
+                      Одјави се
+                    </a>
+                  </>
+                )}
               </div>
 
               <div

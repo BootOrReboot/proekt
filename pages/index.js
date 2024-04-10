@@ -32,6 +32,7 @@ export default function Home() {
       date: "18 Фебруари 2024",
     },
   ]);
+
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     const handleResize = () => {
