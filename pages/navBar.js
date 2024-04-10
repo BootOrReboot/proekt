@@ -36,13 +36,10 @@ export default function Nav() {
 
     const user = search.get("id");
     if (user !== null) {
-      fetch(
-        "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/checkSeenNotif",
-        {
-          method: "POST",
-          body: user,
-        }
-      )
+      fetch("http://localhost:3000/api/notificationAPI/checkSeenNotif", {
+        method: "POST",
+        body: user,
+      })
         .then((r) => {
           return r.json();
         })
@@ -153,26 +150,20 @@ export default function Nav() {
       setErrorM("Register or Login First");
     }
   };
-  const toProfile = () => {
-    window.location.href =
-      "https://master--sougjorchepetrov.netlify.app/loginAndRegister";
-  };
   const LogOut = () => {
-    fetch(
-      "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/loggingOut",
-      {
-        method: "POST",
-        body: account.email,
-      }
-    )
+    fetch("http://localhost:3000/api/loginRegAPI/loggingOut", {
+      method: "POST",
+      body: account.email,
+    })
       .then((r) => {
         return r.json();
       })
       .then((res) => {
         console.log(res.message);
-        window.location.href = "https://master--sougjorchepetrov.netlify.app/";
+        window.location.href = "http://localhost:3000/";
       });
   };
+  console.log(account);
   return (
     <>
       <section className={styles.section}>
@@ -246,9 +237,9 @@ export default function Nav() {
       </section>
       <div id={styles.accountDropdown} style={{ display: "none" }}>
         <div className={styles.options}>
-          {account == {} ? (
+          {account != {} ? (
             <>
-              <Link href="." onClick={toProfile}>
+              <Link href="https://master--sougjorchepetrov.netlify.app/loginAndRegister">
                 Login Or Register
               </Link>
             </>
@@ -304,10 +295,8 @@ export default function Nav() {
                     </div>
                   )}
                 </a>
-                <a className={styles.mobile} href="">
-                  Поставувања
-                </a>
-                <a className={styles.mobile} href="">
+
+                <a className={styles.mobile} onClick={LogOut}>
                   Одјави се
                 </a>
               </div>
@@ -376,10 +365,8 @@ export default function Nav() {
                     </div>
                   )}
                 </a>
-                <a className={styles.mobile} href="">
-                  Поставувања
-                </a>
-                <a className={styles.mobile} href="">
+
+                <a className={styles.mobile} onClick={LogOut}>
                   Одјави се
                 </a>
               </div>
