@@ -247,14 +247,14 @@ export default function Nav() {
         <div className={styles.options}>
           {account != {} ? (
             <>
-              <Link href="https://master--sougjorchepetrov.netlify.app/loginAndRegister">
-                Login Or Register
-              </Link>
+              <Link href=".">{account.firstName + " " + account.lastName}</Link>
+              <a onClick={LogOut}>Одјави се</a>
             </>
           ) : (
             <>
-              <Link href=".">{account.firstName + " " + account.lastName}</Link>
-              <a onClick={LogOut}>Одјави се</a>
+              <Link href="https://master--sougjorchepetrov.netlify.app/loginAndRegister">
+                Login Or Register
+              </Link>
             </>
           )}
         </div>
@@ -304,7 +304,7 @@ export default function Nav() {
                     <Link href="/links/news">Вести и Настани</Link>
                   </>
                 )}
-                {account != {} ? (
+                {account == {} ? (
                   <>
                     <Link
                       className={styles.mobile}
