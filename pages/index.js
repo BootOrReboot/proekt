@@ -137,7 +137,8 @@ export default function Home() {
           <button
             type="button"
             onClick={() =>
-              (window.location.href = "http://localhost:3000/links/news")
+              (window.location.href =
+                "https://master--sougjorchepetrov.netlify.app/links/news")
             }
           >
             Повеќе &#8594;

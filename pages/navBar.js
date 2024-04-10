@@ -152,7 +152,8 @@ export default function Nav() {
     }
   };
   const toProfile = () => {
-    window.location.href = "/loginAndRegister";
+    window.location.href =
+      "https://master--sougjorchepetrov.netlify.app/loginAndRegister";
   };
   return (
     <>
