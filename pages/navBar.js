@@ -341,7 +341,7 @@ export default function Nav() {
                       <div
                         style={{
                           position: "absolute",
-                          left: "-11%",
+                          left: "-1%",
                           top: "63%",
                           fontSize: "58%",
                         }}
