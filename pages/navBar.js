@@ -151,6 +151,9 @@ export default function Nav() {
       setErrorM("Register or Login First");
     }
   };
+  const toProfile = () => {
+    window.location.href = "/loginAndRegister";
+  };
   return (
     <>
       <section className={styles.section}>
@@ -224,7 +227,9 @@ export default function Nav() {
       </section>
       <div id={styles.accountDropdown} style={{ display: "none" }}>
         <div className={styles.options}>
-          <Link href="/loginAndRegister">Профил</Link>
+          <Link href="." onClick={toProfile}>
+            Профил
+          </Link>
           <a href="">Поставувања</a>
           <a href="">Одјави се</a>
         </div>

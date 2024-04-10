@@ -6,6 +6,7 @@ import styleMob from "../styles/screenSizes/mobile.module.css";
 import { Button } from "@mui/material";
 
 export default function Footer() {
+  const [year, setYear] = useState("");
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const [form, setForm] = useState({
@@ -104,6 +105,9 @@ export default function Footer() {
       const width = window.innerWidth;
       setScreenWidth(width);
     };
+
+    const today = new Date();
+    setYear(today.getFullYear().toString());
 
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
@@ -268,7 +272,7 @@ export default function Footer() {
           </form>
         </div>
       </footer>
-      <p className={styles.copyright}>© 2019. Сите права се задржани</p>
+      <p className={styles.copyright}>© {year}. Сите права се задржани</p>
     </>
   );
 }
