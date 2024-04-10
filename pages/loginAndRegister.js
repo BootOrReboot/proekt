@@ -97,17 +97,20 @@ export default function Login() {
   };
   const signUp = () => {
     if (logOrReg) {
-      fetch("http://localhost:3000/api/loginRegAPI/register", {
-        method: "POST",
-        body: JSON.stringify({
-          name: information.name,
-          surname: information.lastName,
-          email: information.email,
-          password: information.password,
-          classNumber: information.classNumber,
-          function: "register",
-        }),
-      })
+      fetch(
+        "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            name: information.name,
+            surname: information.lastName,
+            email: information.email,
+            password: information.password,
+            classNumber: information.classNumber,
+            function: "register",
+          }),
+        }
+      )
         .then((r) => {
           if (r.status === 200) {
             return r.json();
@@ -124,14 +127,17 @@ export default function Login() {
           // console.log(res.status);
         });
     } else {
-      fetch("http://localhost:3000/api/loginRegAPI/register", {
-        method: "POST",
-        body: JSON.stringify({
-          email: information.email,
-          password: information.password,
-          function: "login",
-        }),
-      })
+      fetch(
+        "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register",
+        {
+          method: "POST",
+          body: JSON.stringify({
+            email: information.email,
+            password: information.password,
+            function: "login",
+          }),
+        }
+      )
         .then((r) => {
           if (r.status === 200) {
             return r.json();
