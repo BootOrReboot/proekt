@@ -304,26 +304,7 @@ export default function Nav() {
                     <Link href="/links/news">Вести и Настани</Link>
                   </>
                 )}
-                {account == {} ? (
-                  <>
-                    <Link
-                      className={styles.mobile}
-                      href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
-                    >
-                      Login Or Register
-                    </Link>
-                    <a className={styles.mobile} onClick={notifyM}>
-                      {errorM === "" ? (
-                        "Нотификации"
-                      ) : (
-                        <div>
-                          Нотификации
-                          <div style={{ position: "absolute" }}>{errorM}</div>
-                        </div>
-                      )}
-                    </a>
-                  </>
-                ) : (
+                {account != {} ? (
                   <>
                     <Link className={styles.mobile} href=".">
                       {account.firstName + " " + account.lastName}
@@ -341,6 +322,25 @@ export default function Nav() {
 
                     <a className={styles.mobile} onClick={LogOut}>
                       Одјави се
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      className={styles.mobile}
+                      href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
+                    >
+                      Login Or Register
+                    </Link>
+                    <a className={styles.mobile} onClick={notifyM}>
+                      {errorM === "" ? (
+                        "Нотификации"
+                      ) : (
+                        <div>
+                          Нотификации
+                          <div style={{ position: "absolute" }}>{errorM}</div>
+                        </div>
+                      )}
                     </a>
                   </>
                 )}
