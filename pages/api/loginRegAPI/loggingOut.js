@@ -8,7 +8,7 @@ export default async function insert(req, res) {
   const result = await collections.findOne({ email: info });
 
   if (result != null) {
-    coll.updateOne({ _id: result._id }, { $set: { isLogged: false } });
+    collections.updateOne({ _id: result._id }, { $set: { isLogged: false } });
 
     res.status(200).json({ message: info.email });
   } else {
