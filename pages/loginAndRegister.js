@@ -25,14 +25,8 @@ export default function Login() {
     lastName: false,
   });
   const [logOrReg, setLogOrReg] = useState(true);
-  const [log, setLog] = useState({
-    email: "",
-    password: "",
-  });
-  const [logMistakes, setLogMistakes] = useState({
-    email: false,
-    password: false,
-  });
+  const [wrongEmail, setWrongEmail] = useState("");
+  const [wrongLogin, setWrongLogin] = useState("");
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -102,9 +96,8 @@ export default function Login() {
     });
   };
   const signUp = () => {
-    fetch(
-      "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register",
-      {
+    if (logOrReg) {
+      fetch("http://localhost:3000/api/loginRegAPI/register", {
         method: "POST",
         body: JSON.stringify({
           name: information.name,
@@ -112,110 +105,120 @@ export default function Login() {
           email: information.email,
           password: information.password,
           classNumber: information.classNumber,
+          function: "register",
         }),
-      }
-    )
-      .then((r) => {
-        return r.json();
       })
-      .then((res) => {
-        window.location.href = `/?id=${res.message}`;
-      });
+        .then((r) => {
+          if (r.status === 200) {
+            return r.json();
+          } else {
+            return "Email Already Exists";
+          }
+        })
+        .then((res) => {
+          if (res !== "Email Already Exists") {
+            window.location.href = `/?id=${res.message}`;
+          } else {
+            setWrongEmail("Email Already Exists");
+          }
+          // console.log(res.status);
+        });
+    } else {
+      fetch("http://localhost:3000/api/loginRegAPI/register", {
+        method: "POST",
+        body: JSON.stringify({
+          email: information.email,
+          password: information.password,
+          function: "login",
+        }),
+      })
+        .then((r) => {
+          if (r.status === 200) {
+            return r.json();
+          } else {
+            return "Email Or Password is Incorrect";
+          }
+        })
+        .then((res) => {
+          if (res !== "Email Or Password is Incorrect") {
+            window.location.href = `/?id=${res.message}`;
+          } else {
+            setWrongLogin(res);
+          }
+        });
+    }
   };
   const validateFields = (e) => {
     e.preventDefault();
+    if (logOrReg) {
+      const newMistakes = {};
 
-    const newMistakes = {};
-
-    if (information.name === "") {
-      newMistakes.name = true;
-    } else {
-      newMistakes.name = false;
-    }
-
-    if (information.lastName === "") {
-      newMistakes.lastName = true;
-    } else {
-      newMistakes.lastName = false;
-    }
-
-    if (
-      information.email === "" ||
-      !/^[\w-\.]+@[\w-]+\.[\w-]{2,4}$/.test(information.email)
-    ) {
-      newMistakes.email = true;
-    } else {
-      newMistakes.email = false;
-    }
-
-    if (information.password === "" || information.password.length < 8) {
-      newMistakes.password = true;
-    } else {
-      newMistakes.password = false;
-    }
-
-    if (information.classNumber === "") {
-      newMistakes.classNumber = false;
-    } else {
-      newMistakes.classNumber = false;
-    }
-
-    setMistakes(newMistakes);
-
-    if (
-      newMistakes.name == false &&
-      newMistakes.lastName == false &&
-      newMistakes.email == false &&
-      newMistakes.password == false
-    ) {
-      signUp();
-    }
-    console.log(newMistakes);
-  };
-  const changeLog = (e) => {
-    const { name, value } = e.target;
-    setLog({
-      ...log,
-      [name]: value,
-    });
-  };
-  const validateFieldsLog = (e) => {
-    e.preventDefault();
-    const newMistakes = {};
-    if (log.email === "" || !/^[\w-\.]+@[\w-]+\.[\w-]{2,4}$/.test(log.email)) {
-      newMistakes.email = true;
-    } else {
-      newMistakes.email = false;
-    }
-
-    if (log.password === "") {
-      newMistakes.password = true;
-    } else {
-      newMistakes.password = false;
-    }
-    setLogMistakes(newMistakes);
-
-    if (newMistakes.email == false && newMistakes.password == false) {
-      signIn();
-    }
-  };
-  const signIn = () => {
-    fetch(
-      "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register",
-      {
-        method: "POST",
-        body: JSON.stringify({
-          email: log.email,
-          password: log.password,
-        }),
+      if (information.name === "") {
+        newMistakes.name = true;
+      } else {
+        newMistakes.name = false;
       }
-    )
-      .then((r) => {
-        return r.json();
-      })
-      .then((res) => {
-        window.location.href = `/?id=${res.message}`;
-      });
+
+      if (information.lastName === "") {
+        newMistakes.lastName = true;
+      } else {
+        newMistakes.lastName = false;
+      }
+
+      if (
+        information.email === "" ||
+        !/^[\w-\.]+@[\w-]+\.[\w-]{2,4}$/.test(information.email)
+      ) {
+        newMistakes.email = true;
+      } else {
+        newMistakes.email = false;
+      }
+
+      if (information.password === "" || information.password.length < 8) {
+        newMistakes.password = true;
+      } else {
+        newMistakes.password = false;
+      }
+
+      if (information.classNumber === "") {
+        newMistakes.classNumber = false;
+      } else {
+        newMistakes.classNumber = false;
+      }
+
+      setMistakes(newMistakes);
+
+      if (
+        newMistakes.name == false &&
+        newMistakes.lastName == false &&
+        newMistakes.email == false &&
+        newMistakes.password == false
+      ) {
+        signUp();
+      }
+      console.log(newMistakes);
+    } else {
+      const newMistakes = {};
+      if (
+        information.email === "" ||
+        !/^[\w-\.]+@[\w-]+\.[\w-]{2,4}$/.test(information.email)
+      ) {
+        newMistakes.email = true;
+      } else {
+        newMistakes.email = false;
+      }
+
+      if (information.password === "") {
+        newMistakes.password = true;
+      } else {
+        newMistakes.password = false;
+      }
+      setMistakes(newMistakes);
+
+      if (newMistakes.email == false && newMistakes.password == false) {
+        signUp();
+      }
+    }
   };
   return (
     <>
@@ -331,8 +334,8 @@ export default function Login() {
                 </>
               </div>
               {logOrReg ? (
-                <>
-                  {mistakes.email ? (
+                mistakes.email ? (
+                  wrongEmail === "" ? (
                     <input
                       type="email"
                       placeholder="E-Mail *Invalid Email*"
@@ -344,85 +347,112 @@ export default function Login() {
                   ) : (
                     <input
                       type="email"
-                      placeholder="E-Mail"
+                      placeholder={wrongEmail}
                       onChange={change}
                       name="email"
-                    />
-                  )}
-                  {mistakes.password ? (
-                    <input
-                      type="password"
-                      placeholder="Password *Empty Field*"
-                      onChange={change}
-                      name="password"
-                      className={styles.errorPassword}
+                      className={styles.errorEmail}
                       style={{ borderColor: "red" }}
                     />
-                  ) : (
-                    <input
-                      type="password"
-                      placeholder="Password"
-                      onChange={change}
-                      name="password"
-                    />
-                  )}
-                </>
+                  )
+                ) : wrongEmail === "" ? (
+                  <input
+                    type="email"
+                    placeholder="E-Mail"
+                    onChange={change}
+                    name="email"
+                  />
+                ) : (
+                  <input
+                    type="email"
+                    placeholder={wrongEmail}
+                    onChange={change}
+                    name="email"
+                    className={styles.errorEmail}
+                    style={{ borderColor: "red" }}
+                  />
+                )
+              ) : mistakes.email ? (
+                wrongLogin === "" ? (
+                  <input
+                    type="email"
+                    placeholder="Invalid Email"
+                    onChange={change}
+                    name="email"
+                    className={styles.errorEmail}
+                    style={{ borderColor: "red" }}
+                  />
+                ) : (
+                  <input
+                    type="email"
+                    placeholder={wrongLogin}
+                    onChange={change}
+                    name="email"
+                    className={styles.errorEmail}
+                    style={{ borderColor: "red" }}
+                  />
+                )
+              ) : wrongLogin === "" ? (
+                <input
+                  type="email"
+                  placeholder="Email"
+                  onChange={change}
+                  name="email"
+                />
               ) : (
-                <>
-                  {logMistakes.email ? (
-                    <input
-                      type="email"
-                      placeholder="E-Mail *Invalid Email*"
-                      onChange={changeLog}
-                      name="email"
-                      className={styles.errorEmail}
-                      style={{ borderColor: "red" }}
-                    />
-                  ) : (
-                    <input
-                      type="email"
-                      placeholder="E-Mail"
-                      onChange={changeLog}
-                      name="email"
-                    />
-                  )}
-                  {logMistakes.password ? (
-                    <input
-                      type="password"
-                      placeholder="Password *Empty Field*"
-                      onChange={changeLog}
-                      name="password"
-                      className={styles.errorPassword}
-                      style={{ borderColor: "red" }}
-                    />
-                  ) : (
-                    <input
-                      type="password"
-                      placeholder="Password"
-                      onChange={changeLog}
-                      name="password"
-                    />
-                  )}
-                </>
+                <input
+                  type="email"
+                  placeholder={wrongLogin}
+                  onChange={change}
+                  name="email"
+                  className={styles.errorEmail}
+                  style={{ borderColor: "red" }}
+                />
+              )}
+              {mistakes.password ? (
+                wrongLogin === "" ? (
+                  <input
+                    type="password"
+                    placeholder="Password *Empty Field*"
+                    onChange={change}
+                    name="password"
+                    className={styles.errorPassword}
+                    style={{ borderColor: "red" }}
+                  />
+                ) : (
+                  <input
+                    type="password"
+                    placeholder={wrongLogin}
+                    onChange={change}
+                    name="password"
+                    className={styles.errorPassword}
+                    style={{ borderColor: "red" }}
+                  />
+                )
+              ) : wrongLogin === "" ? (
+                <input
+                  type="password"
+                  placeholder="Password"
+                  onChange={change}
+                  name="password"
+                />
+              ) : (
+                <input
+                  type="password"
+                  placeholder={wrongLogin}
+                  onChange={change}
+                  name="password"
+                  className={styles.errorPassword}
+                  style={{ borderColor: "red" }}
+                />
               )}
               <div className={styles.neznam2}>
-                {logOrReg ? (
-                  <button
-                    type="submit"
-                    id="registerloginButton"
-                    onClick={validateFields}
-                  >
-                    Регистрирај се
-                  </button>
-                ) : (
-                  <button
-                    type="submit"
-                    id="registerloginButton"
-                    onClick={validateFieldsLog}
-                  >
-                    Регистрирај се
-                  </button>
-                )}
+                <button
+                  type="submit"
+                  id="registerloginButton"
+                  onClick={validateFields}
+                >
+                  Регистрирај се
+                </button>
                 <button type="reset">Ресетирај</button>
                 <span id={styles.resetPassword}>
                   {"Доколку ја имате заборавено вашата лозинка кликнете "}

@@ -516,6 +516,7 @@
     font-weight: bold;
   }
   #register {
+    display: flex;
   }
   .struki {
     display: flex;
