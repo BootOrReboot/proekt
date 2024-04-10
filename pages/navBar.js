@@ -422,8 +422,8 @@ export default function Nav() {
                               position: "absolute",
                               fontSize: "70%",
                               color: "red",
-                              top: "80%",
-                              left: "20%",
+                              top: "81%",
+                              left: "-10%",
                             }}
                           >
                             {errorM}
@@ -448,8 +448,8 @@ export default function Nav() {
                               position: "absolute",
                               fontSize: "70%",
                               color: "red",
-                              top: "80%",
-                              left: "20%",
+                              top: "81%",
+                              left: "-10%",
                             }}
                           >
                             {errorM}
