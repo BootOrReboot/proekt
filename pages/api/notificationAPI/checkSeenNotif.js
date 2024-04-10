@@ -8,5 +8,5 @@ export default async function insert(req, res) {
   const collections = base.collection("Professors");
   const finding = await collections.findOne({ email: user });
   console.log(finding.seen);
-  res.status(200).json({ message: finding.seen });
+  res.status(200).json({ message: finding });
 }

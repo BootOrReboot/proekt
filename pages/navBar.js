@@ -22,6 +22,7 @@ export default function Nav() {
   const [error, setError] = useState("");
   const [errorM, setErrorM] = useState("");
   const [haveNotification, setHaveNotification] = useState(false);
+  const [account, setAccount] = useState({});
   const search = useSearchParams();
 
   useEffect(() => {
@@ -47,7 +48,8 @@ export default function Nav() {
         })
         .then((res) => {
           console.log(res.message);
-          setHaveNotification(res.message);
+          setHaveNotification(res.message.seen);
+          setAccount(res.message);
         });
     } else {
       setHaveNotification(false);
@@ -155,6 +157,22 @@ export default function Nav() {
     window.location.href =
       "https://master--sougjorchepetrov.netlify.app/loginAndRegister";
   };
+  const LogOut = () => {
+    fetch(
+      "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/loggingOut",
+      {
+        method: "POST",
+        body: account.email,
+      }
+    )
+      .then((r) => {
+        return r.json();
+      })
+      .then((res) => {
+        console.log(res.message);
+        window.location.href = "https://master--sougjorchepetrov.netlify.app/";
+      });
+  };
   return (
     <>
       <section className={styles.section}>
@@ -228,11 +246,18 @@ export default function Nav() {
       </section>
       <div id={styles.accountDropdown} style={{ display: "none" }}>
         <div className={styles.options}>
-          <Link href="." onClick={toProfile}>
-            Профил
-          </Link>
-          <a href="">Поставувања</a>
-          <a href="">Одјави се</a>
+          {account == {} ? (
+            <>
+              <Link href="." onClick={toProfile}>
+                Login Or Register
+              </Link>
+            </>
+          ) : (
+            <>
+              <Link href=".">{account.firstName + " " + account.lastName}</Link>
+              <a onClick={LogOut}>Одјави се</a>
+            </>
+          )}
         </div>
       </div>
       <header className={styles.header}>
