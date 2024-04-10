@@ -102,16 +102,19 @@ export default function Login() {
     });
   };
   const signUp = () => {
-    fetch("https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register", {
-      method: "POST",
-      body: JSON.stringify({
-        name: information.name,
-        surname: information.lastName,
-        email: information.email,
-        password: information.password,
-        classNumber: information.classNumber,
-      }),
-    })
+    fetch(
+      "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          name: information.name,
+          surname: information.lastName,
+          email: information.email,
+          password: information.password,
+          classNumber: information.classNumber,
+        }),
+      }
+    )
       .then((r) => {
         return r.json();
       })
@@ -197,13 +200,16 @@ export default function Login() {
     }
   };
   const signIn = () => {
-    fetch("https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register", {
-      method: "POST",
-      body: JSON.stringify({
-        email: log.email,
-        password: log.password,
-      }),
-    })
+    fetch(
+      "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register",
+      {
+        method: "POST",
+        body: JSON.stringify({
+          email: log.email,
+          password: log.password,
+        }),
+      }
+    )
       .then((r) => {
         return r.json();
       })
@@ -239,20 +245,51 @@ export default function Login() {
           <div className={styles.main}>
             <form action="">
               <div id={styles.register}>
-                {logOrReg ? (
-                  <>
+                <>
+                  {mistakes.name ? (
+                    <input
+                      type="text"
+                      placeholder="Ime *Empty Field*"
+                      onChange={change}
+                      name="name"
+                      className={styles.errorName}
+                      style={{ borderColor: "red", marginRight: "5px" }}
+                    />
+                  ) : (
                     <input
                       type="text"
                       placeholder="Ime"
                       onChange={change}
                       name="name"
+                      style={{ marginRight: "5px" }}
                     />
+                  )}
+
+                  {mistakes.lastName ? (
+                    <input
+                      type="text"
+                      placeholder="Prezime *Empty Field*"
+                      onChange={change}
+                      name="lastName"
+                      className={styles.errorSurname}
+                      style={{ borderColor: "red" }}
+                    />
+                  ) : (
                     <input
                       type="text"
                       placeholder="Prezime"
                       onChange={change}
                       name="lastName"
                     />
+                  )}
+                  <div
+                    style={{
+                      display: "flex",
+                      flexDirection: "column",
+                      justifyContent: "center",
+                      marginLeft: "5px",
+                    }}
+                  >
                     <select name="classNumber" id="" onChange={change}>
                       <option value="I-1">I-1</option>
                       <option value="I-2">I-2</option>
@@ -290,90 +327,82 @@ export default function Login() {
                       <option value="IV-7">IV-7</option>
                       <option value="IV-8">IV-8</option>
                     </select>
-                  </>
-                ) : (
-                  <>
-                    <input
-                      type="text"
-                      placeholder="Ime"
-                      onChange={changeLog}
-                      name="name"
-                    />
-                    <input
-                      type="text"
-                      placeholder="Prezime"
-                      onChange={changeLog}
-                      name="lastName"
-                    />
-                    <select name="classNumber" id="" onChange={changeLog}>
-                      <option value="I-1">I-1</option>
-                      <option value="I-2">I-2</option>
-                      <option value="I-3">I-3</option>
-                      <option value="I-4">I-4</option>
-                      <option value="I-5">I-5</option>
-                      <option value="I-6">I-6</option>
-                      <option value="I-7">I-7</option>
-                      <option value="I-8">I-8</option>
-                      <option></option>
-                      <option value="II-1">II-1</option>
-                      <option value="II-2">II-2</option>
-                      <option value="II-3">II-3</option>
-                      <option value="II-4">II-4</option>
-                      <option value="II-5">II-5</option>
-                      <option value="II-6">II-6</option>
-                      <option value="II-7">II-7</option>
-                      <option value="II-8">II-8</option>
-                      <option></option>
-                      <option value="III-1">III-1</option>
-                      <option value="III-2">III-2</option>
-                      <option value="III-3">III-3</option>
-                      <option value="III-4">III-4</option>
-                      <option value="III-5">III-5</option>
-                      <option value="III-6">III-6</option>
-                      <option value="III-7">III-7</option>
-                      <option value="III-8">III-8</option>
-                      <option></option>
-                      <option value="IV-1">IV-1</option>
-                      <option value="IV-2">IV-2</option>
-                      <option value="IV-3">IV-3</option>
-                      <option value="IV-4">IV-4</option>
-                      <option value="IV-5">IV-5</option>
-                      <option value="IV-6">IV-6</option>
-                      <option value="IV-7">IV-7</option>
-                      <option value="IV-8">IV-8</option>
-                    </select>
-                  </>
-                )}
+                  </div>
+                </>
               </div>
               {logOrReg ? (
                 <>
-                  <input
-                    type="email"
-                    placeholder="E-Mail"
-                    onChange={change}
-                    name="email"
-                  />
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    onChange={change}
-                    name="password"
-                  />
+                  {mistakes.email ? (
+                    <input
+                      type="email"
+                      placeholder="E-Mail *Invalid Email*"
+                      onChange={change}
+                      name="email"
+                      className={styles.errorEmail}
+                      style={{ borderColor: "red" }}
+                    />
+                  ) : (
+                    <input
+                      type="email"
+                      placeholder="E-Mail"
+                      onChange={change}
+                      name="email"
+                    />
+                  )}
+                  {mistakes.password ? (
+                    <input
+                      type="password"
+                      placeholder="Password *Empty Field*"
+                      onChange={change}
+                      name="password"
+                      className={styles.errorPassword}
+                      style={{ borderColor: "red" }}
+                    />
+                  ) : (
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      onChange={change}
+                      name="password"
+                    />
+                  )}
                 </>
               ) : (
                 <>
-                  <input
-                    type="email"
-                    placeholder="E-Mail"
-                    onChange={changeLog}
-                    name="email"
-                  />
-                  <input
-                    type="password"
-                    placeholder="Password"
-                    onChange={changeLog}
-                    name="password"
-                  />
+                  {logMistakes.email ? (
+                    <input
+                      type="email"
+                      placeholder="E-Mail *Invalid Email*"
+                      onChange={changeLog}
+                      name="email"
+                      className={styles.errorEmail}
+                      style={{ borderColor: "red" }}
+                    />
+                  ) : (
+                    <input
+                      type="email"
+                      placeholder="E-Mail"
+                      onChange={changeLog}
+                      name="email"
+                    />
+                  )}
+                  {logMistakes.password ? (
+                    <input
+                      type="password"
+                      placeholder="Password *Empty Field*"
+                      onChange={changeLog}
+                      name="password"
+                      className={styles.errorPassword}
+                      style={{ borderColor: "red" }}
+                    />
+                  ) : (
+                    <input
+                      type="password"
+                      placeholder="Password"
+                      onChange={changeLog}
+                      name="password"
+                    />
+                  )}
                 </>
               )}
               <div className={styles.neznam2}>

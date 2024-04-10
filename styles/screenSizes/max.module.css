@@ -625,4 +625,16 @@
   .delete svg {
     height: 50px;
   }
+  .RegisterLogin .neznam .main .errorPassword::placeholder {
+    color: red !important;
+  }
+  .RegisterLogin .neznam .main .errorEmail::placeholder {
+    color: red !important;
+  }
+  .RegisterLogin .neznam .main .errorName::placeholder {
+    color: red !important;
+  }
+  .RegisterLogin .neznam .main .errorSurname::placeholder {
+    color: red !important;
+  }
 }
