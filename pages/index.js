@@ -15,6 +15,7 @@ import mladite from "../images/mladite.png";
 import hemija from "../images/hemija.jpg";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
 
 export default function Home() {
   const [screenWidth, setScreenWidth] = useState(0);
