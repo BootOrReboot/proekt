@@ -28,7 +28,7 @@ export default async function insert(req, res) {
 
   if (funct === "register") {
     if (user === null) {
-      // await collections.insertOne(form);
+      await collections.insertOne(form);
       res.status(200).json({ message: email });
     } else {
       res.status(500).json({ message: "Email Already Exists" });
