@@ -178,16 +178,30 @@ export default function Nav() {
   };
   const lang = router.locale == "mk" ? "al" : "mk";
   const t = useTranslations("Nav");
+  const key = Object.keys(router.query)[0];
+  const value = Object.values(router.query)[0];
+  console.log();
   return (
     <>
       <section className={styles.section}>
-        <Link
-          href={router.pathname}
-          locale={lang}
-          style={{ fontSize: "2.5vw", fontWeight: "bold" }}
-        >
-          {lang.toUpperCase()}
-        </Link>
+        {key === undefined ? (
+          <Link
+            href={router.pathname}
+            locale={lang}
+            style={{ fontSize: "2.5vw", fontWeight: "bold" }}
+          >
+            {lang.toUpperCase()}
+          </Link>
+        ) : (
+          <Link
+            href={router.pathname + `?${key}=${value}`}
+            locale={lang}
+            style={{ fontSize: "2.5vw", fontWeight: "bold" }}
+          >
+            {lang.toUpperCase()}
+          </Link>
+        )}
+
         <div className={styles.account}>
           {error === "" ? (
             haveNotification ? (
@@ -400,19 +414,36 @@ export default function Nav() {
               <div className={styles.center}>
                 {hasId ? (
                   <>
-                    <Link
-                      href={router.pathname}
-                      locale={lang}
-                      style={{
-                        fontSize: "5.5vw",
-                        display: "flex",
-                        fontWeight: "bold",
-                        width: "100%",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {lang.toUpperCase()}
-                    </Link>
+                    {key === undefined ? (
+                      <Link
+                        href={router.pathname}
+                        locale={lang}
+                        style={{
+                          fontSize: "5.5vw",
+                          display: "flex",
+                          fontWeight: "bold",
+                          width: "100%",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {lang.toUpperCase()}
+                      </Link>
+                    ) : (
+                      <Link
+                        href={router.pathname + `?${key}=${value}`}
+                        locale={lang}
+                        style={{
+                          fontSize: "5.5vw",
+                          display: "flex",
+                          fontWeight: "bold",
+                          width: "100%",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {lang.toUpperCase()}
+                      </Link>
+                    )}
+
                     <Link href={`/links/schoolInfo?id=${account.email}`}>
                       {t("За Гимназијата")}
                     </Link>
@@ -426,19 +457,35 @@ export default function Nav() {
                   </>
                 ) : (
                   <>
-                    <Link
-                      href={router.pathname}
-                      locale={lang}
-                      style={{
-                        fontSize: "5.5vw",
-                        fontWeight: "bold",
-                        display: "flex",
-                        width: "100%",
-                        justifyContent: "center",
-                      }}
-                    >
-                      {lang.toUpperCase()}
-                    </Link>
+                    {key === undefined ? (
+                      <Link
+                        href={router.pathname}
+                        locale={lang}
+                        style={{
+                          fontSize: "5.5vw",
+                          display: "flex",
+                          fontWeight: "bold",
+                          width: "100%",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {lang.toUpperCase()}
+                      </Link>
+                    ) : (
+                      <Link
+                        href={router.pathname + `?${key}=${value}`}
+                        locale={lang}
+                        style={{
+                          fontSize: "5.5vw",
+                          display: "flex",
+                          fontWeight: "bold",
+                          width: "100%",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {lang.toUpperCase()}
+                      </Link>
+                    )}
                     <Link href="/links/schoolInfo">{t("За Гимназијата")}</Link>
                     <Link href="/branches">{t("Струки")}</Link>
 

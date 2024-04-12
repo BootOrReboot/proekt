@@ -12,8 +12,10 @@ import jazik from "../../images/denNaJazici.jpg";
 import { useState, useEffect } from "react";
 
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
 
 export default function Vesti() {
+  const router = useRouter();
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const t = useTranslations("News");
@@ -76,7 +78,12 @@ export default function Vesti() {
   }
   const moreNews = (e) => {
     const page = e.target.parentNode.id;
-    window.location.href = `/newspaper?page=${page}`;
+
+    if (router.locale == "al") {
+      window.location.href = `/al/newspaper?page=${page}`;
+    } else {
+      window.location.href = `/newspaper?page=${page}`;
+    }
   };
   return (
     <>
