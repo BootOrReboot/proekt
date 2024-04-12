@@ -8,23 +8,35 @@ import { faCalendar } from "@fortawesome/free-solid-svg-icons";
 import test from "../../images/test-slika.png";
 import mladite from "../../images/mladite.png";
 import hemija from "../../images/hemija.jpg";
+import jazik from "../../images/denNaJazici.jpg";
 import { useState, useEffect } from "react";
+
+import { useTranslations } from "next-intl";
 
 export default function Vesti() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
+  const t = useTranslations("News");
   const [news, setNews] = useState([
-    { name: "Светски ден на бубрегот", image: test, date: "14 Март 2024" },
-    { name: "Светски ден на бубрегот", image: test, date: "14 Март 2024" },
     {
-      name: "Новинарски спринт во СОУ „Ѓорче Петров“",
+      name: "Ден на Јазиците и Уметноста",
+      image: jazik,
+      date: `11 ${t("Април")} 2024`,
+    },
+    {
+      name: "Светски ден на бубрегот",
+      image: test,
+      date: `14 ${t("Март")} 2024`,
+    },
+    {
+      name: "Новинарски спринт",
       image: mladite,
-      date: "08 Март 2024",
+      date: `08 ${t("Март")} 2024`,
     },
     {
       name: "Општински натпревар по хемија",
       image: hemija,
-      date: "18 Фебруари 2024",
+      date: `18 ${t("Фебруари")} 2024`,
     },
   ]);
   useEffect(() => {
@@ -62,7 +74,7 @@ export default function Vesti() {
     <>
       <div>
         <div className={styles.vestiNastani}>
-          <h1>Вести и Настани</h1>
+          <h1>{t("Вести и Настани")}</h1>
           <div>
             {news.map((el, index) => (
               <div className={styles.vestNastan} key={index}>
@@ -70,7 +82,7 @@ export default function Vesti() {
                   <Image src={el.image} alt="test slika" />
                 </div>
                 <div className={styles.naslov}>
-                  <p>{el.name}</p>
+                  <p>{t(el.name)}</p>
                 </div>
                 <div className={styles.objaveno}>
                   <FontAwesomeIcon icon={faCalendar} />
@@ -83,4 +95,11 @@ export default function Vesti() {
       </div>
     </>
   );
+}
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      messages: (await import(`../../messages/${locale}.json`)).default,
+    },
+  };
 }

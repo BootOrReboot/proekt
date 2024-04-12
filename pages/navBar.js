@@ -16,6 +16,9 @@ import { useState, useEffect, use } from "react";
 import Button from "@mui/material/Button";
 import { useSearchParams } from "next/navigation";
 import Link from "next/link";
+import { useRouter } from "next/router";
+import { useTranslations } from "next-intl";
+
 export default function Nav() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
@@ -24,7 +27,9 @@ export default function Nav() {
   const [haveNotification, setHaveNotification] = useState(false);
   const [account, setAccount] = useState({});
   const [hasId, setHasId] = useState(false);
+
   const search = useSearchParams();
+  const router = useRouter();
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -171,10 +176,18 @@ export default function Nav() {
         window.location.href = "https://master--sougjorchepetrov.netlify.app";
       });
   };
-
+  const lang = router.locale == "mk" ? "al" : "mk";
+  const t = useTranslations("Nav");
   return (
     <>
       <section className={styles.section}>
+        <Link
+          href={router.pathname}
+          locale={lang}
+          style={{ fontSize: "2.5vw", fontWeight: "bold" }}
+        >
+          {lang}
+        </Link>
         <div className={styles.account}>
           {error === "" ? (
             haveNotification ? (
@@ -248,12 +261,12 @@ export default function Nav() {
           {Object.keys(account).length !== 0 ? (
             <>
               <Link href=".">{account.firstName + " " + account.lastName}</Link>
-              <a onClick={LogOut}>Одјави се</a>
+              <a onClick={LogOut}>{t("Одјави се")}</a>
             </>
           ) : (
             <>
               <Link href="https://master--sougjorchepetrov.netlify.app/loginAndRegister">
-                Login Or Register
+                {t("Логирај се или Регистрирај се")}
               </Link>
             </>
           )}
@@ -264,7 +277,7 @@ export default function Nav() {
           <Link href="/">
             <Image src={logo} alt="logo" priority={true} />
           </Link>
-          <p>Ѓорче Петров</p>
+          <p>{t("Ѓорче Петров")}</p>
         </div>
         <nav>
           <button
@@ -288,20 +301,22 @@ export default function Nav() {
                 {hasId ? (
                   <>
                     <Link href={`/links/schoolInfo?id=${account.email}`}>
-                      За Гимназијата
+                      {t("За Гимназијата")}
                     </Link>
-                    <Link href={`/branches?id=${account.email}`}>Струки</Link>
+                    <Link href={`/branches?id=${account.email}`}>
+                      {t("Струки")}
+                    </Link>
 
                     <Link href={`/links/news?id=${account.email}`}>
-                      Вести и Настани
+                      {t("Вести и Настани")}
                     </Link>
                   </>
                 ) : (
                   <>
-                    <Link href="/links/schoolInfo">За Гимназијата</Link>
-                    <Link href="/branches">Струки</Link>
+                    <Link href="/links/schoolInfo">{t("За Гимназијата")}</Link>
+                    <Link href="/branches">{t("Струки")}</Link>
 
-                    <Link href="/links/news">Вести и Настани</Link>
+                    <Link href="/links/news">{t("Вести и Настани")}</Link>
                   </>
                 )}
                 {Object.keys(account).length !== 0 ? (
@@ -311,17 +326,17 @@ export default function Nav() {
                     </Link>
                     <a className={styles.mobile} onClick={notifyM}>
                       {errorM === "" ? (
-                        "Нотификации"
+                        t("Нотификации")
                       ) : (
                         <div>
-                          Нотификации
+                          {t("Нотификации")}
                           <div style={{ position: "absolute" }}>{errorM}</div>
                         </div>
                       )}
                     </a>
 
                     <a className={styles.mobile} onClick={LogOut}>
-                      Одјави се
+                      {t("Одјави се")}
                     </a>
                   </>
                 ) : (
@@ -330,14 +345,14 @@ export default function Nav() {
                       className={styles.mobile}
                       href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
                     >
-                      Login Or Register
+                      {t("Логирај се или Регистрирај се")}
                     </Link>
                     <a className={styles.mobile} onClick={notifyM}>
                       {errorM === "" ? (
-                        "Нотификации"
+                        t("Нотификации")
                       ) : (
                         <div>
-                          Нотификации
+                          {t("Нотификации")}
                           <div style={{ position: "absolute" }}>{errorM}</div>
                         </div>
                       )}
@@ -385,21 +400,47 @@ export default function Nav() {
               <div className={styles.center}>
                 {hasId ? (
                   <>
-                    <Link href={`/links/schoolInfo?id=${account.email}`}>
-                      За Гимназијата
+                    <Link
+                      href={router.pathname}
+                      locale={lang}
+                      style={{
+                        fontSize: "5vw",
+                        fontWeight: "bold",
+                        width: "100%",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {lang}
                     </Link>
-                    <Link href={`/branches?id=${account.email}`}>Струки</Link>
+                    <Link href={`/links/schoolInfo?id=${account.email}`}>
+                      {t("За Гимназијата")}
+                    </Link>
+                    <Link href={`/branches?id=${account.email}`}>
+                      {t("Струки")}
+                    </Link>
 
                     <Link href={`/links/news?id=${account.email}`}>
-                      Вести и Настани
+                      {t("Вести и Настани")}
                     </Link>
                   </>
                 ) : (
                   <>
-                    <Link href="/links/schoolInfo">За Гимназијата</Link>
-                    <Link href="/branches">Струки</Link>
+                    <Link
+                      href={router.pathname}
+                      locale={lang}
+                      style={{
+                        fontSize: "2.5vw",
+                        fontWeight: "bold",
+                        width: "100%",
+                        justifyContent: "center",
+                      }}
+                    >
+                      {lang}
+                    </Link>
+                    <Link href="/links/schoolInfo">{t("За Гимназијата")}</Link>
+                    <Link href="/branches">{t("Струки")}</Link>
 
-                    <Link href="/links/news">Вести и Настани</Link>
+                    <Link href="/links/news">{t("Вести и Настани")}</Link>
                   </>
                 )}
 
@@ -409,14 +450,14 @@ export default function Nav() {
                       className={styles.mobile}
                       href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
                     >
-                      Login Or Register
+                      {t("Логирај се или Регистрирај се")}
                     </Link>
                     <a className={styles.mobile} onClick={notifyM}>
                       {errorM === "" ? (
-                        "Нотификации"
+                        t("Нотификации")
                       ) : (
                         <div>
-                          Нотификации
+                          {t("Нотификации")}
                           <div
                             style={{
                               position: "absolute",
@@ -439,10 +480,10 @@ export default function Nav() {
                     </Link>
                     <a className={styles.mobile} onClick={notifyM}>
                       {errorM === "" ? (
-                        "Нотификации"
+                        t("Нотификации")
                       ) : (
                         <div>
-                          Нотификации
+                          {t("Нотификации")}
                           <div
                             style={{
                               position: "absolute",
@@ -459,7 +500,7 @@ export default function Nav() {
                     </a>
 
                     <a className={styles.mobile} onClick={LogOut}>
-                      Одјави се
+                      {t("Одјави се")}
                     </a>
                   </>
                 )}
@@ -498,4 +539,11 @@ export default function Nav() {
       </header>
     </>
   );
+}
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      messages: (await import(`../messages/${locale}.json`)).default,
+    },
+  };
 }

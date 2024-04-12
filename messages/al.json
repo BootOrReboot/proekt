@@ -1,0 +1,68 @@
+{
+  "Main": {
+    "Ѓорче Петров": "Gorçe Petrov",
+    "Крива Паланка": "Kriva Pallankë",
+    "Безбедност": "Siguria",
+    "Безбедност опис": "Në shkollën e mesme „Gjorçe Petrov“ besojmë se nxënësit tanë kanë të drejtë për një mjedis të pastër, të sigurt dhe të mbrojtur mësimor. Këtë e kemi bërë të mundur me procedurat e rregullta të pastrimit dhe dezinfektimit, si dhe respektimin e të gjitha protokolleve të sigurisë. Misioni ynë është të rrisim njohuritë e studentëve tanë me një sistem që i mbështet ata të bëhen qytetarë që mund të jenë të suksesshëm në pajtueshmërinë globale.",
+    "Повеќе": "Повеќе"
+  },
+  "News": {
+    "Вести и Настани": "Lajme dhe ngjarje",
+    "Светски ден на бубрегот": "Dita Botërore e Veshkave",
+    "Ден на Јазиците и Уметноста": "Dita e Gjuhës dhe Artit",
+    "Новинарски спринт": "Sprint gazetaresk në shkollën e mesme „Gjorçe Petrov“.",
+    "Општински натпревар по хемија": "Konkursi komunal në kimi",
+    "Март": "marsh",
+    "Фебруари": "shkurt",
+    "Април": "prill"
+  },
+  "Struki": {
+    "Гимназиско Образование:": "Arsimi i mesëm:",
+    "Природно - Математичко Подрачје": "Zona Natyrore - Matematikore",
+    "поени": "pikë",
+    "ученика": "student",
+    "паралелка": "klasës",
+    "Општествено - Хуманистичко Подрачје": "Zonë Sociale - Humaniste",
+    "Јазично - Уметничко Подрачје": "Fusha Gjuhësore - Artistike",
+    "Четиригодишно Траење:": "Kohëzgjatja katërvjeçare:",
+    "Електротехничар за КТА": "Elektricist për AKM",
+    "Соработка со Дема Стил ДОО Крива Паланка": "Bashkëpunim me Dema Steel Sh.PK Kriva Pallankë.",
+    "Медицинска Сестра": "Infermierja",
+    "Соработка со Медицински Центар Крива Паланка": "Bashkëpunim me Qendrën Mjekësore Kriva Pallankë.",
+    "Машински Техничар": "Teknik mekanik",
+    "Градежен Техничар": "Teknik ndërtimi",
+    "Соработка со ЈП Комуналец Крива Паланка и „Хантерс“ ДООЕЛ Скопје": "Bashkëpunim me JP Komunalec Kriva Pallankë dhe „Hunters“ DOOEL Shkup.",
+    "Келнер / Готвач": "Kamarier / Kuzhinier",
+    "Соработка со Парк Гиновци ДООЕЛ Ранковце": "Bashkëpunim me Park Ginovci DOOEL Rankovce.",
+    "Потребни Документи:": "Dokumentet e nevojshme:",
+    "Пријава за запишување": "Aplikimi për regjistrim. Aplikacioni për regjistrim përgatitet nga Ministria e Arsimit dhe Shkencës dhe publikohet në faqen zyrtare të internetit.",
+    "Оригинални свидетелства од VI до IX одделение": "Certifikatat origjinale nga klasa VI deri në IX.",
+    "Дипломи од освоени I, II и III места од меѓународни и државни натпревари, доколку имаат": "Diploma nga vendet e fituara I, II dhe III në garat ndërkombëtare dhe shtetërore, nëse kanë.",
+    "Извод од матична книга на родените": "Certifikate lindje."
+  },
+  "ZaGimnazija": {
+    "МИСИЈА НА УЧИЛИШТЕТО": "MISIONI I SHKOLLËS",
+    "Едукацијата не е подготовка за живот – едукацијата е самиот живот": "Arsimi nuk është një përgatitje për jetën - edukimi është vetë jeta.",
+    "Ние сме училиште со традиција": "Ne jemi një shkollë me traditë, e hapur ndaj ideve të reja që inkurajojnë individualitetin dhe kreativitetin, disiplinën dhe kulturën, aftësitë më të larta intelektuale dhe një edukim që do të përballojë sfidat e jetës. Rrënjët e edukimit janë të hidhura, por frytet janë të ëmbla. Kjo është arsyeja pse ne investojmë çdo ditë në ndërtimin e së ardhmes sonë. Edukimi i njeriut është një pasqyrë në të cilën shfaqet portreti personal.",
+    "Наша мисија е да ја препознаеме индивидуалноста која мора да биде во корелација со тимската работа која поттикнува креативност и создава квалитет": "Misioni ynë është të njohim individualitetin që duhet të lidhet me punën ekipore që nxit kreativitetin dhe krijon cilësi.",
+    "ВИЗИЈА НА УЧИЛИШТЕТО": "VIZIONI I SHKOLLËS",
+    "Развиј ја страста за учење, Доколку успееш во тоа, никогаш нема да престанеш да растеш!": "Zhvilloni një pasion për të mësuar. Nëse keni sukses në këtë, nuk do të ndaloni së rrituri kurrë!",
+    "Средното општинско училиште Ѓорче Петров преставува силен импулс во развојот на образовната дејност": "Shkolla e mesme komunale Gjorçe Petrov paraqet një impuls të fuqishëm në zhvillimin e veprimtarisë arsimore, dhe në këtë mënyrë praktikisht konfirmon vendosmërinë për investim intelektual në arsim dhe për krijimin e kuadrove të larta profesionale, që është parakusht imperativ dhe themelor për zhvillimin dhe zhvillimin progresin e çdo shoqërie. Arsimi është çelësi i artë i lirisë.",
+    "Наша цел е да помогнеме во градење на образована личност која научила како да учи и како да се менува": "Qëllimi ynë është të ndihmojmë në ndërtimin e një personi të arsimuar që ka mësuar si të mësojë dhe si të ndryshojë. Sepse jeta duhet të jetë një edukim i vazhdueshëm.",
+    "Да ги искористиме зборовите на Еразмо Ротердамски: “Најголемата надеж на секоја земја лежи во примерно школување на младите”": "Le të përdorim fjalët e Erasmus të Roterdamit: “Shpresa më e madhe e çdo vendi qëndron në edukimin shembullor të të rinjve”.",
+    "Инвестирањето во знаење исплаќа најдобра и најголема камата": "Investimi në dije paguan interesin më të mirë dhe më të lartë.",
+    "Затоа ние како институција ќе продолжиме да работиме во полза на идните генерации, а времето е онаа мудра категорија која ги потврдува вистинските творци": "Prandaj ne si institucion do të vazhdojmë të punojmë për të mirën e brezave të ardhshëm dhe koha është kategoria e mençur që konfirmon krijuesit e vërtetë.",
+    "Животот мора да биде постојано воспитување!": "Jeta duhet të jetë një edukim i vazhdueshëm!",
+    "Мото на училиштето:": "Motoja e shkollës:",
+    "Да бидеме цртачи на денот за да бидеме дизајнери на животот": "Le të jemi stilistë të ditës për të qenë stilistë të jetës."
+  },
+  "Nav": {
+    "Одјави се": "Shkyç",
+    "Логирај се или Регистрирај се": "Identifikohu ose regjistrohu",
+    "Ѓорче Петров": "Gorçe Petrov",
+    "За Гимназијата": "Rreth shkollës së mesme",
+    "Струки": "Profesionet",
+    "Вести и Настани": "Lajme dhe ngjarje",
+    "Нотификации": "Njoftimet"
+  }
+}

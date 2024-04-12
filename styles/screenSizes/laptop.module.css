@@ -1,6 +1,7 @@
 @media only screen and (min-width: 1024px) and (max-width: 1365px) {
   .section {
     display: flex;
+    flex-direction: row-reverse;
     justify-content: right;
     align-items: center;
     padding: 0.5vw 2vw;

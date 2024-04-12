@@ -2,21 +2,27 @@ import "@/styles/globals.css";
 import Nav from "./navBar";
 import Footer from "./footer";
 import { useRouter } from "next/router";
+import { NextIntlClientProvider } from "next-intl";
 
 export default function App({ Component, pageProps }) {
   const router = useRouter();
   const showNav = router.pathname === "/loginAndRegister" ? true : false;
   return (
-    <>
-      {showNav ? (
-        <Component {...pageProps} />
-      ) : (
-        <>
-          <Nav />
+    <NextIntlClientProvider
+      locale={router.locale}
+      messages={pageProps.messages}
+    >
+      <>
+        {showNav ? (
           <Component {...pageProps} />
-          <Footer />
-        </>
-      )}
-    </>
+        ) : (
+          <>
+            <Nav />
+            <Component {...pageProps} />
+            <Footer />
+          </>
+        )}
+      </>
+    </NextIntlClientProvider>
   );
 }

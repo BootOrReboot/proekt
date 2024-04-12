@@ -14,22 +14,28 @@ import test from "../images/test-slika.png";
 import mladite from "../images/mladite.png";
 import hemija from "../images/hemija.jpg";
 import { useEffect, useState } from "react";
-import { useWindowSize } from "@uidotdev/usehooks";
+import { useTranslations } from "next-intl";
 
 export default function Home() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
+  const t = useTranslations("Main");
+  const t2 = useTranslations("News");
   const [news, setNews] = useState([
-    { name: "Светски ден на бубрегот", image: test, date: "14 Март 2024" },
     {
-      name: "Новинарски спринт во СОУ „Ѓорче Петров“",
+      name: "Светски ден на бубрегот",
+      image: test,
+      date: `14 ${t2("Март")} 2024`,
+    },
+    {
+      name: "Новинарски спринт",
       image: mladite,
-      date: "08 Март 2024",
+      date: `08 ${t2("Март")} 2024`,
     },
     {
       name: "Општински натпревар по хемија",
       image: hemija,
-      date: "18 Фебруари 2024",
+      date: `18 ${t2("Фебруари")} 2024`,
     },
   ]);
 
@@ -70,8 +76,8 @@ export default function Home() {
       <div className={styles.content}>
         <div className={styles.text}>
           <div className={`${styles.center} ${styles.split}`}>
-            <span>Ѓорче Петров</span>
-            <span>Крива Паланка</span>
+            <span>{t("Ѓорче Петров")}</span>
+            <span>{t("Крива Паланка")}</span>
           </div>
         </div>
         <div className={styles.img}>
@@ -88,16 +94,8 @@ export default function Home() {
         </div>
         <div className={styles.text}>
           <div className={styles.split}>
-            <h1>Безбедност</h1>
-            <p>
-              Во Гимназија „Ѓорче Петров“, веруваме дека нашите ученици имаат
-              право на чиста, безбедна и заштитена средина за учење. Ние го
-              направивме тоа можно со регуларни процедури за чистење и
-              дезинфекција, како и почитување на сите безбедносни протоколи.
-              Нашата мисија е да го повисиме знаењето на нашите ученици со
-              систем кој ги поддржува да станат граѓани кои ќе можат да бидат
-              успешни во глобалната усогласеност.
-            </p>
+            <h1>{t("Безбедност")}</h1>
+            <p>{t("Безбедност опис")}</p>
           </div>
         </div>
       </div>
@@ -117,7 +115,7 @@ export default function Home() {
       </div>
 
       <div className={styles.vestiNastani}>
-        <h1>Вести и Настани</h1>
+        <h1>{t2("Вести и Настани")}</h1>
         <div>
           {news.map((el, index) => (
             <div className={styles.vestNastan} key={index}>
@@ -125,7 +123,7 @@ export default function Home() {
                 <Image src={el.image} alt="test slika" />
               </div>
               <div className={styles.naslov}>
-                <p>{el.name}</p>
+                <p>{t2(el.name)}</p>
               </div>
               <div className={styles.objaveno}>
                 <FontAwesomeIcon icon={faCalendar} />
@@ -142,10 +140,17 @@ export default function Home() {
                 "https://master--sougjorchepetrov.netlify.app/links/news")
             }
           >
-            Повеќе &#8594;
+            {t("Повеќе")} &#8594;
           </button>
         </div>
       </div>
     </div>
   );
+}
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      messages: (await import(`../messages/${locale}.json`)).default,
+    },
+  };
 }
