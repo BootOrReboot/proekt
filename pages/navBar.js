@@ -245,7 +245,7 @@ export default function Nav() {
       </section>
       <div id={styles.accountDropdown} style={{ display: "none" }}>
         <div className={styles.options}>
-          {account != {} ? (
+          {account == {} ? (
             <>
               <Link href=".">{account.firstName + " " + account.lastName}</Link>
               <a onClick={LogOut}>Одјави се</a>
