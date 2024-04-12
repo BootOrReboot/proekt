@@ -404,7 +404,8 @@ export default function Nav() {
                       href={router.pathname}
                       locale={lang}
                       style={{
-                        fontSize: "5vw",
+                        fontSize: "5.5vw",
+                        display: "flex",
                         fontWeight: "bold",
                         width: "100%",
                         justifyContent: "center",
@@ -429,8 +430,9 @@ export default function Nav() {
                       href={router.pathname}
                       locale={lang}
                       style={{
-                        fontSize: "2.5vw",
+                        fontSize: "5.5vw",
                         fontWeight: "bold",
+                        display: "flex",
                         width: "100%",
                         justifyContent: "center",
                       }}
