@@ -171,10 +171,11 @@ export default function Nav() {
         window.location.href = "https://master--sougjorchepetrov.netlify.app";
       });
   };
-  console.log(account);
+
   return (
     <>
       <section className={styles.section}>
+        <button onClick={test}>click</button>
         <div className={styles.account}>
           {error === "" ? (
             haveNotification ? (
@@ -245,7 +246,7 @@ export default function Nav() {
       </section>
       <div id={styles.accountDropdown} style={{ display: "none" }}>
         <div className={styles.options}>
-          {account != {} ? (
+          {Object.keys(account).length !== 0 ? (
             <>
               <Link href=".">{account.firstName + " " + account.lastName}</Link>
               <a onClick={LogOut}>Одјави се</a>
@@ -304,7 +305,7 @@ export default function Nav() {
                     <Link href="/links/news">Вести и Настани</Link>
                   </>
                 )}
-                {account != {} ? (
+                {Object.keys(account).length !== 0 ? (
                   <>
                     <Link className={styles.mobile} href=".">
                       {account.firstName + " " + account.lastName}
@@ -403,7 +404,7 @@ export default function Nav() {
                   </>
                 )}
 
-                {account != {} ? (
+                {Object.keys(account).length === 0 ? (
                   <>
                     <Link
                       className={styles.mobile}
