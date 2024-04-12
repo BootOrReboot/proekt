@@ -532,6 +532,10 @@
 
     flex-wrap: wrap;
   }
+  .strukiHeader {
+    font-weight: bold; /* Disable font weight inheritance */
+    font-size: 24px;
+  }
   .struki .struka {
     display: flex;
     background-color: whitesmoke;
@@ -570,6 +574,7 @@
   }
   .upisi h1 {
     font-size: 2.5vw;
+    font-weight: bold;
   }
   .upisi ul li {
     font-size: 1.3vw;

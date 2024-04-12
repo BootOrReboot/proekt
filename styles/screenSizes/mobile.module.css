@@ -501,23 +501,22 @@
     margin-top: 8vw;
   }
   .strukiHeader {
-    font-size: 2.5vw;
+    font-size: 6vw;
+    font-weight: bold;
     text-align: center;
-  }
-  .socialLinks a svg {
-    height: 100%;
   }
   .struki {
     display: flex;
-    width: 80%;
+    width: 90%;
     margin: auto;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
   }
   .struki .struka {
     display: flex;
     background-color: whitesmoke;
     flex-direction: row;
-    width: 48%;
+    width: 90%;
     padding: 1%;
     box-sizing: border-box;
     justify-content: space-evenly;
@@ -526,37 +525,40 @@
   .struki .struka .ikona {
     display: flex;
     align-items: center;
-    width: 15%;
+    width: 30%;
   }
   .struki .struka .ikona img {
-    width: 3vw;
+    width: 15vw;
+    font-size: 2vw;
   }
   .struki .struka .podatoci {
     flex-direction: column;
-    width: 85%;
+    width: 100%;
   }
   .struki .struka .podatoci .ime {
     font-weight: bold;
-    font-size: 1.4vw;
+    font-size: 3vw;
   }
   .struki .struka .podatoci .deskripcija {
-    font-size: 1vw;
+    font-size: 2.5vw;
     margin-top: 1vw;
   }
   .upisi {
     box-sizing: border-box;
     padding: 1%;
-    overflow: auto;
   }
   .upisi ul {
-    padding: 0 1%;
+    padding-left: 5%;
   }
   .upisi h1 {
-    font-size: 2.2vw;
+    font-weight: bold;
+    font-size: 6vw;
+    text-align: center;
   }
   .upisi ul li {
-    font-size: 1.1vw;
-    line-height: 3vw;
+    font-size: 3vw;
+    margin: 3vw 0;
+    text-align: justify;
   }
   .delete svg {
     height: 20px;
