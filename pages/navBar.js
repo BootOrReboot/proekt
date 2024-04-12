@@ -186,7 +186,7 @@ export default function Nav() {
           locale={lang}
           style={{ fontSize: "2.5vw", fontWeight: "bold" }}
         >
-          {lang}
+          {lang.toUpperCase()}
         </Link>
         <div className={styles.account}>
           {error === "" ? (
@@ -411,7 +411,7 @@ export default function Nav() {
                         justifyContent: "center",
                       }}
                     >
-                      {lang}
+                      {lang.toUpperCase()}
                     </Link>
                     <Link href={`/links/schoolInfo?id=${account.email}`}>
                       {t("За Гимназијата")}
@@ -437,7 +437,7 @@ export default function Nav() {
                         justifyContent: "center",
                       }}
                     >
-                      {lang}
+                      {lang.toUpperCase()}
                     </Link>
                     <Link href="/links/schoolInfo">{t("За Гимназијата")}</Link>
                     <Link href="/branches">{t("Струки")}</Link>
