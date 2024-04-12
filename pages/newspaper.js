@@ -6,7 +6,7 @@ import styleMob from "../styles/screenSizes/mobile.module.css";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
-export default function newspaper() {
+export default function Newspaper() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const search = useSearchParams();
