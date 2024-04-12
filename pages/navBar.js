@@ -175,7 +175,6 @@ export default function Nav() {
   return (
     <>
       <section className={styles.section}>
-        <button onClick={test}>click</button>
         <div className={styles.account}>
           {error === "" ? (
             haveNotification ? (
