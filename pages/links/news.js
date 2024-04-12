@@ -22,21 +22,25 @@ export default function Vesti() {
       name: "Ден на Јазиците и Уметноста",
       image: jazik,
       date: `11 ${t("Април")} 2024`,
+      id: 1,
     },
     {
       name: "Светски ден на бубрегот",
       image: test,
       date: `14 ${t("Март")} 2024`,
+      id: 2,
     },
     {
       name: "Новинарски спринт",
       image: mladite,
       date: `08 ${t("Март")} 2024`,
+      id: 3,
     },
     {
       name: "Општински натпревар по хемија",
       image: hemija,
       date: `18 ${t("Фебруари")} 2024`,
+      id: 4,
     },
   ]);
   useEffect(() => {
@@ -70,6 +74,10 @@ export default function Vesti() {
       return styleMob;
     });
   }
+  const moreNews = (e) => {
+    const page = e.target.parentNode.id;
+    window.location.href = `/newspaper?page=${page}`;
+  };
   return (
     <>
       <div>
@@ -81,7 +89,7 @@ export default function Vesti() {
                 <div className={styles.slika}>
                   <Image src={el.image} alt="test slika" />
                 </div>
-                <div className={styles.naslov}>
+                <div className={styles.naslov} id={el.id} onClick={moreNews}>
                   <p>{t(el.name)}</p>
                 </div>
                 <div className={styles.objaveno}>

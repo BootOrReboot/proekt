@@ -14,7 +14,11 @@
     "Општински натпревар по хемија": "Konkursi komunal në kimi",
     "Март": "marsh",
     "Фебруари": "shkurt",
-    "Април": "prill"
+    "Април": "prill",
+    "Денеска во нашето училиште се одржа едукативна, новинарска работилница за членовите на Тинтим во реализација на Ирена Белешковска": "Sot në shkollën tonë u mbajt punëtoria edukative, gazetareske për anëtarët e Tintim, e realizuar nga Irena Beleshkovska, gazetarët e rinj nga shkolla jonë patën mundësinë të mësojnë nga një gazetare me përvojë shumëvjeçare. Ata mësuan përmes shembujve nga përditshmëria, madje u vendosën në rolin e gazetarëve aktivë që duhet të bëjnë një intervistë me njerëz të famshëm. Shumë faleminderit Irena Beleshkovska që me vetëmohim ndau përvojën e saj me gazetarët tanë!",
+    "Бубрежно здравје за сите! – е мотото на денешниот едукативен настан организиран од Центарот за дијализа ,,Диаверум” во нашето училиште": "Shëndeti i veshkave për të gjithë! - është motoja e aktivitetit edukativ të sotëm të organizuar nga Diaverum Dialisis Center në shkollën tonë. Ne iu bashkuam fushatës për shënimin e ditës kushtuar shëndetit të veshkave së bashku me studentë të profesionit shëndetësor. Me ekipin e “Diaverum” diskutuam se si ruajmë shëndetin e veshkave dhe vitalitetin e tyre dhe çfarë duhet të praktikojmë si mënyrë jetese për të ruajtur shëndetin tonë.",
+    "Денеска започнавме со чествување на Патрон празникот": "Sot filluam të festojmë festën e shenjtorit. Festuam gjuhën dhe artin. Kemi shijuar një interpretim lirik, tingujt e pianos dhe kemi qeshur!Kemi ndjekur këto ngjarje: - Shfaqje artistike me rastin e 90 vjetorit të lindjes së shkrimtarit tonë - Petre M. Andreevski i shoqëruar me muzikë sentimentale - kënga Easy on me nga Adele - Skeç: Fundi i vitit shkollor",
+    "На општинскиот натпревар по Хемија кој се одржа на година учествуваа ученици од I, II и III година:": "Nxënësit nga viti I, II dhe III nën mentorimin e profesoreve Valentina Cvetanovska dhe Jaklina Dimitrovska morën pjesë në konkursin komunal të kimisë të mbajtur më 24.02.2023. Nxënësit e mëposhtëm u vendosën në një konkurs rajonal: 1. Dimitar Stojanovski, kl.I-1, III-vendi 2. Vanja Kostovska, kl. I-1, lavdërim 3. Filip Stojanovski, kl. I-2, lavdërim 4. Jovana Stefanovska, klasa I-2, lavdërim 5. Eva Simonova, II. -2 klasi, lavdërim 6. Nina Dimitrovska, II-2 kl., lavdërim 1. Ana Georgievska, kl. III-5, vendi III, diploma 2. Gorana Simonova, klasa III-3, lavdërimi 3. Naum Stojanovski, III-3 kl. , eulogji"
   },
   "Struki": {
     "Гимназиско Образование:": "Arsimi i mesëm:",
@@ -64,5 +68,14 @@
     "Струки": "Profesionet",
     "Вести и Настани": "Lajme dhe ngjarje",
     "Нотификации": "Njoftimet"
+  },
+  "Footer": {
+    "Изработиле:": "I bërë:",
+    "Име": "Emri",
+    "Презиме": "Mbiemri",
+    "Наслов": "Titulli",
+    "Напишете порака": "Shkruani një mesazh",
+    "Испрати": "Dërgo",
+    "Сите права се задржани": "Të gjitha të drejtat e rezervuara"
   }
 }

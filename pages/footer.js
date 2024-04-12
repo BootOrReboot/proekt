@@ -4,6 +4,7 @@ import styleMax from "../styles/screenSizes/max.module.css";
 import styleLap from "../styles/screenSizes/laptop.module.css";
 import styleMob from "../styles/screenSizes/mobile.module.css";
 import { Button } from "@mui/material";
+import { useTranslations } from "next-intl";
 
 export default function Footer() {
   const [year, setYear] = useState("");
@@ -23,7 +24,7 @@ export default function Footer() {
     fullName: false,
     surname: false,
   });
-
+  const t = useTranslations("Footer");
   const addInfo = (e) => {
     const { name, value } = e.target;
     setForm({
@@ -150,7 +151,7 @@ export default function Footer() {
               sougorcepetrov@yahoo.com
             </a>
             <br />
-            <b>Изработиле:</b>
+            <b>{t("Изработиле:")}</b>
             <br />
             Филип Стојановски
             <br />
@@ -162,7 +163,7 @@ export default function Footer() {
             <div className={styles.info}>
               {mistakes.fullName ? (
                 <>
-                  <p style={{ color: "red" }}>Име *Field is empty*</p>
+                  <p style={{ color: "red" }}>{t("Име")} *Field is empty*</p>
                   <input
                     type="text"
                     onChange={addInfo}
@@ -172,13 +173,15 @@ export default function Footer() {
                 </>
               ) : (
                 <>
-                  <p>Име</p>
+                  <p>{t("Име")}</p>
                   <input type="text" onChange={addInfo} name="fullName" />
                 </>
               )}
               {mistakes.surname ? (
                 <>
-                  <p style={{ color: "red" }}>Презиме *Field is empty*</p>
+                  <p style={{ color: "red" }}>
+                    {t("Презиме")} *Field is empty*
+                  </p>
                   <input
                     type="text"
                     onChange={addInfo}
@@ -188,7 +191,7 @@ export default function Footer() {
                 </>
               ) : (
                 <>
-                  <p>Презиме</p>
+                  <p>{t("Презиме")}</p>
                   <input type="text" onChange={addInfo} name="surname" />
                 </>
               )}
@@ -224,7 +227,7 @@ export default function Footer() {
               )}
               {mistakes.title ? (
                 <>
-                  <p style={{ color: "red" }}>Наслов *Field is empty</p>
+                  <p style={{ color: "red" }}>{t("Наслов")} *Field is empty</p>
                   <input
                     type="text"
                     onChange={addInfo}
@@ -234,14 +237,14 @@ export default function Footer() {
                 </>
               ) : (
                 <>
-                  <p>Наслов</p>
+                  <p>{t("Наслов")}</p>
                   <input type="text" onChange={addInfo} name="title" />
                 </>
               )}
               {mistakes.letter ? (
                 <>
                   <p style={{ color: "red" }}>
-                    Напишете порака... *Field is empty*
+                    {t("Напишете порака")}... *Field is empty*
                   </p>
                   <textarea
                     name="letter"
@@ -254,7 +257,7 @@ export default function Footer() {
                 </>
               ) : (
                 <>
-                  <p>Напишете порака... </p>
+                  <p>{t("Напишете порака")}... </p>
                   <textarea
                     name="letter"
                     id="poraka"
@@ -267,12 +270,21 @@ export default function Footer() {
               )}
 
               <br />
-              <Button onClick={validateFields}>Испрати</Button>
+              <Button onClick={validateFields}>{t("Испрати")}</Button>
             </div>
           </form>
         </div>
       </footer>
-      <p className={styles.copyright}>© {year}. Сите права се задржани</p>
+      <p className={styles.copyright}>
+        © {year}. {t("Сите права се задржани")}
+      </p>
     </>
   );
+}
+export async function getStaticProps({ locale }) {
+  return {
+    props: {
+      messages: (await import(`../messages/${locale}.json`)).default,
+    },
+  };
 }
