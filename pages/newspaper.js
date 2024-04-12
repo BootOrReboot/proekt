@@ -21,7 +21,7 @@ export default function newspaper() {
     const search = new URLSearchParams(window.location.search);
 
     const pageNumber = search.get("page");
-    fetch("http://localhost:3000/api/pageRenderer", {
+    fetch("https://master--sougjorchepetrov.netlify.app/api/pageRenderer", {
       method: "POST",
       body: pageNumber,
     })

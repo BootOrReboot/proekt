@@ -21,21 +21,25 @@ export default function Home() {
   const [styles, setStyles] = useState(style);
   const t = useTranslations("Main");
   const t2 = useTranslations("News");
+  const router = useRouter();
   const [news, setNews] = useState([
     {
       name: "Светски ден на бубрегот",
       image: test,
       date: `14 ${t2("Март")} 2024`,
+      pageN: 1,
     },
     {
       name: "Новинарски спринт",
       image: mladite,
       date: `08 ${t2("Март")} 2024`,
+      pageN: 2,
     },
     {
       name: "Општински натпревар по хемија",
       image: hemija,
       date: `18 ${t2("Фебруари")} 2024`,
+      pageN: 3,
     },
   ]);
 
@@ -70,7 +74,15 @@ export default function Home() {
       return styleMob;
     });
   }
+  const toPage = () => {
+    const page = e.target.parentNode.id;
 
+    if (router.locale == "al") {
+      window.location.href = `/al/newspaper?page=${page}`;
+    } else {
+      window.location.href = `/newspaper?page=${page}`;
+    }
+  };
   return (
     <div>
       <div className={styles.content}>
@@ -122,7 +134,7 @@ export default function Home() {
               <div className={styles.slika}>
                 <Image src={el.image} alt="test slika" />
               </div>
-              <div className={styles.naslov}>
+              <div className={styles.naslov} id={pageN} onClick={toPage}>
                 <p>{t2(el.name)}</p>
               </div>
               <div className={styles.objaveno}>
