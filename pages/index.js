@@ -135,7 +135,7 @@ export default function Home() {
               <div className={styles.slika}>
                 <Image src={el.image} alt="test slika" />
               </div>
-              <div className={styles.naslov} id={pageN} onClick={toPage}>
+              <div className={styles.naslov} id={el.pageN} onClick={toPage}>
                 <p>{t2(el.name)}</p>
               </div>
               <div className={styles.objaveno}>
