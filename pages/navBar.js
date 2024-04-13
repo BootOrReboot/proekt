@@ -507,7 +507,7 @@ export default function Nav() {
                       ) : (
                         <div>
                           {t("Нотификации")}
-                          <div style={styles.errorNotif}>{errorM}</div>
+                          <div className={styles.errorNotif}>{errorM}</div>
                         </div>
                       )}
                     </a>
@@ -523,7 +523,7 @@ export default function Nav() {
                       ) : (
                         <div>
                           {t("Нотификации")}
-                          <div style={styles.errorNotif}>{errorM}</div>
+                          <div className={styles.errorNotif}>{errorM}</div>
                         </div>
                       )}
                     </a>
