@@ -507,17 +507,7 @@ export default function Nav() {
                       ) : (
                         <div>
                           {t("Нотификации")}
-                          <div
-                            style={{
-                              position: "absolute",
-                              fontSize: "70%",
-                              color: "red",
-                              top: "81%",
-                              left: "-10%",
-                            }}
-                          >
-                            {errorM}
-                          </div>
+                          <div style={styles.errorNotif}>{errorM}</div>
                         </div>
                       )}
                     </a>
@@ -533,17 +523,7 @@ export default function Nav() {
                       ) : (
                         <div>
                           {t("Нотификации")}
-                          <div
-                            style={{
-                              position: "absolute",
-                              fontSize: "70%",
-                              color: "red",
-                              top: "81%",
-                              left: "-10%",
-                            }}
-                          >
-                            {errorM}
-                          </div>
+                          <div style={styles.errorNotif}>{errorM}</div>
                         </div>
                       )}
                     </a>

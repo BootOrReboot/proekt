@@ -599,4 +599,11 @@
     font-size: 3vw;
     text-align: justify;
   }
+  .errorNotif {
+    position: "absolute";
+    font-size: "70%";
+    color: "red";
+    top: "73%";
+    left: "-10%";
+  }
 }
