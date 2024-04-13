@@ -581,7 +581,7 @@
     justify-content: center;
   }
   .page {
-    width: 50%;
+    width: 90%;
     padding: 1%;
     border: 1px black solid;
   }
@@ -592,9 +592,10 @@
     width: 100%;
     display: flex;
     justify-content: center;
-    font-size: 3vw;
+    font-size: 6vw;
   }
   .info {
-    font-size: 1vw;
+    font-size: 3vw;
+    text-align: justify;
   }
 }
