@@ -111,7 +111,7 @@ export default function Notify() {
 export async function getStaticProps({ locale }) {
   return {
     props: {
-      messages: (await import(`../messages/${locale}.json`)).default,
+      messages: (await import(`../../messages/${locale}.json`)).default,
     },
   };
 }
