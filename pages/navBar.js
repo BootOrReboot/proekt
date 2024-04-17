@@ -91,7 +91,7 @@ export default function Nav() {
     const socials = document.getElementById("socials");
     const nav = document.getElementById(`${styles.navigation}`);
     if (window.innerWidth < 700) socials.style.display = "flex";
-    document.documentElement.style.overflowY = "hidden";
+    
     nav.style.display = "flex";
     nav.style.animationName = `${styles.fadeIn}`;
     nav.style.animationPlayState = "running";
