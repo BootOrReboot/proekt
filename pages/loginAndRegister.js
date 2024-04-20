@@ -6,8 +6,10 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useState, useEffect } from "react";
+import { useRouter } from "next/router";
 
 export default function Login() {
+  const router = useRouter();
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const [information, setInformation] = useState({
@@ -34,6 +36,17 @@ export default function Login() {
       const width = window.innerWidth;
       setScreenWidth(width);
     };
+    const search = new URLSearchParams(window.location.search);
+
+    const user = search.get("prob");
+    const user2 = search.get("prob1");
+    if (user !== null) {
+      setWrongLogin(user);
+      loginChoice();
+    }
+    if (user2 !== null) {
+      setWrongEmail(user2);
+    }
 
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
@@ -97,6 +110,7 @@ export default function Login() {
   };
   const signUp = () => {
     if (logOrReg) {
+      router.push("https://master--sougjorchepetrov.netlify.app/loaderScreen");
       fetch(
         "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register",
         {
@@ -122,11 +136,15 @@ export default function Login() {
           if (res !== "Email Already Exists") {
             window.location.href = `/?id=${res.message}`;
           } else {
-            setWrongEmail("Email Already Exists");
+            router.push(
+              `https://master--sougjorchepetrov.netlify.app/loginAndRegister?prob1=${"Email Already Exists"}`
+            );
+            setWrongEmail();
           }
           // console.log(res.status);
         });
     } else {
+      router.push("https://master--sougjorchepetrov.netlify.app/loaderScreen");
       fetch(
         "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register",
         {
@@ -149,7 +167,9 @@ export default function Login() {
           if (res !== "Email Or Password is Incorrect") {
             window.location.href = `/?id=${res.message}`;
           } else {
-            setWrongLogin(res);
+            router.push(
+              `https://master--sougjorchepetrov.netlify.app/loginAndRegister?prob=${res}`
+            );
           }
         });
     }
@@ -226,6 +246,7 @@ export default function Login() {
       }
     }
   };
+  console.log(wrongLogin);
   return (
     <>
       <div className={styles.bgColor}></div>
@@ -414,7 +435,25 @@ export default function Login() {
                   style={{ borderColor: "red" }}
                 />
               )}
-              {mistakes.password ? (
+              {logOrReg ? (
+                mistakes.password ? (
+                  <input
+                    type="password"
+                    placeholder="Password *Empty Field*"
+                    onChange={change}
+                    name="password"
+                    className={styles.errorPassword}
+                    style={{ borderColor: "red" }}
+                  />
+                ) : (
+                  <input
+                    type="password"
+                    placeholder="Password"
+                    onChange={change}
+                    name="password"
+                  />
+                )
+              ) : mistakes.password ? (
                 wrongLogin === "" ? (
                   <input
                     type="password"

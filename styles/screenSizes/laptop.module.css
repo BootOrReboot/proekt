@@ -701,4 +701,86 @@
     color: red;
     border-color: red !important;
   }
+  .loader {
+    width: 10vw;
+    height: 10vw;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    border: 1vw solid;
+    border-color: #000000 #000000 transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loader::after {
+    content: "";
+    overflow: hidden;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 1vw solid;
+    border-color: transparent #ff3d00 #ff3d00;
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50%;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+  }
+
+  @keyframes rotation {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes rotationBack {
+    0% {
+      transform: rotate(0deg);
+    }
+    100% {
+      transform: rotate(-360deg);
+    }
+  }
+  .loaderChanger {
+    justify-content: center !important;
+    margin: 10px 0px;
+  }
+  .loaderScreen {
+    width: 20vw;
+    height: 20vw;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    border: 1vw solid;
+    border-color: #000000 #000000 transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loaderScreen::after {
+    content: "";
+    overflow: hidden;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 1vw solid;
+    border-color: transparent #ff3d00 #ff3d00;
+    width: 14vw;
+    height: 14vw;
+    border-radius: 50%;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+  }
 }

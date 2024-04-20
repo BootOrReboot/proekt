@@ -11,6 +11,7 @@ export default function Notify() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const [info, setInfo] = useState({});
+  const [spinner, setSpinner] = useState(true);
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -36,6 +37,7 @@ export default function Notify() {
       })
       .then((res) => {
         setInfo(res.message);
+        setSpinner(false);
       });
     console.log(user);
     return () => {
@@ -85,25 +87,50 @@ export default function Notify() {
   return (
     <>
       <div className={styles.notifikacii}>
-        {Object.values(info).map((el, index) => {
-          return (
-            <div className={styles.notifikacija} key={index}>
-              <div className={styles.left}>
-                <div className={styles.tekst}>{el}</div>
-                <div className={styles.pratena}>
-                  <p>20 Maj 2024, 10:20</p>
-                </div>
-              </div>
-              <div className={styles.right}>
-                <div className={styles.delete}>
-                  <div onClick={deleteNotification} id={`N${index + 1}`}>
-                    <FontAwesomeIcon icon={faTrash} />
+        {spinner ? (
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <div
+              style={{
+                width: "15vw",
+                height: "12vw",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                overflow: "hidden",
+              }}
+            >
+              <span className={styles.loader}></span>
+            </div>
+          </div>
+        ) : (
+          <>
+            {Object.values(info).map((el, index) => {
+              return (
+                <div className={styles.notifikacija} key={index}>
+                  <div className={styles.left}>
+                    <div className={styles.tekst}>{el}</div>
+                    <div className={styles.pratena}>
+                      <p>20 Maj 2024, 10:20</p>
+                    </div>
+                  </div>
+                  <div className={styles.right}>
+                    <div className={styles.delete}>
+                      <div onClick={deleteNotification} id={`N${index + 1}`}>
+                        <FontAwesomeIcon icon={faTrash} />
+                      </div>
+                    </div>
                   </div>
                 </div>
-              </div>
-            </div>
-          );
-        })}
+              );
+            })}
+          </>
+        )}
       </div>
     </>
   );

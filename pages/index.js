@@ -16,6 +16,8 @@ import hemija from "../images/hemija.jpg";
 import { useEffect, useState } from "react";
 import { useTranslations } from "next-intl";
 import { useRouter } from "next/router";
+import { CircularProgress } from "@mui/material";
+import Box from "@mui/material/Box";
 
 export default function Home() {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -124,30 +126,46 @@ export default function Home() {
 
       <div className={styles.vestiNastani}>
         <h1>{t2("Вести и Настани")}</h1>
-        <div>
-          {spinner
-            ? "loading"
-            : news.map((el, index) => (
-                <div className={styles.vestNastan} key={index}>
-                  <div className={styles.slika}>
-                    <Image
-                      src={el.image}
-                      alt="test slika"
-                      width={50}
-                      height={50}
-                    />
-                  </div>
-                  <div className={styles.naslov} id={el.id} onClick={toPage}>
-                    <p>{el.name}</p>
-                  </div>
-                  <div className={styles.objaveno}>
-                    <FontAwesomeIcon icon={faCalendar} />
-                    {el.day + " " + t2(el.month) + " " + el.year} by Елена
-                    Ѓорѓиевска
-                  </div>
+
+        {spinner ? (
+          <div className={styles.loaderChanger}>
+            <div
+              style={{
+                width: "15vw",
+                height: "12vw",
+                justifyContent: "center",
+                alignItems: "center",
+                overflow: "hidden",
+              }}
+            >
+              <span className={styles.loader}></span>
+            </div>
+          </div>
+        ) : (
+          <div>
+            {news.map((el, index) => (
+              <div className={styles.vestNastan} key={index}>
+                <div className={styles.slika}>
+                  <Image
+                    src={el.image}
+                    alt="test slika"
+                    width={50}
+                    height={50}
+                  />
                 </div>
-              ))}
-        </div>
+                <div className={styles.naslov} id={el.id} onClick={toPage}>
+                  <p>{el.name}</p>
+                </div>
+                <div className={styles.objaveno}>
+                  <FontAwesomeIcon icon={faCalendar} />
+                  {el.day + " " + t2(el.month) + " " + el.year} by Елена
+                  Ѓорѓиевска
+                </div>
+              </div>
+            ))}
+          </div>
+        )}
+
         <div className={styles.povekje}>
           <button
             type="button"

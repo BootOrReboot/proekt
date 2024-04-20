@@ -17,6 +17,7 @@ export default function Newspaper() {
   const router = useRouter();
   const [locale, setLocale] = useState("mk");
   const t = useTranslations("News");
+  const [spinner, setSpinner] = useState(true);
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     const handleResize = () => {
@@ -37,6 +38,7 @@ export default function Newspaper() {
       .then((res) => {
         console.log(res.message);
         setPage(res.message);
+        setSpinner(false);
       });
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
@@ -67,43 +69,59 @@ export default function Newspaper() {
   return (
     <>
       <div className={styles.headPage}>
-        <div className={styles.page}>
-          {page === null ? (
-            <>
-              <div
-                className={styles.pageImage}
-                style={{
-                  height: "23vw",
-                  display: "flex",
-                  flexDirection: "column",
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
-                <Image src={noImage} alt="pageImage" width={50} height={50} />
-              </div>
+        {spinner ? (
+          <div className={styles.loaderChanger}>
+            <div
+              style={{
+                width: "15vw",
+                height: "12vw",
+                justifyContent: "center",
+                alignItems: "center",
+                overflow: "hidden",
+              }}
+            >
+              <span className={styles.loader}></span>
+            </div>
+          </div>
+        ) : (
+          <div className={styles.page}>
+            {page === null ? (
+              <>
+                <div
+                  className={styles.pageImage}
+                  style={{
+                    height: "23vw",
+                    display: "flex",
+                    flexDirection: "column",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Image src={noImage} alt="pageImage" width={50} height={50} />
+                </div>
 
-              <h1 className={styles.title}>There is no translation</h1>
-            </>
-          ) : (
-            <>
-              <Image
-                src={page.image}
-                alt="pageImage"
-                width={50}
-                height={50}
-                className={styles.pageImage}
-              />
-              <h1 className={styles.title}>{page.name}</h1>
-              <p className={styles.info}>{page.disc}</p>
-              <div>
-                {page.day}
-                {" " + t(page.month) + " "}
-                {page.year}
-              </div>
-            </>
-          )}
-        </div>
+                <h1 className={styles.title}>There is no translation</h1>
+              </>
+            ) : (
+              <>
+                <Image
+                  src={page.image}
+                  alt="pageImage"
+                  width={50}
+                  height={50}
+                  className={styles.pageImage}
+                />
+                <h1 className={styles.title}>{page.name}</h1>
+                <p className={styles.info}>{page.disc}</p>
+                <div>
+                  {page.day}
+                  {" " + t(page.month) + " "}
+                  {page.year}
+                </div>
+              </>
+            )}
+          </div>
+        )}
       </div>
     </>
   );

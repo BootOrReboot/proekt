@@ -92,7 +92,7 @@ export default function Nav() {
     const socials = document.getElementById("socials");
     const nav = document.getElementById(`${styles.navigation}`);
     if (window.innerWidth < 700) socials.style.display = "flex";
-    
+
     nav.style.display = "flex";
     nav.style.animationName = `${styles.fadeIn}`;
     nav.style.animationPlayState = "running";
@@ -121,7 +121,9 @@ export default function Nav() {
   }
   const notify = () => {
     const username = search.get("id");
+
     if (username !== null) {
+      router.push("https://master--sougjorchepetrov.netlify.app/loaderScreen");
       fetch(
         "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/changeSeen",
         {
@@ -142,7 +144,9 @@ export default function Nav() {
   };
   const notifyM = () => {
     const username = search.get("id");
+
     if (username !== null) {
+      router.push("https://master--sougjorchepetrov.netlify.app/loaderScreen");
       fetch(
         "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/changeSeen",
         {
@@ -162,6 +166,7 @@ export default function Nav() {
     }
   };
   const LogOut = () => {
+    router.push("https://master--sougjorchepetrov.netlify.app/loaderScreen");
     fetch(
       "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/loggingOut",
       {
