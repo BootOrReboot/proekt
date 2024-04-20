@@ -8,9 +8,7 @@ export default function test() {
       .then((res) => {
         return res.json();
       })
-      .then((rez) => {
-        setImage(rez.message);
-      });
+      .then((rez) => {});
   };
   return (
     <>
