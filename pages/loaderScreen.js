@@ -4,7 +4,7 @@ import styleMax from "../styles/screenSizes/max.module.css";
 import styleLap from "../styles/screenSizes/laptop.module.css";
 import styleMob from "../styles/screenSizes/mobile.module.css";
 
-export default function loader() {
+export default function Loader() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
 
