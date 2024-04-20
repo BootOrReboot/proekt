@@ -24,6 +24,7 @@ export default function Newspaper() {
       const width = window.innerWidth;
       setScreenWidth(width);
     };
+    setSpinner(true);
     const search = new URLSearchParams(window.location.search);
     const lang = router.locale;
     setLocale(lang);
