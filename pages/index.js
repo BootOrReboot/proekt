@@ -24,6 +24,7 @@ export default function Home() {
   const t2 = useTranslations("News");
   const router = useRouter();
   const [news, setNews] = useState([]);
+  const [spinner, setSpinner] = useState(true);
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -43,6 +44,7 @@ export default function Home() {
       .then((res) => {
         console.log(res);
         setNews(res.message);
+        setSpinner(false);
       });
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
@@ -123,21 +125,28 @@ export default function Home() {
       <div className={styles.vestiNastani}>
         <h1>{t2("Вести и Настани")}</h1>
         <div>
-          {news.map((el, index) => (
-            <div className={styles.vestNastan} key={index}>
-              <div className={styles.slika}>
-                <Image src={el.image} alt="test slika" width={50} height={50} />
-              </div>
-              <div className={styles.naslov} id={el.id} onClick={toPage}>
-                <p>{el.name}</p>
-              </div>
-              <div className={styles.objaveno}>
-                <FontAwesomeIcon icon={faCalendar} />
-                {el.day + " " + t2(el.month) + " " + el.year} by Елена
-                Ѓорѓиевска
-              </div>
-            </div>
-          ))}
+          {spinner
+            ? "loading"
+            : news.map((el, index) => (
+                <div className={styles.vestNastan} key={index}>
+                  <div className={styles.slika}>
+                    <Image
+                      src={el.image}
+                      alt="test slika"
+                      width={50}
+                      height={50}
+                    />
+                  </div>
+                  <div className={styles.naslov} id={el.id} onClick={toPage}>
+                    <p>{el.name}</p>
+                  </div>
+                  <div className={styles.objaveno}>
+                    <FontAwesomeIcon icon={faCalendar} />
+                    {el.day + " " + t2(el.month) + " " + el.year} by Елена
+                    Ѓорѓиевска
+                  </div>
+                </div>
+              ))}
         </div>
         <div className={styles.povekje}>
           <button
