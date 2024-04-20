@@ -30,3 +30,6 @@ svg {
   width: 75%;
   height: 75%;
 }
+h1 {
+  overflow: hidden;
+}
