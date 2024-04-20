@@ -6,11 +6,16 @@ import styleMob from "../styles/screenSizes/mobile.module.css";
 import { useSearchParams } from "next/navigation";
 import Image from "next/image";
 import { useTranslations } from "next-intl";
+import { useRouter } from "next/router";
+import { eslint } from "@/next.config";
+import noImage from "../images/noImage.png";
 export default function Newspaper() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const search = useSearchParams();
   const [page, setPage] = useState({});
+  const router = useRouter();
+  const [locale, setLocale] = useState("mk");
   const t = useTranslations("News");
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -19,11 +24,12 @@ export default function Newspaper() {
       setScreenWidth(width);
     };
     const search = new URLSearchParams(window.location.search);
-
+    const lang = router.locale;
+    setLocale(lang);
     const pageNumber = search.get("page");
     fetch("https://master--sougjorchepetrov.netlify.app/api/pageRenderer", {
       method: "POST",
-      body: pageNumber,
+      body: JSON.stringify({ num: pageNumber, lang: lang }),
     })
       .then((r) => {
         return r.json();
@@ -38,7 +44,7 @@ export default function Newspaper() {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [router.locale]);
 
   if (screenWidth >= 1366 && styles != styleMax) {
     setStyles(() => {
@@ -62,20 +68,41 @@ export default function Newspaper() {
     <>
       <div className={styles.headPage}>
         <div className={styles.page}>
-          <Image
-            src={page.image}
-            alt="pageImage"
-            width={50}
-            height={50}
-            className={styles.pageImage}
-          />
-          <h1 className={styles.title}>{t(page.name)}</h1>
-          <p className={styles.info}>{t(page.disc)}</p>
-          <div>
-            {page.day}
-            {" " + t(page.month) + " "}
-            {page.year}
-          </div>
+          {page === null ? (
+            <>
+              <div
+                className={styles.pageImage}
+                style={{
+                  height: "23vw",
+                  display: "flex",
+                  flexDirection: "column",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Image src={noImage} alt="pageImage" width={50} height={50} />
+              </div>
+
+              <h1 className={styles.title}>There is no translation</h1>
+            </>
+          ) : (
+            <>
+              <Image
+                src={page.image}
+                alt="pageImage"
+                width={50}
+                height={50}
+                className={styles.pageImage}
+              />
+              <h1 className={styles.title}>{page.name}</h1>
+              <p className={styles.info}>{page.disc}</p>
+              <div>
+                {page.day}
+                {" " + t(page.month) + " "}
+                {page.year}
+              </div>
+            </>
+          )}
         </div>
       </div>
     </>

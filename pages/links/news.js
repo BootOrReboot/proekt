@@ -19,32 +19,7 @@ export default function Vesti() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const t = useTranslations("News");
-  const [news, setNews] = useState([
-    {
-      name: "Ден на Јазиците и Уметноста",
-      image: jazik,
-      date: `11 ${t("Април")} 2024`,
-      id: 1,
-    },
-    {
-      name: "Светски ден на бубрегот",
-      image: test,
-      date: `14 ${t("Март")} 2024`,
-      id: 2,
-    },
-    {
-      name: "Новинарски спринт",
-      image: mladite,
-      date: `08 ${t("Март")} 2024`,
-      id: 3,
-    },
-    {
-      name: "Општински натпревар по хемија",
-      image: hemija,
-      date: `18 ${t("Фебруари")} 2024`,
-      id: 4,
-    },
-  ]);
+  const [news, setNews] = useState([]);
   useEffect(() => {
     setScreenWidth(window.innerWidth);
     const handleResize = () => {
@@ -52,13 +27,26 @@ export default function Vesti() {
       setScreenWidth(width);
     };
 
+    const lang = router.locale;
+    fetch("https://master--sougjorchepetrov.netlify.app/api/topNews", {
+      method: "POST",
+      body: JSON.stringify({ lang: lang, site: "news" }),
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((res) => {
+        console.log(res);
+        setNews(res.message);
+      });
+
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [router.locale]);
   if (screenWidth >= 1366 && styles != styleMax) {
     setStyles(() => {
       return styleMax;
@@ -94,14 +82,20 @@ export default function Vesti() {
             {news.map((el, index) => (
               <div className={styles.vestNastan} key={index}>
                 <div className={styles.slika}>
-                  <Image src={el.image} alt="test slika" />
+                  <Image
+                    src={el.image}
+                    alt="test slika"
+                    width={50}
+                    height={50}
+                  />
                 </div>
                 <div className={styles.naslov} id={el.id} onClick={moreNews}>
-                  <p>{t(el.name)}</p>
+                  <p>{el.name}</p>
                 </div>
                 <div className={styles.objaveno}>
                   <FontAwesomeIcon icon={faCalendar} />
-                  {el.date} by Елена Ѓорѓиевска
+                  {el.day + " " + t(el.month) + " " + el.year} by Елена
+                  Ѓорѓиевска
                 </div>
               </div>
             ))}

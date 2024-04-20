@@ -27,6 +27,7 @@ export default function Nav() {
   const [haveNotification, setHaveNotification] = useState(false);
   const [account, setAccount] = useState({});
   const [hasId, setHasId] = useState(false);
+  const [admin, setAdmin] = useState(false);
 
   const search = useSearchParams();
   const router = useRouter();
@@ -53,9 +54,9 @@ export default function Nav() {
           return r.json();
         })
         .then((res) => {
-          console.log(res.message);
           setHaveNotification(res.message.seen);
           setAccount(res.message);
+          setAdmin(res.message.isAdmin);
         });
       setHasId(true);
     } else {
@@ -180,7 +181,6 @@ export default function Nav() {
   const t = useTranslations("Nav");
   const key = Object.keys(router.query)[0];
   const value = Object.values(router.query)[0];
-  console.log();
   return (
     <>
       <section className={styles.section}>
@@ -313,24 +313,54 @@ export default function Nav() {
               </a>
               <div className={styles.center}>
                 {hasId ? (
+                  admin ? (
+                    <>
+                      <Link href={`/links/schoolInfo?id=${account.email}`}>
+                        {t("За Гимназијата")}
+                      </Link>
+                      <Link href={`/branches?id=${account.email}`}>
+                        {t("Струки")}
+                      </Link>
+
+                      <Link href={`/links/news?id=${account.email}`}>
+                        {t("Вести и Настани")}
+                      </Link>
+                      <Link href={`/adminPanel?id=${account.email}`}>
+                        {t("Admin")}
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link href={`/links/schoolInfo?id=${account.email}`}>
+                        {t("За Гимназијата")}
+                      </Link>
+                      <Link href={`/branches?id=${account.email}`}>
+                        {t("Струки")}
+                      </Link>
+
+                      <Link href={`/links/news?id=${account.email}`}>
+                        {t("Вести и Настани")}
+                      </Link>
+                    </>
+                  )
+                ) : admin ? (
                   <>
-                    <Link href={`/links/schoolInfo?id=${account.email}`}>
+                    <Link href={`/links/schoolInfo`}>
                       {t("За Гимназијата")}
                     </Link>
-                    <Link href={`/branches?id=${account.email}`}>
-                      {t("Струки")}
-                    </Link>
+                    <Link href={`/branches`}>{t("Струки")}</Link>
 
-                    <Link href={`/links/news?id=${account.email}`}>
-                      {t("Вести и Настани")}
-                    </Link>
+                    <Link href={`/links/news`}>{t("Вести и Настани")}</Link>
+                    <Link href={`/adminPanel`}>{t("Admin")}</Link>
                   </>
                 ) : (
                   <>
-                    <Link href="/links/schoolInfo">{t("За Гимназијата")}</Link>
-                    <Link href="/branches">{t("Струки")}</Link>
+                    <Link href={`/links/schoolInfo`}>
+                      {t("За Гимназијата")}
+                    </Link>
+                    <Link href={`/branches`}>{t("Струки")}</Link>
 
-                    <Link href="/links/news">{t("Вести и Настани")}</Link>
+                    <Link href={`/links/news`}>{t("Вести и Настани")}</Link>
                   </>
                 )}
                 {Object.keys(account).length !== 0 ? (
@@ -358,6 +388,7 @@ export default function Nav() {
                     <Link
                       className={styles.mobile}
                       href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
+                      style={{ wordWrap: "break-word", width: "100%" }}
                     >
                       {t("Логирај се или Регистрирај се")}
                     </Link>
@@ -443,17 +474,36 @@ export default function Nav() {
                         {lang.toUpperCase()}
                       </Link>
                     )}
+                    {admin ? (
+                      <>
+                        <Link href={`/links/schoolInfo?id=${account.email}`}>
+                          {t("За Гимназијата")}
+                        </Link>
+                        <Link href={`/branches?id=${account.email}`}>
+                          {t("Струки")}
+                        </Link>
 
-                    <Link href={`/links/schoolInfo?id=${account.email}`}>
-                      {t("За Гимназијата")}
-                    </Link>
-                    <Link href={`/branches?id=${account.email}`}>
-                      {t("Струки")}
-                    </Link>
+                        <Link href={`/links/news?id=${account.email}`}>
+                          {t("Вести и Настани")}
+                        </Link>
+                        <Link href={`/adminPanel?id=${account.email}`}>
+                          {t("Admin")}
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link href={`/links/schoolInfo?id=${account.email}`}>
+                          {t("За Гимназијата")}
+                        </Link>
+                        <Link href={`/branches?id=${account.email}`}>
+                          {t("Струки")}
+                        </Link>
 
-                    <Link href={`/links/news?id=${account.email}`}>
-                      {t("Вести и Настани")}
-                    </Link>
+                        <Link href={`/links/news?id=${account.email}`}>
+                          {t("Вести и Настани")}
+                        </Link>
+                      </>
+                    )}
                   </>
                 ) : (
                   <>
@@ -486,10 +536,26 @@ export default function Nav() {
                         {lang.toUpperCase()}
                       </Link>
                     )}
-                    <Link href="/links/schoolInfo">{t("За Гимназијата")}</Link>
-                    <Link href="/branches">{t("Струки")}</Link>
+                    {admin ? (
+                      <>
+                        <Link href={`/links/schoolInfo`}>
+                          {t("За Гимназијата")}
+                        </Link>
+                        <Link href={`/branches`}>{t("Струки")}</Link>
 
-                    <Link href="/links/news">{t("Вести и Настани")}</Link>
+                        <Link href={`/links/news`}>{t("Вести и Настани")}</Link>
+                        <Link href={`/adminPanel`}>{t("Admin")}</Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link href={`/links/schoolInfo`}>
+                          {t("За Гимназијата")}
+                        </Link>
+                        <Link href={`/branches`}>{t("Струки")}</Link>
+
+                        <Link href={`/links/news`}>{t("Вести и Настани")}</Link>
+                      </>
+                    )}
                   </>
                 )}
 
@@ -498,6 +564,7 @@ export default function Nav() {
                     <Link
                       className={styles.mobile}
                       href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
+                      style={{ wordWrap: "break-word", width: "100%" }}
                     >
                       {t("Логирај се или Регистрирај се")}
                     </Link>

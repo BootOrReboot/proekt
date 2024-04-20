@@ -23,26 +23,7 @@ export default function Home() {
   const t = useTranslations("Main");
   const t2 = useTranslations("News");
   const router = useRouter();
-  const [news, setNews] = useState([
-    {
-      name: "Светски ден на бубрегот",
-      image: test,
-      date: `14 ${t2("Март")} 2024`,
-      pageN: 1,
-    },
-    {
-      name: "Новинарски спринт",
-      image: mladite,
-      date: `08 ${t2("Март")} 2024`,
-      pageN: 2,
-    },
-    {
-      name: "Општински натпревар по хемија",
-      image: hemija,
-      date: `18 ${t2("Фебруари")} 2024`,
-      pageN: 3,
-    },
-  ]);
+  const [news, setNews] = useState([]);
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -51,13 +32,25 @@ export default function Home() {
       setScreenWidth(width);
     };
 
+    const lang = router.locale;
+    fetch("https://master--sougjorchepetrov.netlify.app/api/topNews", {
+      method: "POST",
+      body: JSON.stringify({ lang: lang }),
+    })
+      .then((r) => {
+        return r.json();
+      })
+      .then((res) => {
+        console.log(res);
+        setNews(res.message);
+      });
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
 
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [router.locale]);
   if (screenWidth >= 1366 && styles != styleMax) {
     setStyles(() => {
       return styleMax;
@@ -75,7 +68,7 @@ export default function Home() {
       return styleMob;
     });
   }
-  const toPage = () => {
+  const toPage = (e) => {
     const page = e.target.parentNode.id;
 
     if (router.locale == "al") {
@@ -133,14 +126,15 @@ export default function Home() {
           {news.map((el, index) => (
             <div className={styles.vestNastan} key={index}>
               <div className={styles.slika}>
-                <Image src={el.image} alt="test slika" />
+                <Image src={el.image} alt="test slika" width={50} height={50} />
               </div>
-              <div className={styles.naslov} id={el.pageN} onClick={toPage}>
-                <p>{t2(el.name)}</p>
+              <div className={styles.naslov} id={el.id} onClick={toPage}>
+                <p>{el.name}</p>
               </div>
               <div className={styles.objaveno}>
                 <FontAwesomeIcon icon={faCalendar} />
-                {el.date} by Елена Ѓорѓиевска
+                {el.day + " " + t2(el.month) + " " + el.year} by Елена
+                Ѓорѓиевска
               </div>
             </div>
           ))}
