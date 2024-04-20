@@ -1,7 +1,7 @@
 import { useState } from "react";
 import Image from "next/image";
 
-export default function test() {
+export default function Test() {
   const [image, setImage] = useState("");
   const sentMes = () => {
     fetch("http://localhost:3000/api/testInsert")
