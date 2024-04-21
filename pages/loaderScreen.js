@@ -9,6 +9,7 @@ export default function Loader() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const [crash, setCrash] = useState(false);
+  const router = useRouter();
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -16,6 +17,15 @@ export default function Loader() {
       const width = window.innerWidth;
       setScreenWidth(width);
     };
+    const handleRouteChange = (url, { shallow }) => {
+      // Check if the route change was triggered by the user pressing the back or forward button
+      if (!shallow) {
+        console.log("User navigated using back/forward button");
+      }
+    };
+
+    // Listen for route changes
+    router.events.on("routeChangeComplete", handleRouteChange);
 
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
