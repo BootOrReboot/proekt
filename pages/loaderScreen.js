@@ -18,6 +18,16 @@ export default function Loader() {
       setScreenWidth(width);
     };
 
+    setTimeout(() => {
+      const search = new URLSearchParams(window.location.search);
+      const user = search.get("path");
+      if (user !== null) {
+        history.forward();
+      } else {
+        history.back();
+      }
+    }, 11000);
+
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
 
@@ -46,15 +56,7 @@ export default function Loader() {
   setTimeout(() => {
     setCrash(true);
   }, 10000);
-  setTimeout(() => {
-    const search = new URLSearchParams(window.location.href);
-    const user = search.get("path");
-    if (user !== null) {
-      history.forward();
-    } else {
-      history.back();
-    }
-  }, 11000);
+
   return (
     <>
       <div className={styles.loaderChanger}>
