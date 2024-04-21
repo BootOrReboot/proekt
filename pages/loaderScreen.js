@@ -3,10 +3,12 @@ import style from "../styles/mainPage.module.css";
 import styleMax from "../styles/screenSizes/max.module.css";
 import styleLap from "../styles/screenSizes/laptop.module.css";
 import styleMob from "../styles/screenSizes/mobile.module.css";
+import { useRouter } from "next/router";
 
 export default function Loader() {
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
+  const [crash, setCrash] = useState(false);
 
   useEffect(() => {
     setScreenWidth(window.innerWidth);
@@ -40,7 +42,12 @@ export default function Loader() {
       return styleMob;
     });
   }
-
+  setTimeout(() => {
+    setCrash(true);
+  }, 10000);
+  setTimeout(() => {
+    history.back();
+  }, 11000);
   return (
     <>
       <div className={styles.loaderChanger}>
@@ -62,6 +69,17 @@ export default function Loader() {
             }}
           ></span>
         </div>
+      </div>
+      <div
+        style={{
+          display: "flex",
+          justifyContent: "center",
+          fontSize: "4vw",
+          margin: "2vw 0vw",
+          fontWeight: "bold",
+        }}
+      >
+        {crash ? "there's been a crash" : ""}
       </div>
     </>
   );
