@@ -55,9 +55,7 @@ export default function Loader() {
   setTimeout(() => {
     setCrash(true);
   }, 10000);
-  setTimeout(() => {
-    history.forward();
-  }, 11000);
+
   return (
     <>
       <div className={styles.loaderChanger}>
