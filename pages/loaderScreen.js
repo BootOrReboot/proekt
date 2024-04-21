@@ -46,7 +46,7 @@ export default function Loader() {
     setCrash(true);
   }, 10000);
   setTimeout(() => {
-    history.back();
+    history.forward();
   }, 11000);
   return (
     <>
