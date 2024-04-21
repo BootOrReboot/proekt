@@ -110,7 +110,9 @@ export default function Login() {
   };
   const signUp = () => {
     if (logOrReg) {
-      router.push("https://master--sougjorchepetrov.netlify.app/loaderScreen");
+      router.push(
+        `https://master--sougjorchepetrov.netlify.app/loaderScreen?path=Login`
+      );
       fetch(
         "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register",
         {
@@ -144,7 +146,9 @@ export default function Login() {
           // console.log(res.status);
         });
     } else {
-      router.push("https://master--sougjorchepetrov.netlify.app/loaderScreen");
+      router.push(
+        "https://master--sougjorchepetrov.netlify.app/loaderScreen?path=Login"
+      );
       fetch(
         "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/register",
         {

@@ -17,15 +17,6 @@ export default function Loader() {
       const width = window.innerWidth;
       setScreenWidth(width);
     };
-    const handleRouteChange = (url, { shallow }) => {
-      // Check if the route change was triggered by the user pressing the back or forward button
-      if (!shallow) {
-        console.log("User navigated using back/forward button");
-      }
-    };
-
-    // Listen for route changes
-    router.events.on("routeChangeComplete", handleRouteChange);
 
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
@@ -55,7 +46,15 @@ export default function Loader() {
   setTimeout(() => {
     setCrash(true);
   }, 10000);
-
+  setTimeout(() => {
+    const search = new URLSearchParams(window.location.href);
+    const user = search.get("path");
+    if (user !== null) {
+      history.forward();
+    } else {
+      history.back();
+    }
+  }, 11000);
   return (
     <>
       <div className={styles.loaderChanger}>
