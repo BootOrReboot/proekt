@@ -137,7 +137,7 @@ export default function Login() {
         })
         .then((res) => {
           if (res !== "Email Already Exists") {
-            window.location.href = `/?id=${res.message}`;
+            window.location.href = `/`;
             setCookie("id", res.message);
           } else {
             router.push(
@@ -171,7 +171,7 @@ export default function Login() {
         })
         .then((res) => {
           if (res !== "Email Or Password is Incorrect") {
-            window.location.href = `/?id=${res.message}`;
+            window.location.href = `/`;
             setCookie("id", res.message);
           } else {
             router.push(
