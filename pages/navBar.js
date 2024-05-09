@@ -40,17 +40,14 @@ export default function Nav() {
       setScreenWidth(width);
     };
 
-    const search = new URLSearchParams(window.location.search);
-
-    const user = search.get("id");
     const cookie = getCookie("id");
     console.log(cookie);
-    if (user !== null) {
+    if (cookie !== undefined) {
       fetch(
         "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/checkSeenNotif",
         {
           method: "POST",
-          body: user,
+          body: cookie,
         }
       )
         .then((r) => {
