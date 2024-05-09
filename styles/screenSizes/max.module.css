@@ -702,12 +702,45 @@
   #kreacija p {
     font-size: 1vw;
   }
-  #kreacija div {
-    width: 30%;
+  .previewPage {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
   }
+  .prevTitle {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    font-size: 2vw;
+    font-weight: bold;
+  }
+  .prevDisc {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    font-size: 1vw;
+  }
+  .prevImage {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 60%;
+  }
+  .prevContent {
+    flex-direction: column;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
   #kreacija .naslov input,
   #kreacija .sodrzina input {
-    width: 90%;
+    width: 100%;
     padding: 1%;
     font-size: 1vw;
     border: 0;
@@ -819,5 +852,20 @@
     border-radius: 50%;
     animation: rotationBack 0.5s linear infinite;
     transform-origin: center center;
+  }
+  .preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    font-weight: bold;
+  }
+  .editButtons {
+    margin: 0px 1vw;
+  }
+  .alignmentIcons {
+    width: 1vw;
+    height: 1vw;
+    margin: 0px 4px;
   }
 }

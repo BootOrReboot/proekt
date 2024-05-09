@@ -2,7 +2,11 @@ import style from "../styles/mainPage.module.css";
 import styleMax from "../styles/screenSizes/max.module.css";
 import styleLap from "../styles/screenSizes/laptop.module.css";
 import styleMob from "../styles/screenSizes/mobile.module.css";
-import { useState, useEffect } from "react";
+import Image from "next/image";
+import middle from "../images/middle.png";
+import left from "../images/left.png";
+import right from "../images/right.png";
+import { useState, useEffect, useRef } from "react";
 import {
   Button,
   FormControl,
@@ -13,9 +17,21 @@ import {
 import { useRouter } from "next/router";
 
 export default function Admin() {
+  const [text, setText] = useState({
+    disc: "",
+    title: "",
+    day: "",
+    month: "јануари",
+    year: "",
+  });
+  const [realText, setRealText] = useState({ disc: "", title: "" });
+  const [newRows, setNewRows] = useState([]);
+  const inputRef = useRef(null);
   const [screenWidth, setScreenWidth] = useState(0);
   const [styles, setStyles] = useState(style);
   const [image, setImage] = useState(null);
+  const [positionText, setPositionText] = useState("center");
+  const [previewImage, setPreviewImage] = useState("");
   const [form, setForm] = useState({
     title: "",
     disc: "",
@@ -89,13 +105,15 @@ export default function Admin() {
   }
   const kreiraj = (e) => {
     const id = e.target.id;
-    const kreacija = document.getElementById(`${styles.kreacija}`);
+    const kreacija = document.getElementById(`typeField`);
+    const create = document.getElementById(`${styles.kreacija}`);
     const slikaText = document.getElementById(`${styles.slikaText}`);
     const naslovText = document.getElementById(`${styles.naslovText}`);
     const sodrzinaText = document.getElementById(`${styles.sodrzinaText}`);
     const date = document.getElementById("date");
 
     kreacija.style.display = "flex";
+    create.style.display = "block";
     if (id == 1) {
       slikaText.parentNode.style.display = "none";
       naslovText.parentNode.style.display = "none";
@@ -167,12 +185,29 @@ export default function Admin() {
     }
   };
   const imageDrag = (e) => {
+    console.log("drop activated");
     e.preventDefault();
+  };
+  const imageAdd = (e) => {
+    e.preventDefault();
+    const data = e.target.files[0];
+    setImage(data);
+    const reader = new FileReader();
+    reader.readAsDataURL(data);
+    reader.onload = () => {
+      setPreviewImage(reader.result);
+    };
   };
   const imageDrop = (e) => {
     e.preventDefault();
     const data = e.dataTransfer.files[0];
     setImage(data);
+    const reader = new FileReader();
+    reader.readAsDataURL(data);
+    reader.onload = () => {
+      setPreviewImage(reader.result);
+    };
+    console.log("drop activated");
   };
   const submitData = (e) => {
     const reader = new FileReader();
@@ -196,9 +231,10 @@ export default function Admin() {
               totalChunks,
               currentChunk: i + 1,
               name: form.title,
-              disc: form.disc,
+              disc: newRows.join("") + text.disc,
               lang: lang,
               date: { day: form.day, month: form.month, year: form.year },
+              position: positionText,
             }),
           })
             .then((r) => {
@@ -218,8 +254,9 @@ export default function Admin() {
                   totalChunks,
                   currentChunk: i + 1,
                   name: form.title,
-                  disc: form.disc,
+                  disc: newRows.join("") + text.disc,
                   lang: lang,
+                  position: positionText,
                 }),
               }
             )
@@ -241,8 +278,30 @@ export default function Admin() {
       ...form,
       [name]: value,
     });
-    console.log(value);
+    if (name !== "day" && name !== "year" && name !== "month") {
+      setText({ ...text, [name]: `<div>${value}</div>` });
+    } else {
+      setText({
+        ...text,
+        [name]: value,
+      });
+    }
   };
+
+  const row = (e) => {
+    e.preventDefault();
+    if (text === "") {
+      setNewRows([...newRows, "</br>"]);
+    } else {
+      setNewRows([...newRows, text.disc]);
+    }
+
+    setText({ ...text, disc: "" });
+    setForm({ ...form, disc: "" });
+    setRealText("");
+    inputRef.current.focus();
+  };
+
   const test = () => {
     const reader = new FileReader();
     reader.readAsDataURL(image);
@@ -288,11 +347,48 @@ export default function Admin() {
       ["year"]: date.getFullYear(),
     });
     document.getElementById("month").value = arrayOfMonth[date.getMonth()];
-    document.getElementById("day").value = date.getDate();
-    document.getElementById("year").value = date.getFullYear();
+
+    setForm({
+      ...form,
+      month: arrayOfMonth[date.getMonth()],
+      year: `${date.getFullYear()}`,
+      day: `${date.getDate()}`,
+    });
+    setText({
+      ...text,
+      month: arrayOfMonth[date.getMonth()],
+      year: `${date.getFullYear()}`,
+      day: `${date.getDate()}`,
+    });
   };
-  console.log(form);
-  console.log(wrongs);
+
+  const date = new Date();
+  if (form.day > 31) {
+    setForm({ ...form, day: "31" });
+    setText({ ...text, day: "31" });
+  } else if (form.day < 0) {
+    setForm({ ...form, day: "" });
+    setText({ ...text, day: "" });
+  }
+  if (form.year > date.getFullYear()) {
+    setForm({ ...form, year: `${date.getFullYear()}` });
+    setText({ ...text, year: `${date.getFullYear()}` });
+  } else if (form.year < 2000) {
+    setForm({ ...form, year: "2000" });
+    setText({ ...text, year: "2000" });
+  }
+  const enterRow = (e) => {
+    if (e.key === "Enter") {
+      row();
+    }
+  };
+  const buttonSetter = (e) => {
+    e.preventDefault();
+    const { name } = e.target;
+    setPositionText(name);
+  };
+  console.log(text.disc);
+  console.log(newRows.join("") + text.disc);
   return (
     <>
       <div className={styles.functions}>
@@ -319,177 +415,296 @@ export default function Admin() {
         </div>
       </div>
       <form id={styles.kreacija}>
-        <div className={style.slika}>
-          {wrongs.image ? (
-            <>
-              <p id={styles.slikaText} style={{ color: "red" }}>
-                Изберете слика која ја користите за оваа Вест или Настан.
-              </p>
-              <label
-                htmlFor="imageLoader"
-                id={styles.dropArea}
-                onDrop={imageDrop}
-                onDragOver={imageDrag}
-                style={{ borderColor: "red" }}
-              >
-                <input type="file" id="imageLoader" accept="image/*" hidden />
-                <div className={styles.dragText} style={{ color: "red" }}>
-                  *Image not selected
-                </div>
-              </label>
-            </>
-          ) : (
-            <>
-              <p id={styles.slikaText}>
-                Изберете слика која ја користите за оваа Вест или Настан.
-              </p>
-              <label
-                htmlFor="imageLoader"
-                id={styles.dropArea}
-                onDrop={imageDrop}
-                onDragOver={imageDrag}
-              >
-                <input type="file" id="imageLoader" accept="image/*" hidden />
-                <div className={styles.dragText}>
-                  Drag and Drop or Insert Image
-                </div>
-              </label>
-            </>
-          )}
-        </div>
-        <div className={styles.naslov}>
-          {wrongs.title ? (
-            <>
-              <p id={styles.naslovText} style={{ color: "red" }}>
-                Напишете го насловот за оваа Вест или Настан.
-              </p>
+        <div
+          id="typeField"
+          style={{ width: "100%", justifyContent: "space-around" }}
+        >
+          <div className={style.slika}>
+            {wrongs.image ? (
+              <>
+                <p id={styles.slikaText} style={{ color: "red" }}>
+                  Изберете слика која ја користите за оваа Вест или Настан.
+                </p>
+                <label
+                  htmlFor="imageLoader"
+                  id={styles.dropArea}
+                  onDrop={imageDrop}
+                  onDragOver={imageDrag}
+                  onChange={imageAdd}
+                  style={{ borderColor: "red" }}
+                >
+                  <input type="file" id="imageLoader" accept="image/*" hidden />
+                  <div className={styles.dragText} style={{ color: "red" }}>
+                    *Image not selected
+                  </div>
+                </label>
+              </>
+            ) : (
+              <>
+                <p id={styles.slikaText}>
+                  Изберете слика која ја користите за оваа Вест или Настан.
+                </p>
+                <label
+                  htmlFor="imageLoader"
+                  id={styles.dropArea}
+                  onDrop={imageDrop}
+                  onDragOver={imageDrag}
+                  onChange={imageAdd}
+                >
+                  <input type="file" id="imageLoader" accept="image/*" hidden />
+                  <div className={styles.dragText}>
+                    Drag and Drop or Insert Image
+                  </div>
+                </label>
+              </>
+            )}
+          </div>
+          <div className={styles.naslov}>
+            {wrongs.title ? (
+              <>
+                <p id={styles.naslovText} style={{ color: "red" }}>
+                  Напишете го насловот за оваа Вест или Настан.
+                </p>
 
-              <input
-                type="text"
-                onChange={change}
-                name="title"
-                className={styles.placeholderError}
-                style={{ borderColor: "red" }}
-                placeholder="*Field is empty"
-              />
-            </>
-          ) : (
-            <>
-              <p id={styles.naslovText}>
-                Напишете го насловот за оваа Вест или Настан.
-              </p>
-              <input type="text" onChange={change} name="title" />
-            </>
-          )}
-        </div>
-        <div className={styles.sodrzina}>
-          {wrongs.disc ? (
-            <>
-              <p id={styles.sodrzinaText} style={{ color: "red" }}>
-                Напишете ја содржината на оваа Вест или Настан.
-              </p>
-              <input
-                type="text"
-                onChange={change}
-                name="disc"
-                className={styles.placeholderError}
-                style={{ borderColor: "red" }}
-                placeholder="*Field is empty"
-              />
-            </>
-          ) : (
-            <>
-              <p id={styles.sodrzinaText}>
-                Напишете ја содржината на оваа Вест или Настан.
-              </p>
+                <input
+                  type="text"
+                  onChange={change}
+                  name="title"
+                  className={styles.placeholderError}
+                  style={{ borderColor: "red" }}
+                  placeholder="*Field is empty"
+                />
+              </>
+            ) : (
+              <>
+                <p id={styles.naslovText}>
+                  Напишете го насловот за оваа Вест или Настан.
+                </p>
+                <input type="text" onChange={change} name="title" />
+              </>
+            )}
+          </div>
+          <div className={styles.sodrzina}>
+            {wrongs.disc ? (
+              <>
+                <p id={styles.sodrzinaText} style={{ color: "red" }}>
+                  Напишете ја содржината на оваа Вест или Настан.
+                </p>
+                <input
+                  type="text"
+                  onChange={change}
+                  name="disc"
+                  className={styles.placeholderError}
+                  style={{ borderColor: "red" }}
+                  placeholder="*Field is empty"
+                  ref={inputRef}
+                  value={form.disc}
+                  onKeyDown={enterRow}
+                />
+              </>
+            ) : (
+              <>
+                <p id={styles.sodrzinaText}>
+                  Напишете ја содржината на оваа Вест или Настан.
+                </p>
 
-              <input type="text" onChange={change} name="disc" />
-            </>
-          )}
-        </div>
-        <div className={styles.sodrzina} style={{ width: "15%" }}>
-          {wrongs.day || wrongs.month || wrongs.year ? (
-            <p id="date" style={{ color: "red" }}>
-              Внесете датум.
-            </p>
-          ) : (
-            <p id="date">Внесете датум.</p>
-          )}
-          {wrongs.day ? (
-            <input
-              type="number"
-              onChange={change}
-              name="day"
-              placeholder="Ден"
-              style={{ borderColor: "red" }}
-              className={styles.placeholderError}
-              id="day"
-            />
-          ) : (
-            <input
-              type="number"
-              onChange={change}
-              name="day"
-              placeholder="Ден"
-              id="day"
-            />
-          )}
-          <FormControl
-            variant="standard"
-            sx={{ width: "90%", outline: "0", padding: "0", fontSize: "1vw" }}
-            style={{ width: "90%", margin: "2% 0%" }}
-          >
-            <Select
-              sx={{
-                width: "100%",
-                "&::before": { borderColor: "black" },
-                "& > div": {
-                  width: "100% !important",
-                  fontSize: "1vw",
-                  height: "",
-                  minHeight: "",
-                  paddingLeft: "1%",
-                },
-              }}
-              style={{ width: "100%" }}
-              onChange={change}
-              name="month"
-              value={form.month}
-              id="month"
+                <input
+                  type="text"
+                  onChange={change}
+                  name="disc"
+                  ref={inputRef}
+                  value={form.disc}
+                  onKeyDown={enterRow}
+                />
+              </>
+            )}
+            <div style={{ display: "flex", justifyContent: "center" }}>
+              <button onClick={row} className={styles.editButtons}>
+                Add New Row
+              </button>
+              <div className={styles.editButtons}>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <Image
+                    onClick={buttonSetter}
+                    name="flex-start"
+                    src={left}
+                    height={50}
+                    width={50}
+                    className={styles.alignmentIcons}
+                  />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <Image
+                    onClick={buttonSetter}
+                    name="center"
+                    src={middle}
+                    height={50}
+                    width={50}
+                    className={styles.alignmentIcons}
+                  />
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                  }}
+                >
+                  <Image
+                    onClick={buttonSetter}
+                    name="flex-end"
+                    src={right}
+                    height={50}
+                    width={50}
+                    className={styles.alignmentIcons}
+                  />
+                </button>
+              </div>
+            </div>
+          </div>
+          <div className={styles.sodrzina} style={{ width: "15%" }}>
+            {wrongs.day || wrongs.month || wrongs.year ? (
+              <p id="date" style={{ color: "red" }}>
+                Внесете датум.
+              </p>
+            ) : (
+              <p id="date">Внесете датум.</p>
+            )}
+            {wrongs.day ? (
+              <input
+                type="number"
+                onChange={change}
+                name="day"
+                placeholder="Ден"
+                style={{ borderColor: "red" }}
+                className={styles.placeholderError}
+                id="day"
+                value={form.day}
+              />
+            ) : (
+              <input
+                type="number"
+                onChange={change}
+                name="day"
+                placeholder="Ден"
+                id="day"
+                value={form.day}
+              />
+            )}
+            <FormControl
+              variant="standard"
+              sx={{ width: "90%", outline: "0", padding: "0", fontSize: "1vw" }}
+              style={{ width: "90%", margin: "2% 0%" }}
             >
-              {arrayOfMonth.map((el, index) => {
-                return (
-                  <MenuItem
-                    key={`month${index}`}
-                    style={{ width: "100%", fontSize: "1vw" }}
-                    value={`${el}`}
-                  >
-                    {el}
-                  </MenuItem>
-                );
-              })}
-            </Select>
-          </FormControl>
-          {wrongs.year ? (
-            <input
-              type="number"
-              onChange={change}
-              name="year"
-              placeholder="Година"
-              style={{ borderColor: "red" }}
-              className={styles.placeholderError}
-              id="year"
-            />
-          ) : (
-            <input
-              type="number"
-              onChange={change}
-              name="year"
-              placeholder="Година"
-              id="year"
-            />
-          )}
-          <Button onClick={addDate}>Add current date?</Button>
+              <Select
+                sx={{
+                  width: "100%",
+                  "&::before": { borderColor: "black" },
+                  "& > div": {
+                    width: "100% !important",
+                    fontSize: "1vw",
+                    height: "",
+                    minHeight: "",
+                    paddingLeft: "1%",
+                  },
+                }}
+                style={{ width: "100%" }}
+                onChange={change}
+                name="month"
+                value={form.month}
+                id="month"
+              >
+                {arrayOfMonth.map((el, index) => {
+                  return (
+                    <MenuItem
+                      key={`month${index}`}
+                      style={{ width: "100%", fontSize: "1vw" }}
+                      value={`${el}`}
+                    >
+                      {el}
+                    </MenuItem>
+                  );
+                })}
+              </Select>
+            </FormControl>
+            {wrongs.year ? (
+              <input
+                type="number"
+                onChange={change}
+                name="year"
+                placeholder="Година"
+                style={{ borderColor: "red" }}
+                className={styles.placeholderError}
+                id="year"
+                value={form.year}
+              />
+            ) : (
+              <input
+                type="number"
+                onChange={change}
+                name="year"
+                placeholder="Година"
+                id="year"
+                value={form.year}
+              />
+            )}
+            <Button onClick={addDate}>Add current date?</Button>
+          </div>
+        </div>
+        <div className={styles.previewPage}>
+          <h1 className={styles.preview}>Preview:</h1>
+          <div className={styles.prevContent}>
+            {image === null ? (
+              ""
+            ) : (
+              <Image
+                width={50}
+                height={50}
+                src={previewImage}
+                className={styles.prevImage}
+              />
+            )}
+            <div
+              dangerouslySetInnerHTML={{ __html: text.title }}
+              className={styles.prevTitle}
+            ></div>
+            {newRows[0] === undefined ? (
+              <div
+                dangerouslySetInnerHTML={{ __html: text.disc }}
+                className={styles.prevDisc}
+                style={{ alignItems: `${positionText}` }}
+              ></div>
+            ) : (
+              <>
+                <div
+                  dangerouslySetInnerHTML={{ __html: newRows.join("") }}
+                  className={styles.prevDisc}
+                  style={{ alignItems: `${positionText}` }}
+                ></div>
+                <div
+                  dangerouslySetInnerHTML={{ __html: text.disc }}
+                  className={styles.prevDisc}
+                  style={{ alignItems: `${positionText}` }}
+                ></div>
+              </>
+            )}
+
+            <div style={{ width: "60%" }}>
+              <div
+                dangerouslySetInnerHTML={{
+                  __html: `<div>${
+                    text.day + " " + text.month + " " + text.year
+                  }</div>`,
+                }}
+              ></div>
+            </div>
+          </div>
         </div>
       </form>
       <div style={{ display: "flex", justifyContent: "center" }}>

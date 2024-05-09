@@ -1,25 +1,38 @@
-import { useState } from "react";
+import { useState, useTransition, useRef } from "react";
 import Image from "next/image";
 
 export default function Test() {
-  const [image, setImage] = useState("");
-  const sentMes = () => {
-    fetch("http://localhost:3000/api/testInsert")
-      .then((res) => {
-        return res.json();
-      })
-      .then((rez) => {});
+  const [text, setText] = useState("");
+  const [realText, setRealText] = useState("");
+  const [newRows, setNewRows] = useState([]);
+  const inputRef = useRef(null);
+  const change = (e) => {
+    const text = e.target.value;
+    setText(`<div>${text}</div>`);
+    setRealText(text);
   };
+  const row = () => {
+    if (text === "") {
+      setNewRows([...newRows, "</br>"]);
+    } else {
+      setNewRows([...newRows, text]);
+    }
+
+    setText("");
+    setRealText("");
+    inputRef.current.focus();
+  };
+  console.log(newRows);
   return (
     <>
-      <button onClick={sentMes}>Submit</button>
-      <Image
-        src={image}
-        alt="image"
-        width={100}
-        height={100}
-        style={{ width: "100%" }}
-      />
+      <div dangerouslySetInnerHTML={{ __html: text }}></div>
+      <div dangerouslySetInnerHTML={{ __html: newRows.join("") }}></div>
+      <div>
+        <div>
+          <input onChange={change} value={realText} ref={inputRef} />
+          <button onClick={row}>Add New Row</button>
+        </div>
+      </div>
     </>
   );
 }

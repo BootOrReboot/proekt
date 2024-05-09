@@ -5,6 +5,7 @@ export default async function sending(req, res) {
 
   const title = info.name;
   const disc = info.disc;
+  const position = info.position;
   const day = Number(info.date.day);
   const month = info.date.month;
   const fullMonth = month.charAt(0).toUpperCase() + month.slice(1);
@@ -28,6 +29,7 @@ export default async function sending(req, res) {
       form.day = day;
       form.month = fullMonth;
       form.year = year;
+      form.position = position;
       collections.insertOne(form);
     }
     console.log(new Blob([info.chunk]).size);
@@ -44,6 +46,7 @@ export default async function sending(req, res) {
       const form = {};
       form.name = title;
       form.disc = disc;
+      form.position = position;
       form.id = latestNews + 1;
       form.image = info.chunk;
       form.day = day;
