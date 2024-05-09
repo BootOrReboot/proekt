@@ -115,7 +115,11 @@ export default function Newspaper() {
                 <h1 className={styles.title}>{page.name}</h1>
                 <p
                   className={styles.info}
-                  style={{ display: "flex", alignItems: `${page.position}` }}
+                  style={{
+                    display: "flex",
+                    alignItems: `${page.position}`,
+                    flexDirection: "column",
+                  }}
                   dangerouslySetInnerHTML={{ __html: page.disc }}
                 ></p>
                 <div>
