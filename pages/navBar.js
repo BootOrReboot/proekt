@@ -18,7 +18,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
-import { getCookie } from "cookies-next";
+import { deleteCookie, getCookie } from "cookies-next";
 
 export default function Nav() {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -179,7 +179,8 @@ export default function Nav() {
       })
       .then((res) => {
         console.log(res.message);
-        window.location.href = "https://master--sougjorchepetrov.netlify.app";
+        deleteCookie("id");
+        location.reload();
       });
   };
   const lang = router.locale == "mk" ? "al" : "mk";
