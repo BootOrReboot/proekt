@@ -7,6 +7,7 @@ import { faWindowClose } from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import { useState, useEffect } from "react";
 import { useRouter } from "next/router";
+import { setCookie } from "cookies-next";
 
 export default function Login() {
   const router = useRouter();
@@ -137,6 +138,7 @@ export default function Login() {
         .then((res) => {
           if (res !== "Email Already Exists") {
             window.location.href = `/?id=${res.message}`;
+            setCookie("id", res.message);
           } else {
             router.push(
               `https://master--sougjorchepetrov.netlify.app/loginAndRegister?prob1=${"Email Already Exists"}`
@@ -170,6 +172,7 @@ export default function Login() {
         .then((res) => {
           if (res !== "Email Or Password is Incorrect") {
             window.location.href = `/?id=${res.message}`;
+            setCookie("id", res.message);
           } else {
             router.push(
               `https://master--sougjorchepetrov.netlify.app/loginAndRegister?prob=${res}`

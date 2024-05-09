@@ -18,6 +18,7 @@ import { useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import { useTranslations } from "next-intl";
+import { getCookie } from "cookies-next";
 
 export default function Nav() {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -42,6 +43,8 @@ export default function Nav() {
     const search = new URLSearchParams(window.location.search);
 
     const user = search.get("id");
+    const cookie = getCookie("id");
+    console.log(cookie);
     if (user !== null) {
       fetch(
         "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/checkSeenNotif",

@@ -712,12 +712,12 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 50%;
     font-size: 2vw;
     font-weight: bold;
   }
   .prevDisc {
-    width: 60%;
+    width: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -729,7 +729,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 60%;
+    width: 50%;
   }
   .prevContent {
     flex-direction: column;
