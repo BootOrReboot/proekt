@@ -113,10 +113,11 @@ export default function Newspaper() {
                   className={styles.pageImage}
                 />
                 <h1 className={styles.title}>{page.name}</h1>
-                <p className={styles.info} 
+                <p
+                  className={styles.info}
                   style={{ display: "flex", alignItems: `${page.position}` }}
                   dangerouslySetInnerHTML={{ __html: page.disc }}
-                </p>
+                ></p>
                 <div>
                   {page.day}
                   {" " + t(page.month) + " "}
