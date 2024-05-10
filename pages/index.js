@@ -142,7 +142,7 @@ export default function Home() {
             </div>
           </div>
         ) : (
-          <div style={{ flexDirection: "row-reverse" }}>
+          <div className={styles.newsDiv}>
             {news.map((el, index) => (
               <div className={styles.vestNastan} key={index}>
                 <div className={styles.slika}>
