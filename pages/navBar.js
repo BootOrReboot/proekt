@@ -60,9 +60,9 @@ export default function Nav() {
           setAdmin(res.message.isAdmin);
         });
       setHasId(true);
+      setLoggedIn("visible");
     } else {
       setHaveNotification(false);
-      setLoggedIn("visible");
     }
 
     handleResize(); // Call once to set initial state
