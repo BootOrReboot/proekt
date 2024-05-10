@@ -188,11 +188,11 @@ export default function Nav() {
   const t = useTranslations("Nav");
   const key = Object.keys(router.query)[0];
   const value = Object.values(router.query)[0];
-  if (spinner) {
-    setTimeout(() => {
-      setSpinner(false);
-    }, 11000);
-  }
+  // if (spinner) {
+  //   setTimeout(() => {
+  //     setSpinner(false);
+  //   }, 11000);
+  // }
   return (
     <>
       <section className={styles.section}>
@@ -258,10 +258,17 @@ export default function Nav() {
               <a onClick={LogOut}>
                 {spinner ? (
                   <>
-                    <div className={styles.loaderChanger}>
-                      <div>
-                        <span className={styles.loaderScreen}></span>
-                      </div>
+                    <div
+                      style={{
+                        overflow: "hidden",
+                        display: "flex",
+                        justifyContent: "center",
+                      }}
+                    >
+                      <span
+                        className={styles.loaderScreenNav}
+                        style={{}}
+                      ></span>
                     </div>
                   </>
                 ) : (
@@ -369,7 +376,24 @@ export default function Nav() {
                     </a>
 
                     <a className={styles.mobile} onClick={LogOut}>
-                      {t("Одјави се")}
+                      {spinner ? (
+                        <>
+                          <div
+                            style={{
+                              overflow: "hidden",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <span
+                              className={styles.loaderScreenNav}
+                              style={{}}
+                            ></span>
+                          </div>
+                        </>
+                      ) : (
+                        t("Одјави се")
+                      )}
                     </a>
                   </>
                 ) : (
@@ -578,10 +602,17 @@ export default function Nav() {
                     <a className={styles.mobile} onClick={LogOut}>
                       {spinner ? (
                         <>
-                          <div className={styles.loaderChanger}>
-                            <div>
-                              <span className={styles.loaderScreen}></span>
-                            </div>
+                          <div
+                            style={{
+                              overflow: "hidden",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <span
+                              className={styles.loaderScreenNav}
+                              style={{}}
+                            ></span>
                           </div>
                         </>
                       ) : (
