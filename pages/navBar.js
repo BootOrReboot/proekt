@@ -168,7 +168,6 @@ export default function Nav() {
     }
   };
   const LogOut = () => {
-    router.push("https://master--sougjorchepetrov.netlify.app/loaderScreen");
     fetch(
       "https://master--sougjorchepetrov.netlify.app/api/loginRegAPI/loggingOut",
       {
