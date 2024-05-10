@@ -121,9 +121,8 @@ export default function Nav() {
   }
   const notify = () => {
     const username = getCookie("id");
-
+    setSpinner(true);
     if (username !== null) {
-      setSpinner(true);
       fetch(
         "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/changeSeen",
         {
@@ -144,9 +143,8 @@ export default function Nav() {
   };
   const notifyM = () => {
     const username = getCookie("id");
-
+    setSpinner(true);
     if (username !== null) {
-      setSpinner(true);
       fetch(
         "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/changeSeen",
         {
