@@ -768,4 +768,7 @@
     animation: rotationBack 0.5s linear infinite;
     transform-origin: center center;
   }
+  .newsDiv{
+    flex-direction:colum-reverse;
+  }
 }
