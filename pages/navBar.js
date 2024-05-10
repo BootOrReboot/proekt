@@ -122,7 +122,7 @@ export default function Nav() {
     }
   }
   const notify = () => {
-    const username = search.get("id");
+    const username = getCookie("id");
 
     if (username !== null) {
       router.push("https://master--sougjorchepetrov.netlify.app/loaderScreen");
@@ -145,7 +145,7 @@ export default function Nav() {
     }
   };
   const notifyM = () => {
-    const username = search.get("id");
+    const username = getCookie("id");
 
     if (username !== null) {
       router.push("https://master--sougjorchepetrov.netlify.app/loaderScreen");
