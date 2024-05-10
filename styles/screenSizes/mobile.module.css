@@ -770,6 +770,6 @@
   }
   .newsDiv{
     flex-direction:column-reverse;
-  
+  display:flex;
   }
 }
