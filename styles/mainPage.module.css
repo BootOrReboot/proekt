@@ -816,6 +816,6 @@
     transform-origin: center center;
   }
   .newsDiv{
-    flex-direction:colum-reverse;
+    flex-direction:column-reverse;
   }
 }
