@@ -28,6 +28,7 @@ export default function Nav() {
   const [haveNotification, setHaveNotification] = useState(false);
   const [account, setAccount] = useState({});
   const [hasId, setHasId] = useState(false);
+  const [loggedIn, setLoggedIn] = useState("hidden");
   const [admin, setAdmin] = useState(false);
 
   const search = useSearchParams();
@@ -61,6 +62,7 @@ export default function Nav() {
       setHasId(true);
     } else {
       setHaveNotification(false);
+      setLoggedIn("visible");
     }
 
     handleResize(); // Call once to set initial state
@@ -209,66 +211,34 @@ export default function Nav() {
         )}
 
         <div className={styles.account}>
-          {error === "" ? (
-            haveNotification ? (
-              <Button className={styles.notification} onClick={notify}>
-                <Image src={notif} alt="Notifications" />
-              </Button>
-            ) : (
-              <Button
-                className={styles.notification}
-                onClick={notify}
-                style={{ position: "relative" }}
-              >
-                <Image src={notif} alt="Notifications" />
-                <div
-                  style={{
-                    width: "25%",
-                    height: "25%",
-                    backgroundColor: "white",
-                    border: "red solid 4px",
-                    borderRadius: "50%",
-                    position: "absolute",
-                    top: "0",
-                    right: "0",
-                  }}
-                ></div>
-              </Button>
-            )
-          ) : haveNotification ? (
-            <>
-              <Button
-                className={styles.notification}
-                onClick={notify}
-                style={{ display: "flex", flexDirection: "column" }}
-              >
-                <Image src={notif} alt="Notifications" />
-                <div id="error">{error}</div>
-              </Button>
-            </>
+          {haveNotification ? (
+            <Button
+              className={styles.notification}
+              onClick={notify}
+              style={{ visibility: `${loggedIn}` }}
+            >
+              <Image src={notif} alt="Notifications" />
+            </Button>
           ) : (
-            <>
-              <Button
-                className={styles.notification}
-                onClick={notify}
-                style={{ display: "flex", flexDirection: "column" }}
-              >
-                <Image src={notif} alt="Notifications" />
-                <div
-                  style={{
-                    width: "25%",
-                    height: "15%",
-                    backgroundColor: "white",
-                    border: "red solid 4px",
-                    borderRadius: "50%",
-                    position: "absolute",
-                    top: "0",
-                    right: "0",
-                  }}
-                ></div>
-                <div id="error">{error}</div>
-              </Button>
-            </>
+            <Button
+              className={styles.notification}
+              onClick={notify}
+              style={{ position: "relative", visibility: `${loggedIn}` }}
+            >
+              <Image src={notif} alt="Notifications" />
+              <div
+                style={{
+                  width: "25%",
+                  height: "25%",
+                  backgroundColor: "white",
+                  border: "red solid 4px",
+                  borderRadius: "50%",
+                  position: "absolute",
+                  top: "0",
+                  right: "0",
+                }}
+              ></div>
+            </Button>
           )}
 
           <Button className={styles.profile} onClick={toggleProfileDropdown}>
@@ -374,15 +344,12 @@ export default function Nav() {
                     <Link className={styles.mobile} href=".">
                       {account.firstName + " " + account.lastName}
                     </Link>
-                    <a className={styles.mobile} onClick={notifyM}>
-                      {errorM === "" ? (
-                        t("Нотификации")
-                      ) : (
-                        <div>
-                          {t("Нотификации")}
-                          <div style={{ position: "absolute" }}>{errorM}</div>
-                        </div>
-                      )}
+                    <a
+                      className={styles.mobile}
+                      onClick={notifyM}
+                      style={{ visibility: `${loggedIn}` }}
+                    >
+                      {t("Нотификации")}
                     </a>
 
                     <a className={styles.mobile} onClick={LogOut}>
@@ -398,15 +365,12 @@ export default function Nav() {
                     >
                       {t("Логирај се или Регистрирај се")}
                     </Link>
-                    <a className={styles.mobile} onClick={notifyM}>
-                      {errorM === "" ? (
-                        t("Нотификации")
-                      ) : (
-                        <div>
-                          {t("Нотификации")}
-                          <div style={{ position: "absolute" }}>{errorM}</div>
-                        </div>
-                      )}
+                    <a
+                      className={styles.mobile}
+                      onClick={notifyM}
+                      style={{ visibility: `${loggedIn}` }}
+                    >
+                      {t("Нотификации")}
                     </a>
                   </>
                 )}
@@ -574,15 +538,12 @@ export default function Nav() {
                     >
                       {t("Логирај се или Регистрирај се")}
                     </Link>
-                    <a className={styles.mobile} onClick={notifyM}>
-                      {errorM === "" ? (
-                        t("Нотификации")
-                      ) : (
-                        <div>
-                          {t("Нотификации")}
-                          <div className={styles.errorNotif}>{errorM}</div>
-                        </div>
-                      )}
+                    <a
+                      className={styles.mobile}
+                      onClick={notifyM}
+                      style={{ visibility: `${loggedIn}` }}
+                    >
+                      {t("Нотификации")}
                     </a>
                   </>
                 ) : (
@@ -590,15 +551,12 @@ export default function Nav() {
                     <Link className={styles.mobile} href=".">
                       {account.firstName + " " + account.lastName}
                     </Link>
-                    <a className={styles.mobile} onClick={notifyM}>
-                      {errorM === "" ? (
-                        t("Нотификации")
-                      ) : (
-                        <div>
-                          {t("Нотификации")}
-                          <div className={styles.errorNotif}>{errorM}</div>
-                        </div>
-                      )}
+                    <a
+                      className={styles.mobile}
+                      onClick={notifyM}
+                      style={{ visibility: `${loggedIn}` }}
+                    >
+                      {t("Нотификации")}
                     </a>
 
                     <a className={styles.mobile} onClick={LogOut}>
