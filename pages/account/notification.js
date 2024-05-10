@@ -120,7 +120,7 @@ export default function Notify() {
                   <div className={styles.right}>
                     <div className={styles.delete}>
                       <div onClick={deleteNotification} id={`N${index + 1}`}>
-                        <FontAwesomeIcon icon={faTrash} />
+                        <FontAwesomeIcon icon={faTrash} style={{visibility:"hidden"}} />
                       </div>
                     </div>
                   </div>
