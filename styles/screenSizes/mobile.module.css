@@ -772,4 +772,50 @@
     flex-direction:column-reverse;
   display:flex;
   }
+   }
+  .preview {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 3vw;
+    font-weight: bold;
+  }
+  .editButtons {
+    margin: 0px 1vw;
+  }
+  .alignmentIcons {
+    width: 1vw;
+    height: 1vw;
+    margin: 0px 4px;
+  }
+  .loaderScreenNav {
+    width: 3vw;
+    height: 3vw;
+    border-radius: 50%;
+    overflow: hidden;
+    display: inline-block;
+    position: relative;
+    border: 0.2vw solid;
+    border-color: #000000 #000000 transparent;
+    box-sizing: border-box;
+    animation: rotation 1s linear infinite;
+  }
+  .loaderScreenNav::after {
+    content: "";
+    overflow: hidden;
+    box-sizing: border-box;
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
+    margin: auto;
+    border: 0.2vw solid;
+    border-color: transparent #ff3d00 #ff3d00;
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    animation: rotationBack 0.5s linear infinite;
+    transform-origin: center center;
+  }
 }
