@@ -180,7 +180,7 @@ export default function Nav() {
       .then((res) => {
         console.log(res.message);
         deleteCookie("id");
-        location.reload();
+        window.location.href = "/";
         setSpinner(false);
       });
   };
