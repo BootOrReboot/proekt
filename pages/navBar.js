@@ -216,13 +216,39 @@ export default function Nav() {
 
         <div className={styles.account}>
           {haveNotification ? (
-            <Button
-              className={styles.notification}
-              onClick={notify}
-              style={{ visibility: `${loggedIn}` }}
-            >
-              <Image src={notif} alt="Notifications" />
-            </Button>
+            spinner ? (
+              <>
+                <div
+                  style={{
+                    overflow: "hidden",
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
+                  <span className={styles.loaderScreenNav} style={{}}></span>
+                </div>
+              </>
+            ) : (
+              <Button
+                className={styles.notification}
+                onClick={notify}
+                style={{ visibility: `${loggedIn}` }}
+              >
+                <Image src={notif} alt="Notifications" />
+              </Button>
+            )
+          ) : spinner ? (
+            <>
+              <div
+                style={{
+                  overflow: "hidden",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <span className={styles.loaderScreenNav} style={{}}></span>
+              </div>
+            </>
           ) : (
             <Button
               className={styles.notification}
@@ -372,9 +398,25 @@ export default function Nav() {
                       onClick={notifyM}
                       style={{ visibility: `${loggedIn}` }}
                     >
-                      {t("Нотификации")}
+                      {spinner ? (
+                        <>
+                          <div
+                            style={{
+                              overflow: "hidden",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <span
+                              className={styles.loaderScreenNav}
+                              style={{}}
+                            ></span>
+                          </div>
+                        </>
+                      ) : (
+                        t("Нотификации")
+                      )}
                     </a>
-
                     <a className={styles.mobile} onClick={LogOut}>
                       {spinner ? (
                         <>
@@ -410,7 +452,24 @@ export default function Nav() {
                       onClick={notifyM}
                       style={{ visibility: `${loggedIn}` }}
                     >
-                      {t("Нотификации")}
+                      {spinner ? (
+                        <>
+                          <div
+                            style={{
+                              overflow: "hidden",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <span
+                              className={styles.loaderScreenNav}
+                              style={{}}
+                            ></span>
+                          </div>
+                        </>
+                      ) : (
+                        t("Нотификации")
+                      )}
                     </a>
                   </>
                 )}
@@ -583,7 +642,24 @@ export default function Nav() {
                       onClick={notifyM}
                       style={{ visibility: `${loggedIn}` }}
                     >
-                      {t("Нотификации")}
+                      {spinner ? (
+                        <>
+                          <div
+                            style={{
+                              overflow: "hidden",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <span
+                              className={styles.loaderScreenNav}
+                              style={{}}
+                            ></span>
+                          </div>
+                        </>
+                      ) : (
+                        t("Нотификации")
+                      )}
                     </a>
                   </>
                 ) : (
@@ -596,7 +672,24 @@ export default function Nav() {
                       onClick={notifyM}
                       style={{ visibility: `${loggedIn}` }}
                     >
-                      {t("Нотификации")}
+                      {spinner ? (
+                        <>
+                          <div
+                            style={{
+                              overflow: "hidden",
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <span
+                              className={styles.loaderScreenNav}
+                              style={{}}
+                            ></span>
+                          </div>
+                        </>
+                      ) : (
+                        t("Нотификации")
+                      )}
                     </a>
 
                     <a className={styles.mobile} onClick={LogOut}>
