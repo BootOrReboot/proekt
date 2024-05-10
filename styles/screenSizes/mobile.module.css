@@ -769,7 +769,7 @@
     transform-origin: center center;
   }
   .newsDiv{
-    flex-direction:column;
-    background-color:red;
+    flex-direction:column-reverse;
+  
   }
 }
