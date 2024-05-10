@@ -195,174 +195,334 @@ export default function Nav() {
   }
   return (
     <>
-      {spinner ? (
-        <>
-          <div className={styles.loaderChanger}>
-            <div
-              style={{
-                width: "100%",
-                display: "flex",
-                height: "20vw",
-                justifyContent: "center",
-                alignItems: "center",
-                overflow: "hidden",
-              }}
+      <section className={styles.section}>
+        {key === undefined ? (
+          <Link
+            href={router.pathname}
+            locale={lang}
+            style={{ fontSize: "2.5vw", fontWeight: "bold" }}
+          >
+            {lang.toUpperCase()}
+          </Link>
+        ) : (
+          <Link
+            href={router.pathname + `?${key}=${value}`}
+            locale={lang}
+            style={{ fontSize: "2.5vw", fontWeight: "bold" }}
+          >
+            {lang.toUpperCase()}
+          </Link>
+        )}
+
+        <div className={styles.account}>
+          {haveNotification ? (
+            <Button
+              className={styles.notification}
+              onClick={notify}
+              style={{ visibility: `${loggedIn}` }}
             >
-              <span
-                className={styles.loaderScreen}
+              <Image src={notif} alt="Notifications" />
+            </Button>
+          ) : (
+            <Button
+              className={styles.notification}
+              onClick={notify}
+              style={{ position: "relative", visibility: `${loggedIn}` }}
+            >
+              <Image src={notif} alt="Notifications" />
+              <div
                 style={{
-                  width: "20vw",
-                  height: "20vw",
+                  width: "25%",
+                  height: "25%",
+                  backgroundColor: "white",
+                  border: "red solid 4px",
+                  borderRadius: "50%",
+                  position: "absolute",
+                  top: "0",
+                  right: "0",
                 }}
-              ></span>
-            </div>
-          </div>
-          <div
-            style={{
-              display: "flex",
-              justifyContent: "center",
-              fontSize: "4vw",
-              margin: "2vw 0vw",
-              fontWeight: "bold",
-            }}
-          ></div>
-        </>
-      ) : (
-        <>
-          <section className={styles.section}>
-            {key === undefined ? (
-              <Link
-                href={router.pathname}
-                locale={lang}
-                style={{ fontSize: "2.5vw", fontWeight: "bold" }}
-              >
-                {lang.toUpperCase()}
-              </Link>
-            ) : (
-              <Link
-                href={router.pathname + `?${key}=${value}`}
-                locale={lang}
-                style={{ fontSize: "2.5vw", fontWeight: "bold" }}
-              >
-                {lang.toUpperCase()}
-              </Link>
-            )}
+              ></div>
+            </Button>
+          )}
 
-            <div className={styles.account}>
-              {haveNotification ? (
-                <Button
-                  className={styles.notification}
-                  onClick={notify}
-                  style={{ visibility: `${loggedIn}` }}
+          <Button className={styles.profile} onClick={toggleProfileDropdown}>
+            <Image src={profile} alt="Profile" />
+          </Button>
+        </div>
+      </section>
+      <div id={styles.accountDropdown} style={{ display: "none" }}>
+        <div className={styles.options}>
+          {Object.keys(account).length !== 0 ? (
+            <>
+              <Link href=".">{account.firstName + " " + account.lastName}</Link>
+              <a onClick={LogOut}>
+                {spinner ? (
+                  <>
+                    <div className={styles.loaderChanger}>
+                      <div>
+                        <span className={styles.loaderScreen}></span>
+                      </div>
+                    </div>
+                  </>
+                ) : (
+                  t("Одјави се")
+                )}
+              </a>
+            </>
+          ) : (
+            <>
+              <Link href="https://master--sougjorchepetrov.netlify.app/loginAndRegister">
+                {t("Логирај се или Регистрирај се")}
+              </Link>
+            </>
+          )}
+        </div>
+      </div>
+      <header className={styles.header}>
+        <div>
+          <Link href="/">
+            <Image src={logo} alt="logo" priority={true} />
+          </Link>
+          <p>{t("Ѓорче Петров")}</p>
+        </div>
+        <nav>
+          <button
+            type="button"
+            className={styles.menu}
+            id="menu-button"
+            onClick={openNav}
+            style={{ overflow: "hidden" }}
+          >
+            <FontAwesomeIcon icon={faBars} />
+          </button>
+          {screenWidth >= 1024 ? (
+            <div id={styles.navigation} style={{ display: "flex" }}>
+              <a
+                onClick={closeNav}
+                className={`${styles.mobile} ${styles.close} `}
+              >
+                <FontAwesomeIcon icon={faWindowClose} />
+              </a>
+              <div className={styles.center}>
+                {hasId ? (
+                  admin ? (
+                    <>
+                      <Link href={`/links/schoolInfo?id=${account.email}`}>
+                        {t("За Гимназијата")}
+                      </Link>
+                      <Link href={`/branches?id=${account.email}`}>
+                        {t("Струки")}
+                      </Link>
+
+                      <Link href={`/links/news?id=${account.email}`}>
+                        {t("Вести и Настани")}
+                      </Link>
+                      <Link href={`/adminPanel?id=${account.email}`}>
+                        {t("Admin")}
+                      </Link>
+                    </>
+                  ) : (
+                    <>
+                      <Link href={`/links/schoolInfo?id=${account.email}`}>
+                        {t("За Гимназијата")}
+                      </Link>
+                      <Link href={`/branches?id=${account.email}`}>
+                        {t("Струки")}
+                      </Link>
+
+                      <Link href={`/links/news?id=${account.email}`}>
+                        {t("Вести и Настани")}
+                      </Link>
+                    </>
+                  )
+                ) : admin ? (
+                  <>
+                    <Link href={`/links/schoolInfo`}>
+                      {t("За Гимназијата")}
+                    </Link>
+                    <Link href={`/branches`}>{t("Струки")}</Link>
+
+                    <Link href={`/links/news`}>{t("Вести и Настани")}</Link>
+                    <Link href={`/adminPanel`}>{t("Admin")}</Link>
+                  </>
+                ) : (
+                  <>
+                    <Link href={`/links/schoolInfo`}>
+                      {t("За Гимназијата")}
+                    </Link>
+                    <Link href={`/branches`}>{t("Струки")}</Link>
+
+                    <Link href={`/links/news`}>{t("Вести и Настани")}</Link>
+                  </>
+                )}
+                {Object.keys(account).length !== 0 ? (
+                  <>
+                    <Link className={styles.mobile} href=".">
+                      {account.firstName + " " + account.lastName}
+                    </Link>
+                    <a
+                      className={styles.mobile}
+                      onClick={notifyM}
+                      style={{ visibility: `${loggedIn}` }}
+                    >
+                      {t("Нотификации")}
+                    </a>
+
+                    <a className={styles.mobile} onClick={LogOut}>
+                      {t("Одјави се")}
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <Link
+                      className={styles.mobile}
+                      href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
+                      style={{ wordWrap: "break-word", width: "100%" }}
+                    >
+                      {t("Логирај се или Регистрирај се")}
+                    </Link>
+                    <a
+                      className={styles.mobile}
+                      onClick={notifyM}
+                      style={{ visibility: `${loggedIn}` }}
+                    >
+                      {t("Нотификации")}
+                    </a>
+                  </>
+                )}
+              </div>
+
+              <div
+                className={`${styles.socialLinks} ${styles.mobile} `}
+                id="socials"
+                style={{ display: "none" }}
+              >
+                <Link
+                  className={styles.socialTags}
+                  href="https://www.youtube.com/@sougorcepetrovkrivapalanka4547"
+                  target="_blank"
                 >
-                  <Image src={notif} alt="Notifications" />
-                </Button>
-              ) : (
-                <Button
-                  className={styles.notification}
-                  onClick={notify}
-                  style={{ position: "relative", visibility: `${loggedIn}` }}
+                  <FontAwesomeIcon icon={faYoutube} />
+                </Link>
+                <Link
+                  href="https://www.facebook.com/gjorcepetrov"
+                  target="_blank"
+                  className={styles.socialTags}
                 >
-                  <Image src={notif} alt="Notifications" />
-                  <div
-                    style={{
-                      width: "25%",
-                      height: "25%",
-                      backgroundColor: "white",
-                      border: "red solid 4px",
-                      borderRadius: "50%",
-                      position: "absolute",
-                      top: "0",
-                      right: "0",
-                    }}
-                  ></div>
-                </Button>
-              )}
-
-              <Button
-                className={styles.profile}
-                onClick={toggleProfileDropdown}
+                  <FontAwesomeIcon icon={faFacebook} />
+                </Link>
+                <Link
+                  className={styles.socialTags}
+                  href="https://www.instagram.com/uz_gjorchepetrov/"
+                  target="_blank"
+                >
+                  <FontAwesomeIcon icon={faInstagram} />
+                </Link>
+              </div>
+            </div>
+          ) : (
+            <div id={styles.navigation} style={{ display: "none" }}>
+              <a
+                onClick={closeNav}
+                className={`${styles.mobile} ${styles.close} `}
               >
-                <Image src={profile} alt="Profile" />
-              </Button>
-            </div>
-          </section>
-          <div id={styles.accountDropdown} style={{ display: "none" }}>
-            <div className={styles.options}>
-              {Object.keys(account).length !== 0 ? (
-                <>
-                  <Link href=".">
-                    {account.firstName + " " + account.lastName}
-                  </Link>
-                  <a onClick={LogOut}>{t("Одјави се")}</a>
-                </>
-              ) : (
-                <>
-                  <Link href="https://master--sougjorchepetrov.netlify.app/loginAndRegister">
-                    {t("Логирај се или Регистрирај се")}
-                  </Link>
-                </>
-              )}
-            </div>
-          </div>
-          <header className={styles.header}>
-            <div>
-              <Link href="/">
-                <Image src={logo} alt="logo" priority={true} />
-              </Link>
-              <p>{t("Ѓорче Петров")}</p>
-            </div>
-            <nav>
-              <button
-                type="button"
-                className={styles.menu}
-                id="menu-button"
-                onClick={openNav}
-                style={{ overflow: "hidden" }}
-              >
-                <FontAwesomeIcon icon={faBars} />
-              </button>
-              {screenWidth >= 1024 ? (
-                <div id={styles.navigation} style={{ display: "flex" }}>
-                  <a
-                    onClick={closeNav}
-                    className={`${styles.mobile} ${styles.close} `}
-                  >
-                    <FontAwesomeIcon icon={faWindowClose} />
-                  </a>
-                  <div className={styles.center}>
-                    {hasId ? (
-                      admin ? (
-                        <>
-                          <Link href={`/links/schoolInfo?id=${account.email}`}>
-                            {t("За Гимназијата")}
-                          </Link>
-                          <Link href={`/branches?id=${account.email}`}>
-                            {t("Струки")}
-                          </Link>
+                <FontAwesomeIcon icon={faWindowClose} />
+              </a>
+              <div className={styles.center}>
+                {hasId ? (
+                  <>
+                    {key === undefined ? (
+                      <Link
+                        href={router.pathname}
+                        locale={lang}
+                        style={{
+                          fontSize: "5.5vw",
+                          display: "flex",
+                          fontWeight: "bold",
+                          width: "100%",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {lang.toUpperCase()}
+                      </Link>
+                    ) : (
+                      <Link
+                        href={router.pathname + `?${key}=${value}`}
+                        locale={lang}
+                        style={{
+                          fontSize: "5.5vw",
+                          display: "flex",
+                          fontWeight: "bold",
+                          width: "100%",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {lang.toUpperCase()}
+                      </Link>
+                    )}
+                    {admin ? (
+                      <>
+                        <Link href={`/links/schoolInfo?id=${account.email}`}>
+                          {t("За Гимназијата")}
+                        </Link>
+                        <Link href={`/branches?id=${account.email}`}>
+                          {t("Струки")}
+                        </Link>
 
-                          <Link href={`/links/news?id=${account.email}`}>
-                            {t("Вести и Настани")}
-                          </Link>
-                          <Link href={`/adminPanel?id=${account.email}`}>
-                            {t("Admin")}
-                          </Link>
-                        </>
-                      ) : (
-                        <>
-                          <Link href={`/links/schoolInfo?id=${account.email}`}>
-                            {t("За Гимназијата")}
-                          </Link>
-                          <Link href={`/branches?id=${account.email}`}>
-                            {t("Струки")}
-                          </Link>
+                        <Link href={`/links/news?id=${account.email}`}>
+                          {t("Вести и Настани")}
+                        </Link>
+                        <Link href={`/adminPanel?id=${account.email}`}>
+                          {t("Admin")}
+                        </Link>
+                      </>
+                    ) : (
+                      <>
+                        <Link href={`/links/schoolInfo?id=${account.email}`}>
+                          {t("За Гимназијата")}
+                        </Link>
+                        <Link href={`/branches?id=${account.email}`}>
+                          {t("Струки")}
+                        </Link>
 
-                          <Link href={`/links/news?id=${account.email}`}>
-                            {t("Вести и Настани")}
-                          </Link>
-                        </>
-                      )
-                    ) : admin ? (
+                        <Link href={`/links/news?id=${account.email}`}>
+                          {t("Вести и Настани")}
+                        </Link>
+                      </>
+                    )}
+                  </>
+                ) : (
+                  <>
+                    {key === undefined ? (
+                      <Link
+                        href={router.pathname}
+                        locale={lang}
+                        style={{
+                          fontSize: "5.5vw",
+                          display: "flex",
+                          fontWeight: "bold",
+                          width: "100%",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {lang.toUpperCase()}
+                      </Link>
+                    ) : (
+                      <Link
+                        href={router.pathname + `?${key}=${value}`}
+                        locale={lang}
+                        style={{
+                          fontSize: "5.5vw",
+                          display: "flex",
+                          fontWeight: "bold",
+                          width: "100%",
+                          justifyContent: "center",
+                        }}
+                      >
+                        {lang.toUpperCase()}
+                      </Link>
+                    )}
+                    {admin ? (
                       <>
                         <Link href={`/links/schoolInfo`}>
                           {t("За Гимназијата")}
@@ -382,274 +542,87 @@ export default function Nav() {
                         <Link href={`/links/news`}>{t("Вести и Настани")}</Link>
                       </>
                     )}
-                    {Object.keys(account).length !== 0 ? (
-                      <>
-                        <Link className={styles.mobile} href=".">
-                          {account.firstName + " " + account.lastName}
-                        </Link>
-                        <a
-                          className={styles.mobile}
-                          onClick={notifyM}
-                          style={{ visibility: `${loggedIn}` }}
-                        >
-                          {t("Нотификации")}
-                        </a>
+                  </>
+                )}
 
-                        <a className={styles.mobile} onClick={LogOut}>
-                          {t("Одјави се")}
-                        </a>
-                      </>
-                    ) : (
-                      <>
-                        <Link
-                          className={styles.mobile}
-                          href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
-                          style={{ wordWrap: "break-word", width: "100%" }}
-                        >
-                          {t("Логирај се или Регистрирај се")}
-                        </Link>
-                        <a
-                          className={styles.mobile}
-                          onClick={notifyM}
-                          style={{ visibility: `${loggedIn}` }}
-                        >
-                          {t("Нотификации")}
-                        </a>
-                      </>
-                    )}
-                  </div>
-
-                  <div
-                    className={`${styles.socialLinks} ${styles.mobile} `}
-                    id="socials"
-                    style={{ display: "none" }}
-                  >
+                {Object.keys(account).length === 0 ? (
+                  <>
                     <Link
-                      className={styles.socialTags}
-                      href="https://www.youtube.com/@sougorcepetrovkrivapalanka4547"
-                      target="_blank"
+                      className={styles.mobile}
+                      href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
+                      style={{ wordWrap: "break-word", width: "100%" }}
                     >
-                      <FontAwesomeIcon icon={faYoutube} />
+                      {t("Логирај се или Регистрирај се")}
                     </Link>
-                    <Link
-                      href="https://www.facebook.com/gjorcepetrov"
-                      target="_blank"
-                      className={styles.socialTags}
+                    <a
+                      className={styles.mobile}
+                      onClick={notifyM}
+                      style={{ visibility: `${loggedIn}` }}
                     >
-                      <FontAwesomeIcon icon={faFacebook} />
+                      {t("Нотификации")}
+                    </a>
+                  </>
+                ) : (
+                  <>
+                    <Link className={styles.mobile} href=".">
+                      {account.firstName + " " + account.lastName}
                     </Link>
-                    <Link
-                      className={styles.socialTags}
-                      href="https://www.instagram.com/uz_gjorchepetrov/"
-                      target="_blank"
-                    >
-                      <FontAwesomeIcon icon={faInstagram} />
-                    </Link>
-                  </div>
-                </div>
-              ) : (
-                <div id={styles.navigation} style={{ display: "none" }}>
-                  <a
-                    onClick={closeNav}
-                    className={`${styles.mobile} ${styles.close} `}
-                  >
-                    <FontAwesomeIcon icon={faWindowClose} />
-                  </a>
-                  <div className={styles.center}>
-                    {hasId ? (
-                      <>
-                        {key === undefined ? (
-                          <Link
-                            href={router.pathname}
-                            locale={lang}
-                            style={{
-                              fontSize: "5.5vw",
-                              display: "flex",
-                              fontWeight: "bold",
-                              width: "100%",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {lang.toUpperCase()}
-                          </Link>
-                        ) : (
-                          <Link
-                            href={router.pathname + `?${key}=${value}`}
-                            locale={lang}
-                            style={{
-                              fontSize: "5.5vw",
-                              display: "flex",
-                              fontWeight: "bold",
-                              width: "100%",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {lang.toUpperCase()}
-                          </Link>
-                        )}
-                        {admin ? (
-                          <>
-                            <Link
-                              href={`/links/schoolInfo?id=${account.email}`}
-                            >
-                              {t("За Гимназијата")}
-                            </Link>
-                            <Link href={`/branches?id=${account.email}`}>
-                              {t("Струки")}
-                            </Link>
-
-                            <Link href={`/links/news?id=${account.email}`}>
-                              {t("Вести и Настани")}
-                            </Link>
-                            <Link href={`/adminPanel?id=${account.email}`}>
-                              {t("Admin")}
-                            </Link>
-                          </>
-                        ) : (
-                          <>
-                            <Link
-                              href={`/links/schoolInfo?id=${account.email}`}
-                            >
-                              {t("За Гимназијата")}
-                            </Link>
-                            <Link href={`/branches?id=${account.email}`}>
-                              {t("Струки")}
-                            </Link>
-
-                            <Link href={`/links/news?id=${account.email}`}>
-                              {t("Вести и Настани")}
-                            </Link>
-                          </>
-                        )}
-                      </>
-                    ) : (
-                      <>
-                        {key === undefined ? (
-                          <Link
-                            href={router.pathname}
-                            locale={lang}
-                            style={{
-                              fontSize: "5.5vw",
-                              display: "flex",
-                              fontWeight: "bold",
-                              width: "100%",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {lang.toUpperCase()}
-                          </Link>
-                        ) : (
-                          <Link
-                            href={router.pathname + `?${key}=${value}`}
-                            locale={lang}
-                            style={{
-                              fontSize: "5.5vw",
-                              display: "flex",
-                              fontWeight: "bold",
-                              width: "100%",
-                              justifyContent: "center",
-                            }}
-                          >
-                            {lang.toUpperCase()}
-                          </Link>
-                        )}
-                        {admin ? (
-                          <>
-                            <Link href={`/links/schoolInfo`}>
-                              {t("За Гимназијата")}
-                            </Link>
-                            <Link href={`/branches`}>{t("Струки")}</Link>
-
-                            <Link href={`/links/news`}>
-                              {t("Вести и Настани")}
-                            </Link>
-                            <Link href={`/adminPanel`}>{t("Admin")}</Link>
-                          </>
-                        ) : (
-                          <>
-                            <Link href={`/links/schoolInfo`}>
-                              {t("За Гимназијата")}
-                            </Link>
-                            <Link href={`/branches`}>{t("Струки")}</Link>
-
-                            <Link href={`/links/news`}>
-                              {t("Вести и Настани")}
-                            </Link>
-                          </>
-                        )}
-                      </>
-                    )}
-
-                    {Object.keys(account).length === 0 ? (
-                      <>
-                        <Link
-                          className={styles.mobile}
-                          href="https://master--sougjorchepetrov.netlify.app/loginAndRegister"
-                          style={{ wordWrap: "break-word", width: "100%" }}
-                        >
-                          {t("Логирај се или Регистрирај се")}
-                        </Link>
-                        <a
-                          className={styles.mobile}
-                          onClick={notifyM}
-                          style={{ visibility: `${loggedIn}` }}
-                        >
-                          {t("Нотификации")}
-                        </a>
-                      </>
-                    ) : (
-                      <>
-                        <Link className={styles.mobile} href=".">
-                          {account.firstName + " " + account.lastName}
-                        </Link>
-                        <a
-                          className={styles.mobile}
-                          onClick={notifyM}
-                          style={{ visibility: `${loggedIn}` }}
-                        >
-                          {t("Нотификации")}
-                        </a>
-
-                        <a className={styles.mobile} onClick={LogOut}>
-                          {t("Одјави се")}
-                        </a>
-                      </>
-                    )}
-                  </div>
-
-                  <div
-                    className={`${styles.socialLinks} ${styles.mobile} `}
-                    id="socials"
-                    style={{ display: "none" }}
-                  >
                     <a
-                      className={styles.socialTags}
-                      href="https://www.youtube.com/@sougorcepetrovkrivapalanka4547"
-                      target="_blank"
+                      className={styles.mobile}
+                      onClick={notifyM}
+                      style={{ visibility: `${loggedIn}` }}
                     >
-                      <FontAwesomeIcon icon={faYoutube} />
+                      {t("Нотификации")}
                     </a>
-                    <a
-                      href="https://www.facebook.com/gjorcepetrov"
-                      target="_blank"
-                      className={styles.socialTags}
-                    >
-                      <FontAwesomeIcon icon={faFacebook} />
+
+                    <a className={styles.mobile} onClick={LogOut}>
+                      {spinner ? (
+                        <>
+                          <div className={styles.loaderChanger}>
+                            <div>
+                              <span className={styles.loaderScreen}></span>
+                            </div>
+                          </div>
+                        </>
+                      ) : (
+                        t("Одјави се")
+                      )}
                     </a>
-                    <a
-                      className={styles.socialTags}
-                      href="https://www.instagram.com/uz_gjorchepetrov/"
-                      target="_blank"
-                    >
-                      <FontAwesomeIcon icon={faInstagram} />
-                    </a>
-                  </div>
-                </div>
-              )}
-            </nav>
-          </header>
-        </>
-      )}
+                  </>
+                )}
+              </div>
+
+              <div
+                className={`${styles.socialLinks} ${styles.mobile} `}
+                id="socials"
+                style={{ display: "none" }}
+              >
+                <a
+                  className={styles.socialTags}
+                  href="https://www.youtube.com/@sougorcepetrovkrivapalanka4547"
+                  target="_blank"
+                >
+                  <FontAwesomeIcon icon={faYoutube} />
+                </a>
+                <a
+                  href="https://www.facebook.com/gjorcepetrov"
+                  target="_blank"
+                  className={styles.socialTags}
+                >
+                  <FontAwesomeIcon icon={faFacebook} />
+                </a>
+                <a
+                  className={styles.socialTags}
+                  href="https://www.instagram.com/uz_gjorchepetrov/"
+                  target="_blank"
+                >
+                  <FontAwesomeIcon icon={faInstagram} />
+                </a>
+              </div>
+            </div>
+          )}
+        </nav>
+      </header>
     </>
   );
 }
