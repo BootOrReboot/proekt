@@ -6,6 +6,7 @@ import styleLap from "../../styles/screenSizes/laptop.module.css";
 import styleMob from "../../styles/screenSizes/mobile.module.css";
 import { useState, useEffect } from "react";
 import { useSearchParams } from "next/navigation";
+import { getCookie } from "cookies-next";
 
 export default function Notify() {
   const [screenWidth, setScreenWidth] = useState(0);
@@ -22,9 +23,8 @@ export default function Notify() {
 
     handleResize(); // Call once to set initial state
     window.addEventListener("resize", handleResize);
-    const search = new URLSearchParams(window.location.search);
 
-    const user = search.get("id");
+    const user = getCookie("id");
     fetch(
       "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/getNotifications",
       {
@@ -65,9 +65,7 @@ export default function Notify() {
   const deleteNotification = (event) => {
     const id = event.currentTarget.id;
 
-    const search = new URLSearchParams(window.location.search);
-
-    const user = search.get("id");
+    const user = getCookie("id");
     fetch(
       "https://master--sougjorchepetrov.netlify.app/api/notificationAPI/deleteNotification",
       {
