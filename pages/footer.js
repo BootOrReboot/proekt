@@ -197,7 +197,14 @@ export default function Footer() {
               )}
             </div>
             <div className={styles.email}>
-              {mistakes.email ? (
+              <div 
+                style={{
+                  display: "flex",
+                  height: "12vw",
+                  flexDirection: "column",
+                  justifyContent: "space-between",
+                }}>
+                {mistakes.email ? (
                 form.email === "" ? (
                   <>
                     <p style={{ color: "red" }}>Email *Field is empty*</p>
@@ -241,6 +248,8 @@ export default function Footer() {
                   <input type="text" onChange={addInfo} name="title" />
                 </>
               )}
+            </div>
+              
               {mistakes.letter ? (
                 <>
                   <p style={{ color: "red" }}>
