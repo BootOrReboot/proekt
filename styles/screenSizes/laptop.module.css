@@ -620,6 +620,10 @@
   }
   .info {
     font-size: 2vw;
+    display: flex;
+    height: 12vw;
+    justify-content: space-between;
+    flex-direction: column;
   }
   .functions {
     display: flex;
