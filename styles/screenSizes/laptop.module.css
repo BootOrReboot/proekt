@@ -757,7 +757,12 @@
     justify-content: center !important;
     margin: 10px 0px;
   }
-  .emailPad{display:flex,flex-direction:column,height:12vw}
+  .emailPad{
+    display:flex;
+    flex-direction:column;
+    height:12vw;
+    justify-content:space-between;
+  }
   .loaderScreen {
     width: 20vw;
     height: 20vw;
