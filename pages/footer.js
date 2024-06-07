@@ -197,13 +197,7 @@ export default function Footer() {
               )}
             </div>
             <div className={styles.email}>
-              <div 
-                style={{
-                  display: "flex",
-                  height: "12vw",
-                  flexDirection: "column",
-                  justifyContent: "space-between",
-                }}>
+              <div className={styles.emailPad}>
                 {mistakes.email ? (
                 form.email === "" ? (
                   <>
